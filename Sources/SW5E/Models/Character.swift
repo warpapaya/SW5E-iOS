@@ -41,18 +41,46 @@ struct Character: Identifiable, Codable, Equatable, Hashable {
         lastModified: Date()
     )
     
+    // Explicit memberwise init (required because custom init(from:) suppresses synthesis)
+    init(id: String, name: String, species: String, charClass: String,
+         level: Int, experiencePoints: Int, currentHP: Int, maxHP: Int,
+         ac: Int, forcePoints: Int, lastModified: Date) {
+        self.id = id; self.name = name; self.species = species; self.charClass = charClass
+        self.level = level; self.experiencePoints = experiencePoints
+        self.currentHP = currentHP; self.maxHP = maxHP; self.ac = ac
+        self.forcePoints = forcePoints; self.lastModified = lastModified
+    }
+
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case species
-        case charClass = "class"
+        case charClass    = "class"
         case level
-        case experiencePoints = "experience_points"
-        case currentHP = "current_hp"
-        case maxHP = "max_hp"
-        case ac
-        case forcePoints = "force_points"
-        case lastModified = "last_modified"
+        case experiencePoints = "xp"          // backend: "xp"
+        case currentHP    = "currentHp"       // backend: "currentHp"
+        case maxHP        = "maxHp"           // backend: "maxHp"
+        case ac           = "armorClass"      // backend: "armorClass"
+        case forcePoints                      // not in backend — defaults to 0
+        case lastModified = "updatedAt"       // backend: "updatedAt"
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id               = try c.decode(String.self, forKey: .id)
+        name             = try c.decode(String.self, forKey: .name)
+        species          = try c.decodeIfPresent(String.self, forKey: .species)   ?? "Unknown"
+        charClass        = try c.decodeIfPresent(String.self, forKey: .charClass) ?? "Guardian"
+        level            = try c.decodeIfPresent(Int.self,    forKey: .level)     ?? 1
+        experiencePoints = try c.decodeIfPresent(Int.self,    forKey: .experiencePoints) ?? 0
+        currentHP        = try c.decodeIfPresent(Int.self,    forKey: .currentHP) ?? 10
+        maxHP            = try c.decodeIfPresent(Int.self,    forKey: .maxHP)     ?? 10
+        ac               = try c.decodeIfPresent(Int.self,    forKey: .ac)        ?? 10
+        forcePoints      = try c.decodeIfPresent(Int.self,    forKey: .forcePoints) ?? 0
+        let dateStr      = try c.decodeIfPresent(String.self, forKey: .lastModified) ?? ""
+        let fmt          = ISO8601DateFormatter()
+        fmt.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        lastModified     = fmt.date(from: dateStr) ?? Date()
     }
 }
 
