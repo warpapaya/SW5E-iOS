@@ -1,0 +1,77 @@
+name: SW5E
+projectType: application
+bundleIdPrefix: com.petie
+outputs:
+  project:
+    path: ../SW5E.xcodeproj
+settings:
+  BASE_PACKAGE_NAME: SW5E
+targets:
+  SW5E:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - Sources/SW5E
+      - Resources
+    scheme:
+      name: SW5E
+      build:
+        targets:
+          SW5E: all
+      executable: SW5E
+      launchStyle: automatic
+      diagnostics:
+        launchOnFailure: true
+        slowStart: false
+        slowEnd: false
+      testables: []
+      coverageTargets: []
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.petie.sw5e
+        SWIFT_VERSION: "5.0"
+        MACOSX_DEPLOYMENT_TARGET: "10.15"
+        CLANG_ENABLE_MODULES: YES
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      custom:
+        INFOPLIST_FILE: Resources/Info.plist
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    configurations:
+      Debug:
+        base:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          GCC_OPTIMIZATION_LEVEL: 0
+      Release:
+        base:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          ENABLE_NS_ASSERTIONS: YES
+          SWIFT_COMPILATION_MODE: wholemodule
+
+schemes:
+  - name: Debug
+    build:
+      targets:
+        SW5E: all
+    run:
+      config: Debug
+      diagnostics:
+        launchOnFailure: true
+        slowStart: false
+        slowEnd: false
+      timeProfiling: false
+      coverageTargets: []
+  - name: Release
+    build:
+      targets:
+        SW5E: all
+    run:
+      config: Release
+      diagnostics:
+        launchOnFailure: true
+        slowStart: false
+        slowEnd: false
+      timeProfiling: false
+      coverageTargets: []
