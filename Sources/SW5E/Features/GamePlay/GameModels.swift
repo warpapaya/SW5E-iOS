@@ -168,11 +168,17 @@ struct Campaign: Identifiable, Codable {
 
 // MARK: - Backend Shape Helpers (decode-only)
 
+struct BackendNPC: Codable {
+    var name: String
+    var disposition: String?
+    var description: String?
+}
+
 struct BackendScene: Codable {
     var description: String
     var location: String?
     var choices: [String]
-    var npcs: [String]?
+    var npcs: [BackendNPC]?
 }
 
 struct BackendHistoryEntry: Codable {

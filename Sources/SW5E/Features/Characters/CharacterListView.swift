@@ -54,6 +54,12 @@ struct CharacterListView: View {
             .navigationDestination(isPresented: $showingBuilder) {
                 CharacterBuilderView()
             }
+            .onChange(of: showingBuilder) { _, isShowing in
+                // Reload characters when returning from the builder (new char may have been saved)
+                if !isShowing {
+                    Task { await viewModel.refreshCharacters() }
+                }
+            }
             // ── Delete confirmation alert ────────────────────────────────────
             .alert(
                 "Delete Character?",
