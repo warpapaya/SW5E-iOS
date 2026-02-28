@@ -10,6 +10,7 @@ struct GamePlayView: View {
     @State private var actionText = ""
     @State private var showCombatOverlay = false
     @State private var showCharacterDrawer = false
+    @State private var showSettingsSheet = false
     @State private var narrativeScrollProxy: ScrollViewProxy?
 
     // MARK: - Computed Properties
@@ -23,11 +24,8 @@ struct GamePlayView: View {
 
     // MARK: - Initialization
 
-    init(campaignId: String, apiClient: APIClient? = nil) {
-        _viewModel = StateObject(wrappedValue: GamePlayViewModel(
-            apiClient: apiClient ?? APIClient(),
-            campaignId: campaignId
-        ))
+    init(campaignId: String) {
+        _viewModel = StateObject(wrappedValue: GamePlayViewModel(campaignId: campaignId))
     }
 
     // MARK: - Body
@@ -52,12 +50,27 @@ struct GamePlayView: View {
                         actionInputBar
                     }
 
+                    // Session summary banner (top)
                     if viewModel.showSessionSummaryBanner {
-                        sessionSummaryBanner
-                            .transition(.move(edge: .top).combined(with: .opacity))
+                        VStack {
+                            sessionSummaryBanner
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                            Spacer()
+                        }
+                    }
+
+                    // XP Toast
+                    if viewModel.showXPToast {
+                        VStack {
+                            Spacer()
+                            xpToast
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                                .padding(.bottom, 120)
+                        }
                     }
                 }
 
+                // Combat overlay
                 if let campaign = viewModel.campaign, campaign.gameState.combatState.active {
                     CombatOverlayView(
                         combatState: campaign.gameState.combatState,
@@ -71,6 +84,7 @@ struct GamePlayView: View {
                     ))
                 }
 
+                // Character drawer
                 if showCharacterDrawer, let campaign = viewModel.campaign {
                     CharacterSidebarDrawer(
                         campaign: campaign,
@@ -80,12 +94,15 @@ struct GamePlayView: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
+            .animation(.spring(response: 0.35, dampingFraction: 0.85), value: viewModel.showXPToast)
+            .animation(.spring(response: 0.35), value: viewModel.showSessionSummaryBanner)
             .onAppear {
                 Task { await viewModel.loadCampaign() }
-                if let character = viewModel.campaign?.gameState.activeCharacter {
-                    viewModel.checkForceUserStatus(character: character)
-                }
             }
+        }
+        // Campaign settings sheet
+        .sheet(isPresented: $showSettingsSheet) {
+            CampaignSettingsSheet(viewModel: viewModel)
         }
     }
 
@@ -112,9 +129,24 @@ struct GamePlayView: View {
 
             Spacer()
 
-            Button(action: {}) {
+            // Undo button
+            Button {
+                Task { await viewModel.undoLastAction() }
+            } label: {
+                Image(systemName: viewModel.isUndoing ? "clock.arrow.circlepath" : "arrow.uturn.backward")
+                    .font(.system(size: 18))
+                    .foregroundColor(viewModel.isUndoing ? .mutedText : .hologramBlue)
+                    .padding(8)
+                    .background(Color.spaceCard)
+                    .clipShape(Circle())
+                    .overlay(Circle().strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+            }
+            .disabled(viewModel.isUndoing)
+
+            // Settings button
+            Button(action: { showSettingsSheet = true }) {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: 18))
                     .foregroundColor(.hologramBlue)
                     .padding(8)
                     .background(Color.spaceCard)
@@ -127,25 +159,33 @@ struct GamePlayView: View {
     }
 
     // MARK: - Narrative Scroll View
+    // Use VStack (not LazyVStack) — iOS 26 LazyVStack inside NavigationStack is unreliable
 
     @ViewBuilder private var narrativeScrollView: some View {
         ScrollViewReader { proxy in
-            ScrollViewShowsIndicators {
-                LazyVStack(spacing: 0) {
+            ScrollView {
+                VStack(spacing: 0) {
                     ForEach(narrativeEntries) { entry in
                         historyEntry(for: entry)
                             .id(entry.id)
+                            .padding(.bottom, 8)
                     }
-                    GeometryReader { geo in
-                        Color.clear.preference(
-                            key: ScrollPositionPreferenceKey.self,
-                            value: geo.frame(in: .named("gameplay-scroll")).minY
-                        )
+
+                    if viewModel.isProcessingAction {
+                        thinkingIndicator
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 8)
                     }
-                    .frame(height: 0)
+
+                    Color.clear.frame(height: 1).id("bottom")
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.top, 8)
             }
             .animation(.easeInOut(duration: 0.3), value: narrativeEntries.count)
+            .onChange(of: narrativeEntries.count) { _, _ in
+                withAnimation { proxy.scrollTo("bottom") }
+            }
             .onAppear { narrativeScrollProxy = proxy }
         }
     }
@@ -161,7 +201,7 @@ struct GamePlayView: View {
         case .gmNarration:    gmNarrationCard(content: entry.content)
         case .playerAction:   playerActionCard(content: entry.content)
         case .combatResult:   combatResultCard(content: entry.content)
-        case .sessionSummary: sessionSummaryBannerContent(text: entry.content)
+        case .sessionSummary: sessionSummaryCard(content: entry.content)
         }
     }
 
@@ -186,25 +226,20 @@ struct GamePlayView: View {
     }
 
     @ViewBuilder private func playerActionCard(content: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
+        HStack {
             Spacer()
-            VStack(alignment: .trailing, spacing: 8) {
-                Text(content)
-                    .font(.bodyText)
-                    .foregroundColor(.lightText)
-                    .lineSpacing(4)
-                    .padding(.vertical, 8)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
+            Text(content)
+                .font(.bodyText)
+                .foregroundColor(.lightText)
+                .lineSpacing(4)
+                .padding(14)
+                .background(Color.spaceCard.opacity(0.7))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .strokeBorder(Color.techOrange, lineWidth: 2)
+                )
         }
-        .padding(16)
-        .background(Color.spaceCard.opacity(0.7))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.techOrange, lineWidth: 2)
-                .padding(-2)
-        )
         .padding(.horizontal, 16)
     }
 
@@ -229,10 +264,71 @@ struct GamePlayView: View {
         .padding(.horizontal, 16)
     }
 
+    @ViewBuilder private func sessionSummaryCard(content: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                Image(systemName: "book.closed.fill")
+                    .foregroundColor(.hologramBlue)
+                Text("SESSION RECAP")
+                    .font(.dataReadout)
+                    .foregroundColor(.hologramBlue)
+            }
+            Text(content)
+                .font(.bodyText)
+                .foregroundColor(.lightText)
+        }
+        .padding(16)
+        .background(Color.spaceCard)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(Color.hologramBlue.opacity(0.5), lineWidth: 1)
+        )
+        .padding(.horizontal, 16)
+    }
+
+    // MARK: - Thinking Indicator
+
+    @ViewBuilder private var thinkingIndicator: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "ellipsis")
+                .font(.title3)
+                .foregroundColor(.hologramBlue)
+                .symbolEffect(.variableColor.iterative, options: .repeating)
+            Text("AI Game Master is thinking…")
+                .font(.caption)
+                .foregroundColor(.mutedText)
+            Spacer()
+        }
+        .padding(12)
+        .background(Color.spaceCard.opacity(0.6))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+
+    // MARK: - XP Toast
+
+    @ViewBuilder private var xpToast: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "sparkles")
+                .foregroundColor(.saberGreen)
+            Text("+\(viewModel.xpToastAmount) XP")
+                .font(.headline.weight(.bold))
+                .foregroundColor(.saberGreen)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        .background(
+            Capsule()
+                .fill(Color.spaceCard)
+                .shadow(color: Color.saberGreen.opacity(0.4), radius: 12)
+        )
+        .overlay(Capsule().strokeBorder(Color.saberGreen.opacity(0.5), lineWidth: 1))
+    }
+
     // MARK: - Choices Row
 
     @ViewBuilder private var choicesRow: some View {
-        ScrollViewShowsIndicators(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(suggestedChoices) { choice in
                     ChoiceChip(
@@ -279,14 +375,15 @@ struct GamePlayView: View {
                     .background(Color.spaceCard)
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.borderSubtle, lineWidth: 1))
+                    .lineLimit(1...4)
 
                 Button(action: sendAction) {
                     Image(systemName: "arrow.up.circle.fill")
                         .font(.system(size: 28))
-                        .foregroundColor(canSendAction ? Color.hologramBlue : Color.mutedText)
+                        .foregroundColor(canSendAction && !actionText.isEmpty ? Color.hologramBlue : Color.mutedText)
                         .padding(4)
                 }
-                .disabled(!canSendAction)
+                .disabled(!canSendAction || actionText.isEmpty)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -314,49 +411,28 @@ struct GamePlayView: View {
     // MARK: - Session Summary Banner
 
     @ViewBuilder private var sessionSummaryBanner: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Image(systemName: "book.closed").foregroundColor(.hologramBlue)
-                Text("Previous Session Recap").font(.dataReadout).foregroundColor(.lightText)
-                Spacer()
-                Button(action: viewModel.dismissSessionSummary) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.mutedText)
-                }
+        HStack(spacing: 12) {
+            Image(systemName: "book.closed").foregroundColor(.hologramBlue)
+            Text(viewModel.sessionSummaryText)
+                .font(.caption)
+                .foregroundColor(.lightText)
+                .lineLimit(2)
+            Spacer()
+            Button {
+                Task { await viewModel.fetchSessionSummary() }
+                viewModel.dismissSessionSummary()
+            } label: {
+                Text("Load")
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.hologramBlue)
             }
-            .padding(12)
-            Divider().background(Color.borderSubtle)
-        }
-        .background(Color.spaceCard.opacity(0.9))
-    }
-
-    @ViewBuilder private func sessionSummaryBannerContent(text: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 12) {
-                Image(systemName: "book.closed").foregroundColor(.hologramBlue)
-                Text("Previous Session Recap").font(.dataReadout).foregroundColor(.lightText)
-                Spacer()
-                Button(action: viewModel.dismissSessionSummary) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.mutedText)
-                }
-            }
-            Text(text).font(.bodyText).foregroundColor(.lightText).padding(.horizontal, 12)
-        }
-        .padding(.vertical, 8)
-    }
-
-    // MARK: - Loading Indicator
-
-    @ViewBuilder private var loadingIndicator: some View {
-        HStack(spacing: 6) {
-            ForEach(0..<3, id: \.self) { _ in
-                Circle()
-                    .fill(Color.hologramBlue.opacity(0.7))
-                    .frame(width: 8, height: 8)
-                    .scaleEffect(viewModel.isProcessingAction ? 1.0 : 0.5)
-                    .opacity(viewModel.isProcessingAction ? 1.0 : 0.3)
-                    .animation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: viewModel.isProcessingAction)
+            Button(action: viewModel.dismissSessionSummary) {
+                Image(systemName: "xmark.circle.fill").foregroundColor(.mutedText)
             }
         }
+        .padding(12)
+        .background(Color.spaceCard.opacity(0.95))
+        .clipShape(RoundedRectangle(cornerRadius: 0))
     }
 
     // MARK: - Actions
@@ -364,25 +440,89 @@ struct GamePlayView: View {
     private func sendAction() {
         guard canSendAction, !actionText.isEmpty else { return }
         soundManager.playDiceRoll()
+        let text = actionText
+        withAnimation(.spring(response: 0.2, dampingFraction: 0.7)) {
+            actionText = ""
+            viewModel.selectedChoiceId = nil
+        }
         Task {
-            do {
-                try await viewModel.submitAction(
-                    actionText: actionText,
-                    selectedChoiceId: viewModel.selectedChoiceId
-                )
-                withAnimation(.spring(response: 0.2, dampingFraction: 0.7)) {
-                    actionText = ""
-                    viewModel.selectedChoiceId = nil
-                }
-            } catch {
-                print("Action failed: \(error)")
-            }
+            await viewModel.submitAction(actionText: text)
         }
     }
 
     private func selectQuickAction(_ text: String) {
         withAnimation(.spring(response: 0.2, dampingFraction: 0.7)) {
             actionText = text
+        }
+    }
+}
+
+// MARK: - Campaign Settings Sheet
+
+struct CampaignSettingsSheet: View {
+    @ObservedObject var viewModel: GamePlayViewModel
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var draft_difficulty: DifficultyLevel = .normal
+    @State private var draft_gmStyle: GMStyle = .cinematic
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Picker("Difficulty", selection: $draft_difficulty) {
+                        ForEach(DifficultyLevel.allCases, id: \.self) { level in
+                            Label(level.displayName, systemImage: level.icon).tag(level)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.spaceCard)
+                } header: {
+                    Label("Difficulty", systemImage: "shield.fill")
+                        .foregroundColor(.hologramBlue)
+                }
+
+                Section {
+                    Picker("GM Style", selection: $draft_gmStyle) {
+                        ForEach(GMStyle.allCases, id: \.self) { style in
+                            Label(style.displayName, systemImage: style.icon).tag(style)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.spaceCard)
+                } header: {
+                    Label("Narrative Style", systemImage: "film.fill")
+                        .foregroundColor(.hologramBlue)
+                } footer: {
+                    Text("Cinematic = epic drama · Gritty = dark & realistic · Comedic = lighthearted")
+                        .foregroundColor(.mutedText)
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color.spacePrimary.ignoresSafeArea())
+            .navigationTitle("Campaign Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                        .foregroundColor(.hologramBlue)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Apply") {
+                        Task {
+                            await viewModel.applySettings(difficulty: draft_difficulty, gmStyle: draft_gmStyle)
+                            dismiss()
+                        }
+                    }
+                    .foregroundColor(.saberGreen)
+                    .fontWeight(.semibold)
+                }
+            }
+        }
+        .preferredColorScheme(.dark)
+        .onAppear {
+            draft_difficulty = viewModel.selectedDifficulty
+            draft_gmStyle    = viewModel.selectedGMStyle
         }
     }
 }

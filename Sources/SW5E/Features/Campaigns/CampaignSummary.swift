@@ -149,12 +149,7 @@ struct CampaignStartRequest: Codable {
     let templateId: String?
     let characterId: String
     let title: String?
-
-    enum CodingKeys: String, CodingKey {
-        case templateId   = "template_id"
-        case characterId  = "character_id"
-        case title
-    }
+    // Backend expects camelCase — no CodingKeys needed
 }
 
 struct CampaignStartResponse: Codable {

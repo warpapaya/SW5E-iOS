@@ -25,11 +25,9 @@ class CampaignStartViewModel: ObservableObject {
 
     // MARK: - Private
 
-    private let baseURL: String
+    private var baseURL: String { APIService.shared.serverURL }
 
-    init(baseURL: String = APIService.shared.serverURL) {
-        self.baseURL = baseURL
-    }
+    init() {}
 
     // MARK: - Load
 
@@ -74,19 +72,9 @@ class CampaignStartViewModel: ObservableObject {
     }
 
     func checkAIStatus() async {
-        do {
-            let url = URL(string: "\(baseURL)/api/ai/status")!
-            let (data, response) = try await URLSession.shared.data(from: url)
-            if let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) {
-                let status = try JSONDecoder().decode(AIStatusResponse.self, from: data)
-                aiAvailable = status.available
-                aiBackend   = status.backend
-            } else {
-                aiAvailable = false
-            }
-        } catch {
-            aiAvailable = false
-        }
+        let status = await APIService.shared.checkAIStatus()
+        aiAvailable = status.available
+        aiBackend   = status.message
     }
 
     // MARK: - Start New Campaign

@@ -4,7 +4,7 @@ import SwiftUI
 
 /// Server configuration, AI backend status, sound, and about sections.
 struct SettingsView: View {
-    @AppStorage("serverURL") private var serverURL: String = "http://localhost:3001"
+    @AppStorage("serverURL") private var serverURL: String = "https://sw5e-api.petieclark.com"
 
     // SoundManager accessed via shared singleton — no environment injection required
     @StateObject private var soundManager = SoundManager.shared
@@ -28,6 +28,10 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            // Sync persisted URL into APIService on every appearance
+            APIService.shared.serverURL = serverURL
+        }
     }
 
     // MARK: - Server Configuration Section
@@ -123,7 +127,7 @@ struct SettingsView: View {
             Label("Server Configuration", systemImage: "server.rack.fill")
                 .foregroundColor(.hologramBlue)
         } footer: {
-            Text("Set the address of your SW5E backend. Default: http://localhost:3001")
+            Text("Set the address of your SW5E backend. Default: https://sw5e-api.petieclark.com")
                 .foregroundColor(.mutedText)
         }
         .listRowBackground(Color.spaceCard)
@@ -142,7 +146,7 @@ struct SettingsView: View {
                     Text("AI Game Master")
                         .font(.subheadline.weight(.semibold))
                         .foregroundColor(.lightText)
-                    Text("Ollama · LM Studio")
+                    Text("Via server /api/ai/status")
                         .font(.caption)
                         .foregroundColor(.mutedText)
                 }
@@ -163,7 +167,7 @@ struct SettingsView: View {
             Label("AI Backend", systemImage: "cpu.fill")
                 .foregroundColor(.hologramBlue)
         } footer: {
-            Text("The AI GM generates narrative, descriptions, and NPC dialogue in real-time. Checks localhost:11434 (Ollama) and localhost:1234 (LM Studio).")
+            Text("The AI GM generates narrative, descriptions, and NPC dialogue in real-time using the configured server.")
                 .foregroundColor(.mutedText)
         }
         .listRowBackground(Color.spaceCard)
@@ -171,19 +175,14 @@ struct SettingsView: View {
 
     @ViewBuilder
     private var aiStatusBadge: some View {
-        switch connectionChecker.aiStatus {
-        case .online:
+        if connectionChecker.aiOnline {
             Label("Online", systemImage: "checkmark.circle.fill")
                 .font(.caption.weight(.semibold))
                 .foregroundColor(.saberGreen)
-        case .offline:
+        } else {
             Label("Offline", systemImage: "xmark.circle.fill")
                 .font(.caption.weight(.semibold))
                 .foregroundColor(.siithRed)
-        case .unknown:
-            Label("Unknown", systemImage: "questionmark.circle")
-                .font(.caption.weight(.semibold))
-                .foregroundColor(.mutedText)
         }
     }
 
@@ -334,8 +333,8 @@ struct SettingsView: View {
             // Reset
             Button(role: .destructive) {
                 soundManager.resetDefaults()
-                serverURL = "http://localhost:3001"
-                APIService.shared.serverURL = "http://localhost:3001"
+                serverURL = "https://sw5e-api.petieclark.com"
+                APIService.shared.serverURL = "https://sw5e-api.petieclark.com"
             } label: {
                 Label("Reset to Defaults", systemImage: "arrow.counterclockwise")
                     .foregroundColor(.siithRed)
@@ -358,9 +357,8 @@ struct SettingsView: View {
 final class ConnectionChecker: ObservableObject {
     @Published var isChecking = false
     @Published var isConnected = false
-    @Published var aiStatus: AIStatus = .unknown
-
-    enum AIStatus { case online, offline, unknown }
+    @Published var aiOnline: Bool = false
+    @Published var aiStatusDescription: String = "Checking AI backend availability…"
 
     private let api = APIService.shared
 
@@ -372,42 +370,16 @@ final class ConnectionChecker: ObservableObject {
         isChecking = true
         defer { isChecking = false }
 
-        // Check main backend (non-throwing)
+        // Check main backend
         isConnected = await api.checkConnection()
 
-        // Check AI backends concurrently
-        aiStatus = await checkAIBackends()
-    }
-
-    private func checkAIBackends() async -> AIStatus {
-        let ollamaURL  = URL(string: "http://localhost:11434")!
-        let lmStudioURL = URL(string: "http://localhost:1234/v1/models")!
-
-        async let ollamaOK   = quickReachable(ollamaURL)
-        async let lmStudioOK = quickReachable(lmStudioURL)
-
-        let (o, l) = await (ollamaOK, lmStudioOK)
-        return (o || l) ? .online : .offline
-    }
-
-    /// Returns true if the URL responds with any 2xx status within 2 seconds.
-    private func quickReachable(_ url: URL) async -> Bool {
-        var req = URLRequest(url: url)
-        req.timeoutInterval = 2.0
-        do {
-            let (_, resp) = try await URLSession.shared.data(for: req)
-            guard let http = resp as? HTTPURLResponse else { return false }
-            return (200...299).contains(http.statusCode)
-        } catch {
-            return false
-        }
-    }
-
-    var aiStatusDescription: String {
-        switch aiStatus {
-        case .online:  return "AI Game Master is ready. Narrative generation enabled."
-        case .offline: return "No AI backend detected. Start Ollama or LM Studio on this device."
-        case .unknown: return "Checking AI backend availability…"
+        // Check AI via the real /api/ai/status endpoint
+        let status = await api.checkAIStatus()
+        aiOnline = status.available
+        if status.available {
+            aiStatusDescription = status.message ?? "AI Game Master is ready. Narrative generation enabled."
+        } else {
+            aiStatusDescription = status.message ?? "AI backend offline. Start Ollama or LM Studio on the server."
         }
     }
 }

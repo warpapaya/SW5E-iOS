@@ -63,6 +63,7 @@ final class CharacterBuilderViewModel: ObservableObject {
 
     // MARK: UI State
     @Published var isGeneratingBackstory: Bool = false
+    @Published var backstoryError: String? = nil
 
     private let api = APIService.shared
 
@@ -247,29 +248,47 @@ final class CharacterBuilderViewModel: ObservableObject {
     // MARK: - AI Backstory Generation
 
     func generateBackstory() async {
+        guard !isGeneratingBackstory else { return }
         isGeneratingBackstory = true
+        backstoryError = nil
         defer { isGeneratingBackstory = false }
 
-        let payload: [String: Any] = [
-            "name":       draft.name,
-            "species":    draft.species?.name ?? "",
-            "class":      draft.charClass?.name ?? "",
-            "background": draft.background?.name ?? "",
-        ]
-        do {
-            let url = URL(string: "\(api.serverURL)/api/ai/backstory")!
-            var req = URLRequest(url: url)
-            req.httpMethod = "POST"
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            req.httpBody = try JSONSerialization.data(withJSONObject: payload)
-            let (data, _) = try await URLSession.shared.data(for: req)
-            if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let text = json["backstory"] as? String {
-                draft.backstory = text
-            }
-        } catch {
-            draft.backstory = "A wanderer of the galaxy, \(draft.name) comes from humble beginnings, shaped by hardship and destiny."
+        let name       = draft.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let species    = draft.species?.name    ?? "Unknown"
+        let charClass  = draft.charClass?.name  ?? "Unknown"
+        let background = draft.background?.name ?? "Unknown"
+
+        // Check AI availability first
+        let aiStatus = await api.checkAIStatus()
+        guard aiStatus.available else {
+            // Offline fallback: generate a local template backstory
+            draft.backstory = localBackstory(name: name, species: species, charClass: charClass, background: background)
+            backstoryError = "AI offline — using template backstory."
+            return
         }
+
+        do {
+            let result = try await api.generateBackstory(
+                name: name,
+                species: species,
+                charClass: charClass,
+                background: background
+            )
+            draft.backstory = result
+        } catch {
+            // Fallback on error
+            draft.backstory = localBackstory(name: name, species: species, charClass: charClass, background: background)
+            backstoryError = "AI generation failed — using template."
+        }
+    }
+
+    private func localBackstory(name: String, species: String, charClass: String, background: String) -> String {
+        let templates = [
+            "\(name) is a \(species) \(charClass) whose \(background) past shaped a destiny written in starlight and shadow. They roam the galaxy seeking purpose, leaving legends in their wake.",
+            "Born amid the chaos of a galaxy torn by conflict, \(name) rose from \(background) origins to become a formidable \(charClass). Their \(species) heritage grants them unique strengths few others possess.",
+            "The galaxy whispers the name \(name) — a \(species) of \(background) stock who chose the path of a \(charClass). Whether by fate or force of will, their journey has only begun.",
+        ]
+        return templates.randomElement() ?? templates[0]
     }
 
     // MARK: - Save Character

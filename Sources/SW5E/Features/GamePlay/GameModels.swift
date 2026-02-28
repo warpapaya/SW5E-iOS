@@ -88,14 +88,13 @@ struct Combatant: Identifiable, Equatable, Codable {
 // MARK: - Campaign
 
 /// Campaign data received from the API.
-/// Uses a custom decoder to map the backend shape; encoding uses simple stored-property keys.
 struct Campaign: Identifiable, Codable {
     let id: String
     var title: String
     var currentLocation: String   // derived from worldState.currentLocation on decode
+    var difficulty: DifficultyLevel
+    var gmStyle: GMStyle
     var gameState: GameState
-
-    // MARK: Inner types
 
     struct GameState: Codable {
         var active: Bool = true
@@ -105,19 +104,20 @@ struct Campaign: Identifiable, Codable {
         var activeCharacter: Character?
     }
 
-    // MARK: Memberwise init (used by demo data and in-app construction)
-
-    init(id: String, title: String, currentLocation: String, gameState: GameState) {
+    init(id: String, title: String, currentLocation: String,
+         difficulty: DifficultyLevel = .normal, gmStyle: GMStyle = .cinematic,
+         gameState: GameState) {
         self.id = id
         self.title = title
         self.currentLocation = currentLocation
+        self.difficulty = difficulty
+        self.gmStyle = gmStyle
         self.gameState = gameState
     }
 
-    // MARK: Encodable — encode stored properties directly
-
+    // MARK: Encodable
     enum StoredKeys: String, CodingKey {
-        case id, title, currentLocation, gameState
+        case id, title, currentLocation, difficulty, gmStyle, gameState
     }
 
     func encode(to encoder: Encoder) throws {
@@ -125,29 +125,30 @@ struct Campaign: Identifiable, Codable {
         try c.encode(id,              forKey: .id)
         try c.encode(title,           forKey: .title)
         try c.encode(currentLocation, forKey: .currentLocation)
+        try c.encode(difficulty,      forKey: .difficulty)
+        try c.encode(gmStyle,         forKey: .gmStyle)
         try c.encode(gameState,       forKey: .gameState)
     }
 
     // MARK: Decodable — maps backend shape
-
     enum BackendKeys: String, CodingKey {
-        case id, title, currentScene, combatState, history, worldState
+        case id, title, currentScene, combatState, history, worldState, difficulty, gmStyle
     }
 
     init(from decoder: Decoder) throws {
-        // Try backend shape first
         let c = try decoder.container(keyedBy: BackendKeys.self)
         id    = try c.decode(String.self, forKey: .id)
         title = try c.decodeIfPresent(String.self, forKey: .title) ?? "Campaign"
 
-        // Extract currentLocation from worldState
+        difficulty = try c.decodeIfPresent(DifficultyLevel.self, forKey: .difficulty) ?? .normal
+        gmStyle    = try c.decodeIfPresent(GMStyle.self,         forKey: .gmStyle)    ?? .cinematic
+
         if let ws = try? c.decodeIfPresent(WorldState.self, forKey: .worldState) {
             currentLocation = ws.currentLocation
         } else {
             currentLocation = "Unknown"
         }
 
-        // Build GameState from backend fields
         let history     = try c.decodeIfPresent([BackendHistoryEntry].self, forKey: .history)     ?? []
         let combatState = try c.decodeIfPresent(CombatState.self,           forKey: .combatState) ?? CombatState()
         let scene       = try c.decodeIfPresent(BackendScene.self,          forKey: .currentScene)
@@ -165,9 +166,8 @@ struct Campaign: Identifiable, Codable {
     }
 }
 
-// MARK: - Backend Shape Helpers (decode-only, not used for encoding)
+// MARK: - Backend Shape Helpers (decode-only)
 
-/// Backend scene shape — used when decoding campaign and action responses
 struct BackendScene: Codable {
     var description: String
     var location: String?
@@ -175,14 +175,12 @@ struct BackendScene: Codable {
     var npcs: [String]?
 }
 
-/// Backend history entry
 struct BackendHistoryEntry: Codable {
     var type: String        // "narration" | "action" | "combat"
     var text: String
     var timestamp: String?
 }
 
-/// WorldState — only the fields we need
 struct WorldState: Codable {
     var currentLocation: String
 }
@@ -198,41 +196,107 @@ extension GameHistoryEntry {
     }
 }
 
-// MARK: - Action Request / Response
+// MARK: - Action Request (legacy — kept for compatibility)
 
-/// POST /api/game/action  body
 struct ActionRequest: Codable {
     let campaignId: String
     let action: String
+}
 
-    // Backend expects camelCase keys — no snake_case needed
-    enum CodingKeys: String, CodingKey {
-        case campaignId
-        case action
+// MARK: - Campaign Settings Enums
+
+/// Difficulty levels for campaigns (matches backend values)
+enum DifficultyLevel: String, Codable, CaseIterable {
+    case story   = "story"
+    case normal  = "normal"
+    case heroic  = "heroic"
+
+    var displayName: String {
+        switch self {
+        case .story:  return "Story"
+        case .normal: return "Normal"
+        case .heroic: return "Heroic"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .story:  return "book.fill"
+        case .normal: return "shield.fill"
+        case .heroic: return "flame.fill"
+        }
     }
 }
 
-/// POST /api/game/action  response
-struct ActionResponse: Codable {
-    let scene: BackendScene?
-    let combatState: CombatState?
-    let xpAwarded: Int?
+/// GM narrative style (matches backend values)
+enum GMStyle: String, Codable, CaseIterable {
+    case cinematic = "cinematic"
+    case gritty    = "gritty"
+    case comedic   = "comedic"
 
-    var narration: String?         { scene?.description }
-    var suggestedChoices: [SuggestedChoice]? { scene?.choices.map { SuggestedChoice(text: $0) } }
-    var success: Bool              { scene != nil }
+    var displayName: String {
+        switch self {
+        case .cinematic: return "Cinematic"
+        case .gritty:    return "Gritty"
+        case .comedic:   return "Comedic"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .cinematic: return "film.fill"
+        case .gritty:    return "bolt.fill"
+        case .comedic:   return "face.smiling.fill"
+        }
+    }
+}
+
+// MARK: - AI Status (from /api/ai/status)
+
+/// Backend AI availability response
+struct AIStatus: Codable {
+    let available: Bool
+    let backends: AIBackends?
+    let message: String?
+
+    struct AIBackends: Codable {
+        let ollama: Bool?
+        let lmStudio: Bool?
+    }
+
+    static let offline = AIStatus(available: false, backends: nil, message: "Offline")
+}
+
+// MARK: - Travel Result (from /api/game/travel)
+
+struct TravelResult: Codable {
+    let success: Bool
+    let route: RouteInfo?
+    let encounter: String?
+    let arrivalScene: BackendScene?
+    let narration: String?
+}
+
+struct RouteInfo: Codable {
+    let fromPlanet: String?
+    let toPlanet: String?
+    let waypoints: [String]?
+    let totalDistance: Double?
+    let numJumps: Int?
+    let estimatedTravelTimeHours: Double?
 }
 
 // MARK: - Demo Campaign Data
 
 extension Campaign {
-    /// Demo campaign shown when server is offline.
     static func demo(id: String = "demo-campaign-1") -> Campaign {
         let character = Character.demos.first
         return Campaign(
             id: id,
             title: "Shadows of the Sith",
             currentLocation: "Coruscant, Level 1313",
+            difficulty: .normal,
+            gmStyle: .cinematic,
             gameState: Campaign.GameState(
                 active: true,
                 combatState: CombatState(),
@@ -258,15 +322,11 @@ extension Campaign {
     }
 }
 
-// MARK: - Server configuration for settings
+// MARK: - Server Configuration
+
 struct ServerConfig: Codable {
     var url: String
     let timeoutSeconds: Int
 
-    enum CodingKeys: String, CodingKey {
-        case url
-        case timeoutSeconds = "timeout_seconds"
-    }
-
-    static let `default`: Self = Self(url: "https://sw5e-api.petieclark.com", timeoutSeconds: 30)
+    static let `default` = ServerConfig(url: "https://sw5e-api.petieclark.com", timeoutSeconds: 30)
 }
