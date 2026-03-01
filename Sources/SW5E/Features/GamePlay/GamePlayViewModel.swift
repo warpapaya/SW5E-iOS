@@ -37,7 +37,7 @@ class GamePlayViewModel: ObservableObject {
     @Published var showSessionSummaryBanner = false
     @Published var sessionSummaryText = ""
 
-    // Force user tracking (for lightsaber hum)
+    // Veilborn tracking (for Veilblade hum)
     @Published var isActiveForceUser = false
 
     // Campaign settings editing
@@ -165,8 +165,8 @@ class GamePlayViewModel: ObservableObject {
         } catch {
             // Offline / demo fallback
             let demoReplies = [
-                "The Force stirs as you act. The outcome ripples through the galaxy. *[AI Game Master offline — connect your server to continue]*",
-                "Your action echoes through the corridors of fate. *[Demo mode — wire up your SW5E backend for full AI narration]*",
+                "The Veil stirs as you act. The outcome ripples through the galaxy. *[AI Game Master offline — connect your server to continue]*",
+                "Your action echoes through the corridors of fate. *[Demo mode — wire up your Echoveil backend for full AI narration]*",
                 "An interesting choice. The galaxy holds its breath... *[Server offline]*",
             ]
             let count = campaign?.gameState.history.count ?? 0
@@ -266,7 +266,7 @@ class GamePlayViewModel: ObservableObject {
         let wasActive = isActiveForceUser
         isActiveForceUser = character?.isForceUser ?? false
         if isActiveForceUser != wasActive {
-            isActiveForceUser ? soundManager.startLightsaberHum() : soundManager.stopLightsaberHum()
+            isActiveForceUser ? soundManager.startVeilbladeHum() : soundManager.stopVeilbladeHum()
         }
     }
 

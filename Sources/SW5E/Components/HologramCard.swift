@@ -39,7 +39,7 @@ struct HologramCard: View {
 #Preview("Hologram Card") {
     VStack(spacing: 16) {
         HologramCard(title: "Character Stats", content: "Strength +3, Dexterity +2, Constitution +4")
-        HologramCard(content: "Level 5 Guardian\nCurrent HP: 38/40\nAC: 18\nInitiative: +2")
+        HologramCard(content: "Level 5 Tidecaller\nCurrent HP: 38/40\nAC: 18\nInitiative: +2")
     }
     .padding()
 }

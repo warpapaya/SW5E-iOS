@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-/// Sound effects manager for SW5E iOS app.
+/// Sound effects manager for Echoveil iOS app.
 /// Audio synthesis stubs — sounds will be wired up in a future sprint.
 @MainActor
 class SoundManager: NSObject, ObservableObject {
@@ -36,8 +36,8 @@ class SoundManager: NSObject, ObservableObject {
     // MARK: - Sound Playback (stubs — TODO: implement AVAudioEngine synthesis)
 
     func playBlasterShot()   { /* TODO: implement audio */ }
-    func startLightsaberHum() { /* TODO: implement audio */ }
-    func stopLightsaberHum()  { /* TODO: implement audio */ }
+    func startVeilbladeHum() { /* TODO: implement audio */ }
+    func stopVeilbladeHum()  { /* TODO: implement audio */ }
     func playDiceRoll()      { /* TODO: implement audio */ }
     func playXPChime()       { /* TODO: implement audio */ }
     func startAmbientLoop()  { /* TODO: implement audio */ }

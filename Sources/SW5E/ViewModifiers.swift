@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Custom view modifiers for the Star Wars design system.
+/// Custom view modifiers for the Echoveil design system.
 extension View {
     // MARK: - Hologram Card Modifier
     
@@ -69,7 +69,7 @@ extension View {
     
     // MARK: - Safe Area Padding
     
-    /// Applies consistent padding for Star Wars UI safe areas.
+    /// Applies consistent padding for Echoveil UI safe areas.
     func swSafeAreaPadding() -> some View {
         self
             .padding(.horizontal, 16)

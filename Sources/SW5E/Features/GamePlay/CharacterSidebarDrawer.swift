@@ -170,7 +170,7 @@ struct CharacterSidebarDrawer: View {
     private var powers: [Power] {
         [
             Power(name: "Force Push",       description: "Push enemy back 10ft",         type: .force),
-            Power(name: "Lightsaber Strike", description: "+3 to hit, 1d8+2 damage",      type: .weapon),
+            Power(name: "Veilblade Strike", description: "+3 to hit, 1d8+2 damage",      type: .weapon),
             Power(name: "Defensive Stance",  description: "+2 AC until end of turn",      type: .defensive)
         ]
     }
@@ -287,13 +287,13 @@ struct Power: Identifiable, Hashable {
             ZStack(alignment: .trailing) {
                 Color.spacePrimary.ignoresSafeArea()
                 CharacterSidebarDrawer(
-                    campaign: Campaign(id: "test", title: "Test", currentLocation: "Coruscant", gameState: .init()),
+                    campaign: Campaign(id: "test", title: "Test", currentLocation: "Solara Prime", gameState: .init()),
                     isPresented: $showDrawer,
                     character: Character(
                         id: "preview-1",
                         name: "Jax Varrick",
                         species: "Human",
-                        charClass: "Guardian",
+                        charClass: "Tidecaller",
                         level: 5,
                         experiencePoints: 0,
                         currentHP: 28,

@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// Star Wars-themed typography extensions.
+/// Echoveil-themed typography extensions.
 /// Uses SF Pro Display as base, with SF Mono for data readouts when available.
 extension Font {
     // MARK: - Title Typography
 
-    /// Main title font — inspired by Star Wars opening crawl
+    /// Main title font — inspired by Echoveil opening crawl
     static var starWarsTitle: Font {
         .largeTitle.weight(.bold)
     }
@@ -40,7 +40,7 @@ extension Font {
 // MARK: - Preview Provider
 #Preview("Typography") {
     VStack(alignment: .leading, spacing: 24) {
-        Text("Star Wars Title")
+        Text("Echoveil Title")
             .font(.starWarsTitle)
             .tracking(2)
 

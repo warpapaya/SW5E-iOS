@@ -15,22 +15,22 @@ struct CBSpecies: Identifiable, Codable, Equatable {
     }
 
     static let samples: [CBSpecies] = [
-        CBSpecies(id: "human", name: "Human",
+        CBSpecies(id: "arion", name: "Arion",
                   traits: ["Adaptable", "Ambitious", "Extra Skill"],
                   abilityBonuses: ["any": 1],
                   description: "The most widespread species in the galaxy, valued for their ambition and adaptability."),
-        CBSpecies(id: "twi-lek", name: "Twi'lek",
-                  traits: ["Charismatic", "Flexible Lekku", "Darkvision"],
+        CBSpecies(id: "sylari", name: "Sylari",
+                  traits: ["Charismatic", "Resonant Crest", "Low-light Vision"],
                   abilityBonuses: ["cha": 2, "dex": 1],
-                  description: "Known for their colorful skin and head-tails (lekku), Twi'leks are natural diplomats."),
-        CBSpecies(id: "wookiee", name: "Wookiee",
-                  traits: ["Powerful Build", "Natural Claws", "Rage"],
+                  description: "Known for their bioluminescent crests and innate charm, Sylari are natural diplomats."),
+        CBSpecies(id: "vrask", name: "Vrask",
+                  traits: ["Powerful Build", "Natural Claws", "Fury"],
                   abilityBonuses: ["str": 2, "con": 1],
-                  description: "Powerful beings from the forest world of Kashyyyk, Wookiees are fierce and loyal."),
+                  description: "Powerful beings from the world of Vakhar, Vrask are fierce and intensely loyal."),
         CBSpecies(id: "mirialan", name: "Mirialan",
-                  traits: ["Force Sensitive", "Focused", "Acrobatic"],
+                  traits: ["Veilborn", "Focused", "Acrobatic"],
                   abilityBonuses: ["wis": 2, "dex": 1],
-                  description: "Naturally attuned to the Force, Mirialans are disciplined and spiritually aware."),
+                  description: "Naturally attuned to the Veil, Mirialans are disciplined and spiritually aware."),
         CBSpecies(id: "zabrak", name: "Zabrak",
                   traits: ["Determined", "Pain Endurance", "Horns"],
                   abilityBonuses: ["con": 1, "wis": 1],
@@ -133,17 +133,17 @@ struct CBClass: Identifiable, Codable, Equatable {
     }
 
     static let samples: [CBClass] = [
-        CBClass(id: "guardian",  name: "Guardian",  hitDie: 10, primaryStat: .strength,
-                roleDescription: "Force-wielding warriors who protect the light. Masters of lightsaber combat.",
+        CBClass(id: "guardian",   name: "Tidecaller", hitDie: 10, primaryStat: .strength,
+                roleDescription: "Veil-wielding warriors who protect the Tide. Masters of Veilblade combat.",
                 isForceUser: true, isTechUser: false),
-        CBClass(id: "sentinel",  name: "Sentinel",  hitDie: 8,  primaryStat: .dexterity,
-                roleDescription: "Agile scouts who blend martial skill with Force techniques and investigation.",
+        CBClass(id: "sentinel",   name: "Warden",     hitDie: 8,  primaryStat: .dexterity,
+                roleDescription: "Agile scouts who blend martial skill with Veil techniques and investigation.",
                 isForceUser: true, isTechUser: false),
-        CBClass(id: "consular",  name: "Consular",  hitDie: 6,  primaryStat: .wisdom,
-                roleDescription: "Diplomatic Force users who wield powerful Force powers over brute combat.",
+        CBClass(id: "consular",   name: "Lorekeeper", hitDie: 6,  primaryStat: .wisdom,
+                roleDescription: "Diplomatic Veil users who wield powerful Veil powers over brute combat.",
                 isForceUser: true, isTechUser: false),
-        CBClass(id: "engineer",  name: "Engineer",  hitDie: 8,  primaryStat: .intelligence,
-                roleDescription: "Tech specialists who modify weapons, control droids, and wield tech powers.",
+        CBClass(id: "engineer",   name: "Fabricant",  hitDie: 8,  primaryStat: .intelligence,
+                roleDescription: "Tech specialists who modify weapons, control machines, and wield tech powers.",
                 isForceUser: false, isTechUser: true),
         CBClass(id: "fighter",   name: "Fighter",   hitDie: 10, primaryStat: .strength,
                 roleDescription: "Master warriors trained in all forms of combat, unmatched in sustained fighting.",
@@ -184,9 +184,9 @@ struct CBBackground: Identifiable, Codable, Equatable {
         CBBackground(id: "scavenger",     name: "Scavenger",
                      skillGrants: ["Perception", "Survival"],
                      featureDescription: "You find value in discarded tech and can salvage useful parts from wrecks."),
-        CBBackground(id: "jedi-initiate", name: "Jedi Initiate",
+        CBBackground(id: "tidecaller-initiate", name: "Tidecaller Initiate",
                      skillGrants: ["Insight", "History"],
-                     featureDescription: "Trained in the Jedi Order. Access Jedi resources and refuge in temples."),
+                     featureDescription: "Trained in the Tidecaller Order. Access Tidecaller resources and refuge in sanctuaries."),
         CBBackground(id: "bounty-hunter", name: "Bounty Hunter",
                      skillGrants: ["Perception", "Investigation"],
                      featureDescription: "Contacts in criminal networks. You can get intel on any target for the right price."),
@@ -220,18 +220,18 @@ struct CBPower: Identifiable, Codable, Equatable {
     }
 
     static let forceSamples: [CBPower] = [
-        CBPower(id: "force-push",   name: "Force Push",   level: 0, type: "force",
-                duration: "Instant",       description: "Push a creature or object with the Force.", cost: "At-will"),
-        CBPower(id: "force-pull",   name: "Force Pull",   level: 0, type: "force",
+        CBPower(id: "veil-push",    name: "Veil Push",    level: 0, type: "force",
+                duration: "Instant",       description: "Push a creature or object with the Veil.", cost: "At-will"),
+        CBPower(id: "veil-pull",    name: "Veil Pull",    level: 0, type: "force",
                 duration: "Instant",       description: "Pull a nearby object into your hand.", cost: "At-will"),
-        CBPower(id: "sense-force",  name: "Sense Force",  level: 0, type: "force",
-                duration: "Concentration", description: "Sense Force emanations of nearby living beings.", cost: "At-will"),
-        CBPower(id: "force-bond",   name: "Force Bond",   level: 1, type: "force",
+        CBPower(id: "sense-veil",   name: "Sense Veil",   level: 0, type: "force",
+                duration: "Concentration", description: "Sense Veil emanations of nearby living beings.", cost: "At-will"),
+        CBPower(id: "veil-bond",    name: "Veil Bond",    level: 1, type: "force",
                 duration: "1 hour",        description: "Create a mental link with a willing creature.", cost: "2 FP"),
-        CBPower(id: "force-blind",  name: "Force Blind",  level: 1, type: "force",
-                duration: "1 minute",      description: "Blind a target with surging Force energy.", cost: "2 FP"),
-        CBPower(id: "force-absorb", name: "Force Absorb", level: 1, type: "force",
-                duration: "Instant",       description: "Absorb Force damage that would harm you.", cost: "2 FP"),
+        CBPower(id: "veil-blind",   name: "Veil Blind",   level: 1, type: "force",
+                duration: "1 minute",      description: "Blind a target with surging Veil energy.", cost: "2 FP"),
+        CBPower(id: "veil-absorb",  name: "Veil Absorb",  level: 1, type: "force",
+                duration: "Instant",       description: "Absorb Veil damage that would harm you.", cost: "2 FP"),
     ]
 
     static let techSamples: [CBPower] = [
@@ -292,20 +292,20 @@ struct CBEquipment: Identifiable, Codable, Equatable {
             CBEquipment(id: "comlink",       name: "Comlink",         type: "gear",       weight: 0.25, isDefault: false, description: "Short-range communicator, 1-mile range."),
         ]
         switch className.lowercased() {
-        case "guardian", "fighter", "sentinel":
-            items.append(CBEquipment(id: "lightsaber",    name: "Lightsaber",          type: "weapon", weight: 1.0,  isDefault: true,  description: "1d8 energy, finesse, versatile (1d10)."))
-            items.append(CBEquipment(id: "light-armor",   name: "Light Battle Armor",  type: "armor",  weight: 13.0, isDefault: true,  description: "AC 12 + DEX modifier."))
+        case "tidecaller", "fighter", "warden":
+            items.append(CBEquipment(id: "veilblade",    name: "Veilblade",           type: "weapon", weight: 1.0,  isDefault: true,  description: "1d8 energy, finesse, versatile (1d10)."))
+            items.append(CBEquipment(id: "light-armor",  name: "Light Battle Armor",  type: "armor",  weight: 13.0, isDefault: true,  description: "AC 12 + DEX modifier."))
         case "smuggler", "operative":
-            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",     type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
-            items.append(CBEquipment(id: "holdout-blaster", name: "Holdout Blaster",   type: "weapon", weight: 0.5, isDefault: false, description: "1d4 energy, concealable, 30/120 ft."))
-        case "engineer", "scholar":
-            items.append(CBEquipment(id: "techblade",    name: "Techblade",            type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 kinetic, finesse."))
-            items.append(CBEquipment(id: "tech-kit",     name: "Tech Kit",             type: "gear",   weight: 4.0, isDefault: true,  description: "Required for casting tech powers."))
-        case "consular":
-            items.append(CBEquipment(id: "force-staff",  name: "Force-imbued Staff",   type: "weapon", weight: 3.0, isDefault: true,  description: "1d6 kinetic, versatile (1d8), focus."))
-            items.append(CBEquipment(id: "robes",        name: "Jedi Robes",           type: "armor",  weight: 4.0, isDefault: true,  description: "AC 10 + WIS modifier (Force Focus)."))
+            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
+            items.append(CBEquipment(id: "holdout-blaster", name: "Holdout Blaster",  type: "weapon", weight: 0.5, isDefault: false, description: "1d4 energy, concealable, 30/120 ft."))
+        case "fabricant", "scholar":
+            items.append(CBEquipment(id: "techblade",    name: "Techblade",           type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 kinetic, finesse."))
+            items.append(CBEquipment(id: "tech-kit",     name: "Tech Kit",            type: "gear",   weight: 4.0, isDefault: true,  description: "Required for casting tech powers."))
+        case "lorekeeper":
+            items.append(CBEquipment(id: "veil-staff",   name: "Veil-imbued Staff",   type: "weapon", weight: 3.0, isDefault: true,  description: "1d6 kinetic, versatile (1d8), focus."))
+            items.append(CBEquipment(id: "robes",        name: "Lorekeeper Robes",    type: "armor",  weight: 4.0, isDefault: true,  description: "AC 10 + WIS modifier (Veil Focus)."))
         default:
-            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",     type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
+            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
         }
         return items
     }

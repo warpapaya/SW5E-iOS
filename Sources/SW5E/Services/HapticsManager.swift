@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-/// Manager for haptic feedback in the SW5E iOS app.
+/// Manager for haptic feedback in the Echoveil iOS app.
 final class HapticsManager {
 
     static let shared = HapticsManager()

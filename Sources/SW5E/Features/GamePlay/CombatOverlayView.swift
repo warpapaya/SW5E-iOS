@@ -323,8 +323,8 @@ struct CombatOverlayView: View {
     CombatOverlayView(
         combatState: CombatState(active: true, currentTurnIndex: 0, participants: [
             Combatant(name: "Player Character", hp: 28, maxHp: 35, ac: 16),
-            Combatant(name: "Sith Warrior",     hp: 42, maxHp: 50, ac: 18),
-            Combatant(name: "Imperial Trooper", hp: 12, maxHp: 20, ac: 14)
+            Combatant(name: "Voidshaper Warrior",     hp: 42, maxHp: 50, ac: 18),
+            Combatant(name: "Sovereignty Vanguard", hp: 12, maxHp: 20, ac: 14)
         ]),
         soundManager: SoundManager.shared,
         onDismiss: { },

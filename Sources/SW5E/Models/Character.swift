@@ -1,14 +1,14 @@
 import Foundation
 import SwiftUI
 
-// MARK: - SW5E Character Model
+// MARK: - Echoveil Character Model
 
-/// Star Wars 5th Edition character data model
+/// Echoveil character data model
 struct Character: Identifiable, Codable, Equatable, Hashable {
     let id: String
     var name: String
     var species: String
-    var charClass: String  // Guardian, Sentinel, Consular, Engineer, Fighter, etc.
+    var charClass: String  // Tidecaller, Warden, Lorekeeper, Fabricant, Fighter, etc.
     var level: Int
     var experiencePoints: Int
     var currentHP: Int
@@ -31,7 +31,7 @@ struct Character: Identifiable, Codable, Equatable, Hashable {
         id: "",
         name: "New Character",
         species: "Human",
-        charClass: "Guardian",
+        charClass: "Tidecaller",
         level: 1,
         experiencePoints: 0,
         currentHP: 10,
@@ -70,7 +70,7 @@ struct Character: Identifiable, Codable, Equatable, Hashable {
         id               = try c.decode(String.self, forKey: .id)
         name             = try c.decode(String.self, forKey: .name)
         species          = try c.decodeIfPresent(String.self, forKey: .species)   ?? "Unknown"
-        charClass        = try c.decodeIfPresent(String.self, forKey: .charClass) ?? "Guardian"
+        charClass        = try c.decodeIfPresent(String.self, forKey: .charClass) ?? "Tidecaller"
         level            = try c.decodeIfPresent(Int.self,    forKey: .level)     ?? 1
         experiencePoints = try c.decodeIfPresent(Int.self,    forKey: .experiencePoints) ?? 0
         currentHP        = try c.decodeIfPresent(Int.self,    forKey: .currentHP) ?? 10
@@ -86,12 +86,12 @@ struct Character: Identifiable, Codable, Equatable, Hashable {
 
 // MARK: - Character Class Colors
 
-/// Gradient colors for each character class in the SW5E system
+/// Gradient colors for each character class in the Echoveil system
 enum CharacterClassColor: String, CaseIterable {
-    case guardian = "Guardian"      // Blue - Force users, defenders
-    case sentinel = "Sentinel"       // Purple - Scouts, investigators
-    case consular = "Consular"       // Teal - Diplomats, scholars
-    case engineer = "Engineer"       // Green - Tech specialists
+    case guardian = "Tidecaller"    // Blue - Veil users, defenders
+    case sentinel = "Warden"        // Purple - Scouts, investigators
+    case consular = "Lorekeeper"    // Teal - Diplomats, scholars
+    case engineer = "Fabricant"     // Green - Tech specialists
     case fighter = "Fighter"         // Orange - Martial combatants
     case smuggler = "Smuggler"       // Yellow - Rogues, operators
     
@@ -135,22 +135,22 @@ enum CharacterClassColor: String, CaseIterable {
 extension Character {
     static let demos: [Character] = [
         Character(
-            id: "demo-1", name: "Kael Voss", species: "Miraluka", charClass: "Guardian",
+            id: "demo-1", name: "Kael Voss", species: "Arion", charClass: "Tidecaller",
             level: 7, experiencePoints: 23_000, currentHP: 45, maxHP: 68,
             ac: 16, forcePoints: 12, lastModified: Date().addingTimeInterval(-3_600)
         ),
         Character(
-            id: "demo-2", name: "Zara Teth", species: "Twi'lek", charClass: "Sentinel",
+            id: "demo-2", name: "Zara Teth", species: "Sylari", charClass: "Warden",
             level: 3, experiencePoints: 2_100, currentHP: 22, maxHP: 28,
             ac: 14, forcePoints: 6, lastModified: Date().addingTimeInterval(-86_400)
         ),
         Character(
-            id: "demo-3", name: "Brom Skalos", species: "Zabrak", charClass: "Engineer",
+            id: "demo-3", name: "Brom Skalos", species: "Zabrak", charClass: "Fabricant",
             level: 5, experiencePoints: 14_000, currentHP: 38, maxHP: 42,
             ac: 17, forcePoints: 0, lastModified: Date().addingTimeInterval(-7_200)
         ),
         Character(
-            id: "demo-4", name: "Lyss Orann", species: "Human", charClass: "Consular",
+            id: "demo-4", name: "Lyss Orann", species: "Arion", charClass: "Lorekeeper",
             level: 4, experiencePoints: 5_500, currentHP: 30, maxHP: 32,
             ac: 13, forcePoints: 20, lastModified: Date().addingTimeInterval(-172_800)
         ),
@@ -158,19 +158,19 @@ extension Character {
 }
 
 extension Character {
-    /// Check if character is a force user (Jedi, Sith, etc.)
+    /// Check if character is a Veil user (Tidecaller, Voidshaper, etc.)
     var isForceUser: Bool {
-        // Guardian class often has force powers
-        let guardianHasForce = charClass.contains("Guardian") && forcePoints > 0
+        // Tidecaller class often has Veil powers
+        let tidecallerHasVeil = charClass.contains("Tidecaller") && forcePoints > 0
         
-        // Explicit Jedi/Sith/Acolyte classes
-        let explicitForceClasses = ["Jedi", "Sith", "Dark Jedi", "Force Acolyte", "Jedi Knight", "Jedi Master"]
-        let hasExplicitForceClass = explicitForceClasses.contains { charClass.contains($0) }
+        // Explicit Veilborn classes
+        let explicitVeilClasses = ["Tidecaller", "Voidshaper", "Lorekeeper", "Warden", "Veil Acolyte"]
+        let hasExplicitVeilClass = explicitVeilClasses.contains { charClass.contains($0) }
         
-        // Sentinel can be force-sensitive (investigators, diplomats with powers)
-        let sentinelHasForce = charClass.contains("Sentinel") && forcePoints > 0
+        // Warden can be Veilborn (investigators, diplomats with powers)
+        let wardenHasVeil = charClass.contains("Warden") && forcePoints > 0
         
-        return guardianHasForce || explicitForceClasses.contains(charClass) || sentinelHasForce
+        return tidecallerHasVeil || hasExplicitVeilClass || wardenHasVeil
     }
     
     /// Initiative bonus for combat (includes force sensitivity bonus)

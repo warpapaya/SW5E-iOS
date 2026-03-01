@@ -299,8 +299,8 @@ extension Campaign {
         let character = Character.demos.first
         return Campaign(
             id: id,
-            title: "Shadows of the Sith",
-            currentLocation: "Coruscant, Level 1313",
+            title: "Shadows of the Void",
+            currentLocation: "Solara Prime, Level 1313",
             difficulty: .normal,
             gmStyle: .cinematic,
             gameState: Campaign.GameState(
@@ -309,7 +309,7 @@ extension Campaign {
                 history: [
                     GameHistoryEntry(
                         type: .gmNarration,
-                        content: "You stand in the dimly lit corridors of Coruscant's Level 1313. The air is thick with the scent of industrial oil and distant crime. Neon signs flicker in alien scripts. A hooded figure emerges from the shadows ahead — robes dark, posture coiled. The Force whispers danger."
+                        content: "You stand in the dimly lit corridors of Solara Prime's Level 1313. The air is thick with the scent of industrial oil and distant crime. Neon signs flicker in alien scripts. A hooded figure emerges from the shadows ahead — robes dark, posture coiled. The Veil whispers danger."
                     ),
                     GameHistoryEntry(
                         type: .gmNarration,
@@ -317,7 +317,7 @@ extension Campaign {
                     ),
                 ],
                 suggestedChoices: [
-                    SuggestedChoice(text: "Ignite my lightsaber and stand ready", emoji: "⚔️"),
+                    SuggestedChoice(text: "Draw my Veilblade and stand ready", emoji: "⚔️"),
                     SuggestedChoice(text: "Use Force Sense to read their intent",  emoji: "✨"),
                     SuggestedChoice(text: "Try to negotiate or stall for time",    emoji: "💬"),
                     SuggestedChoice(text: "Draw my blaster and take cover",        emoji: "🔫"),

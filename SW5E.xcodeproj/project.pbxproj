@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,15 +12,11 @@
 		08024663623C111CF2938C6C /* CampaignListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23705D881533A088E629AF50 /* CampaignListView.swift */; };
 		1ACEDDFAE268078441240B81 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47CD4CFB70CA42A9E74C95 /* APIService.swift */; };
 		25F2F639B3B2724F46B8EC58 /* ClassSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09BB57B93D64D8A101AA28 /* ClassSelectView.swift */; };
-		AA01234500000001AABBCCDD /* DetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01234500000001AABBCCDD /* DetailsFormView.swift */; };
-		AA01234500000002AABBCCDD /* ReviewSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01234500000002AABBCCDD /* ReviewSaveView.swift */; };
 		2644E757EE0942DB13D9E6BD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256C98EC01D265AAF56B90B /* App.swift */; };
 		287B1A4960998094488C7CCD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54513303823FB5D46B90516 /* Colors.swift */; };
-		3202A82E82AD967A3A946C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3797E0CBAFB95B2E2204962 /* Info.plist */; };
 		3C3C86BB1932C5CDED195169 /* GamePlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C111BF3CD89C5DFEFEEFBE80 /* GamePlayView.swift */; };
 		42B224F84322BD88AFEDE9B7 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE167B93E0CE26030238D1 /* GamePlayViewModel.swift */; };
 		4C4BAD12EE94283B39F6C404 /* CampaignSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266E4174EF3E7FD45A70FB3 /* CampaignSummary.swift */; };
-		4D3D1846BF5940D0D2099822 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E4C67A0E6F981F4AD3D4E5D /* LaunchScreen.storyboard */; };
 		55A06C37E6BDF74C3838F7C3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2F28C4A612B4CDB7229D80 /* SettingsView.swift */; };
 		5F1C9B67A6A8DA7144CB00BF /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA65620F3EABDAFA3E54E489 /* Character.swift */; };
 		6C5E2184A99BF183B7D08518 /* DiceRollOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489C41A1C1019DD3765BFF46 /* DiceRollOverlay.swift */; };
@@ -38,6 +34,8 @@
 		A17B8AF9E29708A61B0CB80A /* CharacterBuilderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDD7C3B6EE79992B58D397 /* CharacterBuilderViewModel.swift */; };
 		A3967E4F8BE6CB2692B8F4AA /* DICE_ROLLING_README.md in Resources */ = {isa = PBXBuildFile; fileRef = 96E21716AD6832975227ABE8 /* DICE_ROLLING_README.md */; };
 		A72F38138A9186F7A7D63AB7 /* CombatOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB8FD4DF437F0BA840E52E2 /* CombatOverlayView.swift */; };
+		AA01234500000001AABBCCDD /* DetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01234500000001AABBCCDD /* DetailsFormView.swift */; };
+		AA01234500000002AABBCCDD /* ReviewSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01234500000002AABBCCDD /* ReviewSaveView.swift */; };
 		AA1ACC83F50F5E4B51924E3D /* AIStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7F3610E6187998EDB2AE2 /* AIStatusIndicator.swift */; };
 		AADC004371D8023DD45E996F /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B874535EBD11B563EF1685 /* SectionHeader.swift */; };
 		AAFA03ECFA692D22B799CD47 /* StatBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FE5ED13C3EAB233DAB5204 /* StatBadge.swift */; };
@@ -61,8 +59,6 @@
 /* Begin PBXFileReference section */
 		03D842E6E9795717C37BBD78 /* GameModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModels.swift; sourceTree = "<group>"; };
 		0C09BB57B93D64D8A101AA28 /* ClassSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassSelectView.swift; sourceTree = "<group>"; };
-		BB01234500000001AABBCCDD /* DetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsFormView.swift; sourceTree = "<group>"; };
-		BB01234500000002AABBCCDD /* ReviewSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSaveView.swift; sourceTree = "<group>"; };
 		13951B1230087B662196A18F /* EquipmentSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentSelectView.swift; sourceTree = "<group>"; };
 		14CA8A84CDDE5A9FD6173A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		160BB961AA6F32E218D9FE96 /* CampaignStartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignStartViewModel.swift; sourceTree = "<group>"; };
@@ -80,7 +76,7 @@
 		740DB745757405D1A2087EEC /* GamePlayModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayModifiers.swift; sourceTree = "<group>"; };
 		7916AF72D4C508AC15F782FE /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		81B874535EBD11B563EF1685 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		83B9E790FAF89BD5C5C54136 /* SW5E.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SW5E.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83B9E790FAF89BD5C5C54136 /* Echoveil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Echoveil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E8C1AA09E1F3F2D101CB6D /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		8AF149C806FF6F53A2F1BD4B /* HologramCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HologramCard.swift; sourceTree = "<group>"; };
 		8BE4706246EADBCC6031913B /* AbilityScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityScoresView.swift; sourceTree = "<group>"; };
@@ -96,6 +92,8 @@
 		AD0A4DDFD4F52AE03910CA94 /* HPBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPBar.swift; sourceTree = "<group>"; };
 		AFFEAAB5BF028208197D8EDB /* BackgroundSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSelectView.swift; sourceTree = "<group>"; };
 		B619A35B6936ABA4DD1CF57A /* DiceRollerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollerService.swift; sourceTree = "<group>"; };
+		BB01234500000001AABBCCDD /* DetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsFormView.swift; sourceTree = "<group>"; };
+		BB01234500000002AABBCCDD /* ReviewSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSaveView.swift; sourceTree = "<group>"; };
 		BEAA22967529CFEA5B687AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C111BF3CD89C5DFEFEEFBE80 /* GamePlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayView.swift; sourceTree = "<group>"; };
 		CA65620F3EABDAFA3E54E489 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -117,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				BC3B11C30C2236916498D012 /* Resources */,
-				210F35F15FB51FAD9C5525B3 /* SW5E */,
+				210F35F15FB51FAD9C5525B3 /* Echoveil */,
 				35CC2C9FE900D289FE37B655 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -133,7 +131,7 @@
 			path = CharacterBuilder;
 			sourceTree = "<group>";
 		};
-		210F35F15FB51FAD9C5525B3 /* SW5E */ = {
+		210F35F15FB51FAD9C5525B3 /* Echoveil */ = {
 			isa = PBXGroup;
 			children = (
 				5256C98EC01D265AAF56B90B /* App.swift */,
@@ -147,14 +145,14 @@
 				793F5BC3A4A6668A29397876 /* Services */,
 				D4848870B4DCE1FF44FF89D6 /* Utilities */,
 			);
-			name = SW5E;
+			name = Echoveil;
 			path = Sources/SW5E;
 			sourceTree = "<group>";
 		};
 		35CC2C9FE900D289FE37B655 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83B9E790FAF89BD5C5C54136 /* SW5E.app */,
+				83B9E790FAF89BD5C5C54136 /* Echoveil.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,9 +300,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EEAAF853DE6A614271635FED /* SW5E */ = {
+		EEAAF853DE6A614271635FED /* Echoveil */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8CA3278C0FDB9BF7C36D8444 /* Build configuration list for PBXNativeTarget "SW5E" */;
+			buildConfigurationList = 8CA3278C0FDB9BF7C36D8444 /* Build configuration list for PBXNativeTarget "Echoveil" */;
 			buildPhases = (
 				208703DB092A3DA6E15D7E23 /* Sources */,
 				600DC42107FD51D8EFA5E0A1 /* Resources */,
@@ -313,11 +311,11 @@
 			);
 			dependencies = (
 			);
-			name = SW5E;
+			name = Echoveil;
 			packageProductDependencies = (
 			);
-			productName = SW5E;
-			productReference = 83B9E790FAF89BD5C5C54136 /* SW5E.app */;
+			productName = Echoveil;
+			productReference = 83B9E790FAF89BD5C5C54136 /* Echoveil.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -327,9 +325,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2620;
 			};
-			buildConfigurationList = 57D85CC7FC5A11B37E84A69F /* Build configuration list for PBXProject "SW5E" */;
+			buildConfigurationList = 57D85CC7FC5A11B37E84A69F /* Build configuration list for PBXProject "Echoveil" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -339,11 +337,10 @@
 			);
 			mainGroup = 063A3C06E406A884197C34DE;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EEAAF853DE6A614271635FED /* SW5E */,
+				EEAAF853DE6A614271635FED /* Echoveil */,
 			);
 		};
 /* End PBXProject section */
@@ -419,18 +416,21 @@
 		15A293FC667801360380CDA4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Sources/SW5E/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Echoveil;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petie.sw5e;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petie.echoveil;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -440,18 +440,21 @@
 		54F4674F19D0B20711AAB9E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Sources/SW5E/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Echoveil;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petie.sw5e;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petie.echoveil;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -462,7 +465,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_PACKAGE_NAME = SW5E;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BASE_PACKAGE_NAME = Echoveil;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -494,8 +498,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = VF5SMXSV89;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -508,6 +514,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -518,7 +525,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_PACKAGE_NAME = SW5E;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BASE_PACKAGE_NAME = Echoveil;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -550,8 +558,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = VF5SMXSV89;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -571,6 +581,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -580,7 +591,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		57D85CC7FC5A11B37E84A69F /* Build configuration list for PBXProject "SW5E" */ = {
+		57D85CC7FC5A11B37E84A69F /* Build configuration list for PBXProject "Echoveil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B279C6787708A3BBAA5F64FB /* Debug */,
@@ -589,7 +600,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		8CA3278C0FDB9BF7C36D8444 /* Build configuration list for PBXNativeTarget "SW5E" */ = {
+		8CA3278C0FDB9BF7C36D8444 /* Build configuration list for PBXNativeTarget "Echoveil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				54F4674F19D0B20711AAB9E4 /* Debug */,

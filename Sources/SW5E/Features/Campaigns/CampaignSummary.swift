@@ -87,7 +87,7 @@ struct CampaignTemplate: Identifiable {
     static let outerRimJob = CampaignTemplate(
         id: "outer-rim-job",
         title: "Outer Rim Job",
-        era: "Imperial Era",
+        era: "Sovereignty Era",
         description: "A shady cargo run turns deadly when you discover what's really in those crates. Smugglers, bounty hunters, and desperate choices await beyond the Core.",
         difficulty: .moderate,
         icon: "shippingbox.fill",
@@ -96,9 +96,9 @@ struct CampaignTemplate: Identifiable {
 
     static let jediAcademy = CampaignTemplate(
         id: "jedi-academy",
-        title: "Jedi Academy",
+        title: "Tidecaller Academy",
         era: "New Republic",
-        description: "Master Skywalker has taken you as a student. But the dark side whispers, and not every Jedi survives their trials. How will you face your destiny?",
+        description: "Warden Aelith has taken you as an Initiate. But the Void whispers, and not every Tidecaller survives their trials. How will you face your destiny?",
         difficulty: .hard,
         icon: "sparkles",
         accentColor: .blue
@@ -106,9 +106,9 @@ struct CampaignTemplate: Identifiable {
 
     static let rebelCell = CampaignTemplate(
         id: "rebel-cell",
-        title: "Rebel Cell",
+        title: "Fractured Coalition Cell",
         era: "Galactic Civil War",
-        description: "Deep in Imperial space, your small cell of rebels fights for survival. Every mission could be your last—and the Empire is always watching.",
+        description: "Deep in Sovereignty space, your small cell of Fractured fighters fights for survival. Every mission could be your last—and the Sovereignty is always watching.",
         difficulty: .hard,
         icon: "shield.lefthalf.filled",
         accentColor: .red
@@ -133,11 +133,11 @@ extension CampaignSummary {
     static let demos: [CampaignSummary] = [
         CampaignSummary(
             id: "demo-campaign-1",
-            title: "Shadows of the Sith",
+            title: "Shadows of the Void",
             characterName: "Kael Voss",
-            characterClass: "Guardian",
+            characterClass: "Tidecaller",
             lastPlayedAt: Date().addingTimeInterval(-21_600),
-            currentLocation: "Coruscant, Level 1313",
+            currentLocation: "Solara Prime, Level 1313",
             isActive: true
         ),
     ]

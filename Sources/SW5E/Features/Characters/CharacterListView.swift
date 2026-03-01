@@ -436,13 +436,13 @@ final class CharacterListViewModel: ObservableObject {
         .preferredColorScheme(.dark)
 }
 
-#Preview("Character Card — Guardian") {
+#Preview("Character Card — Tidecaller") {
     CharacterCardView(
         character: Character(
             id: "preview-1",
             name: "Kael Voss",
-            species: "Miraluka",
-            charClass: "Guardian",
+            species: "Arion",
+            charClass: "Tidecaller",
             level: 7,
             experiencePoints: 23_000,
             currentHP: 45,
@@ -466,7 +466,7 @@ final class CharacterListViewModel: ObservableObject {
             id: "preview-2",
             name: "Zara Night",
             species: "Human",
-            charClass: "Sentinel",
+            charClass: "Warden",
             level: 3,
             experiencePoints: 2_700,
             currentHP: 6,

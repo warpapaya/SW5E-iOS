@@ -264,8 +264,8 @@ private struct EquipmentRow: View {
 
 #Preview("Equipment Select") {
     let vm = CharacterBuilderViewModel()
-    vm.draft.charClass = CBClass.samples.first(where: { $0.name == "Guardian" })
-    vm.draft.selectedEquipment = CBEquipment.samples(forClass: "Guardian")
+    vm.draft.charClass = CBClass.samples.first(where: { $0.name == "Tidecaller" })
+    vm.draft.selectedEquipment = CBEquipment.samples(forClass: "Tidecaller")
     return EquipmentSelectView(vm: vm)
         .preferredColorScheme(.dark)
         .background(Color.spacePrimary)

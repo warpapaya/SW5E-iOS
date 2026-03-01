@@ -381,11 +381,11 @@ struct GamePlayLaunchView: View {
     SavedCampaignCard(
         summary: CampaignSummary(
             id: "c1",
-            title: "Shadows of the Sith",
+            title: "Shadows of the Void",
             characterName: "Kael Voss",
-            characterClass: "Guardian",
+            characterClass: "Tidecaller",
             lastPlayedAt: Date().addingTimeInterval(-3600 * 6),
-            currentLocation: "Coruscant, Level 1313",
+            currentLocation: "Solara Prime, Level 1313",
             isActive: true
         ),
         onResume: {}

@@ -195,9 +195,9 @@ private struct CharacterPickerRow: View {
 
 #Preview("Character Picker Sheet") {
     let sampleChars: [Character] = [
-        Character(id: "1", name: "Kael Voss",   species: "Human",   charClass: "Guardian",  level: 5,  experiencePoints: 6500,  currentHP: 38, maxHP: 42, ac: 16, forcePoints: 12, lastModified: Date()),
-        Character(id: "2", name: "Zara Teth",   species: "Twi'lek", charClass: "Sentinel",  level: 3,  experiencePoints: 2100,  currentHP: 22, maxHP: 28, ac: 14, forcePoints: 6,  lastModified: Date()),
-        Character(id: "3", name: "Brom Skalos", species: "Zabrak",  charClass: "Engineer",  level: 7,  experiencePoints: 23000, currentHP: 55, maxHP: 55, ac: 17, forcePoints: 0,  lastModified: Date()),
+        Character(id: "1", name: "Kael Voss",   species: "Arion",   charClass: "Tidecaller",  level: 5,  experiencePoints: 6500,  currentHP: 38, maxHP: 42, ac: 16, forcePoints: 12, lastModified: Date()),
+        Character(id: "2", name: "Zara Teth",   species: "Sylari",  charClass: "Warden",     level: 3,  experiencePoints: 2100,  currentHP: 22, maxHP: 28, ac: 14, forcePoints: 6,  lastModified: Date()),
+        Character(id: "3", name: "Brom Skalos", species: "Zabrak",  charClass: "Fabricant",  level: 7,  experiencePoints: 23000, currentHP: 55, maxHP: 55, ac: 17, forcePoints: 0,  lastModified: Date()),
     ]
     CharacterPickerSheet(
         characters: sampleChars,

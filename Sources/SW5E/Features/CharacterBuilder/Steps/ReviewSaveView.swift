@@ -401,8 +401,8 @@ private struct ReviewSection<Content: View>: View {
     draft.charClass = CBClass.samples.first
     draft.background = CBBackground.samples.first
     draft.selectedPowers = [CBPower.forceSamples[0], CBPower.forceSamples[3]]
-    draft.selectedEquipment = CBEquipment.samples(forClass: "Guardian")
-    draft.backstory = "Once a Jedi initiate, Kira left the Order after the fall of the Republic. Now she wanders the Outer Rim, using her Force training to protect those who cannot protect themselves."
+    draft.selectedEquipment = CBEquipment.samples(forClass: "Tidecaller")
+    draft.backstory = "Once a Tidecaller initiate, Kira left the Order after the fall of the old guard. Now she wanders the outer systems, using her Veil training to protect those who cannot protect themselves."
 
     let vm = CharacterBuilderViewModel()
     vm.draft = draft

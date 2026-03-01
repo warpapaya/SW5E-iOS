@@ -64,7 +64,7 @@ struct SettingsView: View {
             Label("Server Configuration", systemImage: "server.rack.fill")
                 .foregroundColor(.hologramBlue)
         } footer: {
-            Text("Set the address of your SW5E backend. Default: https://sw5e-api.petieclark.com")
+            Text("Set the address of your Echoveil backend. Default: https://sw5e-api.petieclark.com")
                 .foregroundColor(.mutedText)
         }
         .listRowBackground(Color.spaceCard)
@@ -273,8 +273,8 @@ struct SettingsView: View {
                 VStack(spacing: 8) {
                     SoundEffectRow(
                         icon: "waveform.and.sparkles",
-                        title: "Lightsaber Hum",
-                        description: "Dual-oscillator hum with FM modulation. Plays for force-sensitive classes.",
+                        title: "Veilblade Hum",
+                        description: "Dual-oscillator hum with FM modulation. Plays for Veilborn classes.",
                         color: .saberGreen
                     )
                     SoundEffectRow(
@@ -334,7 +334,7 @@ struct SettingsView: View {
             }
 
             HStack {
-                Label("SW5E Companion App", systemImage: "star.fill")
+                Label("Echoveil Companion App", systemImage: "star.fill")
                     .foregroundColor(.lightText)
                 Spacer()
                 Text("⚔️")
@@ -346,7 +346,7 @@ struct SettingsView: View {
             }
 
             Link(destination: URL(string: "https://www.sw5e.com")!) {
-                Label("SW5E Ruleset", systemImage: "book.closed.fill")
+                Label("Echoveil Ruleset", systemImage: "book.closed.fill")
                     .foregroundColor(.hologramBlue)
             }
 
@@ -448,7 +448,7 @@ private struct SoundEffectRow: View {
 
 #Preview("Sound Effect Row") {
     VStack(spacing: 8) {
-        SoundEffectRow(icon: "waveform.and.sparkles", title: "Lightsaber Hum",
+        SoundEffectRow(icon: "waveform.and.sparkles", title: "Veilblade Hum",
                        description: "Dual-oscillator hum with FM modulation.", color: .saberGreen)
         SoundEffectRow(icon: "bolt.fill", title: "Blaster Shot",
                        description: "White noise + frequency sweep.", color: .techOrange)

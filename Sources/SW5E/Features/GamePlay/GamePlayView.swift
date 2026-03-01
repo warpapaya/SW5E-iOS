@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Main game play screen - the core Star Wars 5E experience.
+/// Main game play screen - the core Echoveil experience.
 struct GamePlayView: View {
     // MARK: - Environment & State
 

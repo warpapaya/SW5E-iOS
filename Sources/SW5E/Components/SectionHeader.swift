@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Section header with small caps-style label and divider.
-/// Inspired by Aurebesh-inspired UI elements from Star Wars interfaces.
+/// Inspired by Echoveil UI elements and aesthetic.
 struct SectionHeader: View {
     let title: String
     

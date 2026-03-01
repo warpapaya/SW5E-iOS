@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Star Wars-themed color palette for the SW5E iOS app.
+/// Echoveil-themed color palette for the Echoveil iOS app.
 /// Dark space aesthetic with hologram-blue accents and tech-orange highlights.
 /// NOTE: Using explicit RGB values — Color("#RRGGBB") hex-string initializer
 /// is unreliable on iOS 26 beta and will return .clear silently.
@@ -26,10 +26,10 @@ extension Color {
     /// Tech orange — UI highlights, action buttons  (#E8700A)
     static let techOrange = Color(red: 0.910, green: 0.439, blue: 0.039)
 
-    /// Sith red — danger, critical states, enemy indicators  (#CC2222)
+    /// Voidshaper red — danger, critical states, enemy indicators  (#CC2222)
     static let siithRed = Color(red: 0.800, green: 0.133, blue: 0.133)
 
-    /// Saber green — lightsaber color, positive force effects  (#4ADE80)
+    /// Veil green — Veilblade color, positive Veil effects  (#4ADE80)
     static let saberGreen = Color(red: 0.290, green: 0.871, blue: 0.502)
 
     // MARK: - Text Colors

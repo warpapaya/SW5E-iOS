@@ -800,8 +800,8 @@ struct CombatView: View {
             currentTurnIndex: 0,
             participants: [
                 Combatant(name: "Kael Ryn", hp: 28, maxHp: 35, ac: 16, initiative: 18),
-                Combatant(name: "Sith Acolyte", hp: 22, maxHp: 30, ac: 15, initiative: 14, conditions: ["Stunned"]),
-                Combatant(name: "Imperial Trooper", hp: 8, maxHp: 20, ac: 12, initiative: 9)
+                Combatant(name: "Voidshaper Acolyte", hp: 22, maxHp: 30, ac: 15, initiative: 14, conditions: ["Stunned"]),
+                Combatant(name: "Sovereignty Vanguard", hp: 8, maxHp: 20, ac: 12, initiative: 9)
             ]
         ),
         campaignId: "preview-001",

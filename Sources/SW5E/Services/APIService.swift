@@ -1,9 +1,9 @@
 import Foundation
 import UIKit
 
-// MARK: - API Service for SW5E Backend
+// MARK: - API Service for Echoveil Backend
 
-/// Central HTTP client for the SW5E backend at https://sw5e-api.petieclark.com
+/// Central HTTP client for the Echoveil backend at https://sw5e-api.petieclark.com
 /// All public methods are async-safe and non-throwing where possible (AI status).
 class APIService: ObservableObject {
     static let shared = APIService()

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SW5EApp: App {
+struct EchoveilApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
