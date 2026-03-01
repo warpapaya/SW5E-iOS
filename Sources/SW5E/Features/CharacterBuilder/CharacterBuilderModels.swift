@@ -8,37 +8,45 @@ struct CBSpecies: Identifiable, Codable, Equatable {
     let traits: [String]
     let abilityBonuses: [String: Int]
     let description: String
+    let imageName: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, traits, description
         case abilityBonuses = "ability_bonuses"
+        case imageName = "image_name"
     }
 
     static let samples: [CBSpecies] = [
         CBSpecies(id: "arion", name: "Arion",
                   traits: ["Adaptable", "Ambitious", "Extra Skill"],
                   abilityBonuses: ["any": 1],
-                  description: "The most widespread species in the galaxy, valued for their ambition and adaptability."),
+                  description: "The most widespread species in the galaxy, valued for their ambition and adaptability.",
+                  imageName: "Species_Arion"),
         CBSpecies(id: "sylari", name: "Sylari",
                   traits: ["Veil Sensitivity", "Bioluminescence", "Keen Perception"],
                   abilityBonuses: ["wis": 2, "dex": 1],
-                  description: "Slender beings with bioluminescent skin patterns and heightened Veil perception. Rare Tidecallers, often outsiders."),
+                  description: "Slender beings with bioluminescent skin patterns and heightened Veil perception. Rare Tidecallers, often outsiders.",
+                  imageName: "Species_Sylari"),
         CBSpecies(id: "vrask", name: "Vrask",
                   traits: ["Powerful Build", "Natural Resilience", "Honor Bound"],
                   abilityBonuses: ["str": 2, "con": 1],
-                  description: "Large, powerful beings covered in banded grey-silver scales. Deep honor culture — fierce warriors, fiercely loyal to those who earn their respect."),
+                  description: "Large, powerful beings covered in banded grey-silver scales. Deep honor culture — fierce warriors, fiercely loyal to those who earn their respect.",
+                  imageName: "Species_Vrask"),
         CBSpecies(id: "keth", name: "Keth",
                   traits: ["Four-Armed", "Technical Aptitude", "Methodical Mind"],
                   abilityBonuses: ["int": 2, "con": 1],
-                  description: "Four-armed, coral-skinned beings known for their engineering mastery and methodical thinking. Natural Fabricants."),
+                  description: "Four-armed, coral-skinned beings known for their engineering mastery and methodical thinking. Natural Fabricants.",
+                  imageName: "Species_Keth"),
         CBSpecies(id: "naxxid", name: "Naxxid",
                   traits: ["Silicon-Based", "Ancient Memory", "Void Resistant"],
                   abilityBonuses: ["wis": 2, "int": 1],
-                  description: "Silicon-based beings of ancient origin. Slow-speaking but fast-thinking — resilient, quietly wise, and deeply patient."),
+                  description: "Silicon-based beings of ancient origin. Slow-speaking but fast-thinking — resilient, quietly wise, and deeply patient.",
+                  imageName: "Species_Naxxid"),
         CBSpecies(id: "drifborn", name: "Drifborn",
                   traits: ["Stateless", "Hyper-Adaptable", "Station Savvy"],
                   abilityBonuses: ["dex": 1, "cha": 1],
-                  description: "Born on stations or deep-space vessels with no homeworld. Culturally stateless, hyper-adaptable, and trusted nowhere — and everywhere."),
+                  description: "Born on stations or deep-space vessels with no homeworld. Culturally stateless, hyper-adaptable, and trusted nowhere — and everywhere.",
+                  imageName: "Species_Drifborn"),
     ]
 }
 

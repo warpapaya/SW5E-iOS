@@ -68,56 +68,69 @@ private struct SpeciesCard: View {
     let isSelected: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Species avatar placeholder
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(
-                        LinearGradient(
-                            colors: isSelected
-                                ? [Color.veilGold.opacity(0.3), Color.veilGoldSubtle]
-                                : [Color.spaceCard, Color.borderSubtle.opacity(0.5)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+        HStack(spacing: 12) {
+            // Species portrait image
+            if let img = UIImage(named: species.imageName) {
+                Image(uiImage: img)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 88, height: 88)
+                    .clipped()
+                    .cornerRadius(8)
+            } else {
+                // Fallback placeholder if image not found
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(
+                            LinearGradient(
+                                colors: isSelected
+                                    ? [Color.veilGold.opacity(0.3), Color.veilGoldSubtle]
+                                    : [Color.spaceCard, Color.borderSubtle.opacity(0.5)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
                         )
-                    )
-                    .frame(height: 80)
+                        .frame(width: 88, height: 88)
 
-                Image(systemName: "figure.stand")
-                    .font(.system(size: 34))
-                    .foregroundStyle(isSelected ? Color.veilGold : Color.mutedText)
-            }
-
-            // Name
-            Text(species.name)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(isSelected ? Color.veilGold : Color.lightText)
-                .lineLimit(1)
-
-            // Ability bonuses chips
-            HStack(spacing: 4) {
-                ForEach(Array(species.abilityBonuses.prefix(2)), id: \.key) { key, val in
-                    Text("+\(val) \(key.uppercased())")
-                        .font(.caption2.weight(.medium))
-                        .foregroundStyle(Color.veilGlow)
-                        .padding(.horizontal, 5)
-                        .padding(.vertical, 2)
-                        .background(Color.veilGlow.opacity(0.15))
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                    Image(systemName: "figure.stand")
+                        .font(.system(size: 34))
+                        .foregroundStyle(isSelected ? Color.veilGold : Color.mutedText)
                 }
             }
 
-            // Traits (first 2)
-            VStack(alignment: .leading, spacing: 2) {
-                ForEach(species.traits.prefix(2), id: \.self) { trait in
-                    HStack(spacing: 4) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.caption2)
-                            .foregroundStyle(Color.veilGlow.opacity(0.7))
-                        Text(trait)
-                            .font(.caption2)
-                            .foregroundStyle(Color.mutedText)
-                            .lineLimit(1)
+            // Content VStack
+            VStack(alignment: .leading, spacing: 8) {
+                // Name
+                Text(species.name)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(isSelected ? Color.veilGold : Color.lightText)
+                    .lineLimit(1)
+
+                // Ability bonuses chips
+                HStack(spacing: 4) {
+                    ForEach(Array(species.abilityBonuses.prefix(2)), id: \.key) { key, val in
+                        Text("+\(val) \(key.uppercased())")
+                            .font(.caption2.weight(.medium))
+                            .foregroundStyle(Color.veilGlow)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(Color.veilGlow.opacity(0.15))
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                    }
+                }
+
+                // Traits (first 2)
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(species.traits.prefix(2), id: \.self) { trait in
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.caption2)
+                                .foregroundStyle(Color.veilGlow.opacity(0.7))
+                            Text(trait)
+                                .font(.caption2)
+                                .foregroundStyle(Color.mutedText)
+                                .lineLimit(1)
+                        }
                     }
                 }
             }
