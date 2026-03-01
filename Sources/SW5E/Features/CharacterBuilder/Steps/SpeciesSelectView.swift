@@ -7,8 +7,8 @@ struct SpeciesSelectView: View {
     @State private var selectedForDetail: CBSpecies? = nil
 
     private let columns = [
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 14),
+        GridItem(.flexible(), spacing: 14),
     ]
 
     var body: some View {
@@ -31,21 +31,19 @@ struct SpeciesSelectView: View {
                         .frame(maxWidth: .infinity, minHeight: 200)
                         .tint(Color.veilGold)
                 } else {
-                    LazyVGrid(columns: columns, spacing: 12) {
+                    LazyVGrid(columns: columns, spacing: 14) {
                         ForEach(vm.availableSpecies) { species in
                             SpeciesCard(
                                 species: species,
                                 isSelected: vm.draft.species?.id == species.id
                             )
                             .onTapGesture {
-                                vm.select(species: species)
-                            }
-                            .onLongPressGesture {
                                 selectedForDetail = species
                             }
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 4)
                 }
 
                 Spacer(minLength: 20)
@@ -68,90 +66,43 @@ private struct SpeciesCard: View {
     let isSelected: Bool
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Species portrait image
-            if let img = UIImage(named: species.imageName) {
-                Image(uiImage: img)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 88, height: 88)
-                    .clipped()
-                    .cornerRadius(8)
-            } else {
-                // Fallback placeholder if image not found
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(
-                            LinearGradient(
-                                colors: isSelected
-                                    ? [Color.veilGold.opacity(0.3), Color.veilGoldSubtle]
-                                    : [Color.spaceCard, Color.borderSubtle.opacity(0.5)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 88, height: 88)
+        ZStack(alignment: .bottom) {
+            // Portrait — full bleed, square crop
+            Image(species.imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity)
+                .aspectRatio(1, contentMode: .fill)
+                .clipped()
 
-                    Image(systemName: "figure.stand")
-                        .font(.system(size: 34))
-                        .foregroundStyle(isSelected ? Color.veilGold : Color.mutedText)
-                }
-            }
+            // Name scrim + label
+            LinearGradient(
+                colors: [.clear, .black.opacity(0.75)],
+                startPoint: .center,
+                endPoint: .bottom
+            )
+            .frame(height: 60)
 
-            // Content VStack
-            VStack(alignment: .leading, spacing: 8) {
-                // Name
-                Text(species.name)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(isSelected ? Color.veilGold : Color.lightText)
-                    .lineLimit(1)
-
-                // Ability bonuses chips
-                HStack(spacing: 4) {
-                    ForEach(Array(species.abilityBonuses.prefix(2)), id: \.key) { key, val in
-                        Text("+\(val) \(key.uppercased())")
-                            .font(.caption2.weight(.medium))
-                            .foregroundStyle(Color.veilGlow)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 2)
-                            .background(Color.veilGlow.opacity(0.15))
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                    }
-                }
-
-                // Traits (first 2)
-                VStack(alignment: .leading, spacing: 2) {
-                    ForEach(species.traits.prefix(2), id: \.self) { trait in
-                        HStack(spacing: 4) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.caption2)
-                                .foregroundStyle(Color.veilGlow.opacity(0.7))
-                            Text(trait)
-                                .font(.caption2)
-                                .foregroundStyle(Color.mutedText)
-                                .lineLimit(1)
-                        }
-                    }
-                }
-            }
+            Text(species.name)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white)
+                .padding(.bottom, 10)
+                .padding(.horizontal, 8)
+                .lineLimit(1)
         }
-        .padding(12)
-        .background(
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color.spaceCard)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 14)
-                        .strokeBorder(
-                            isSelected ? Color.veilGold : Color.borderSubtle,
-                            lineWidth: isSelected ? 2 : 1
-                        )
+                .strokeBorder(
+                    isSelected ? Color.veilGold : Color.borderSubtle.opacity(0.5),
+                    lineWidth: isSelected ? 2.5 : 1
                 )
-                .shadow(color: isSelected ? Color.veilGold.opacity(0.2) : .clear, radius: 8)
         )
+        .shadow(color: isSelected ? Color.veilGold.opacity(0.35) : .clear, radius: 10)
         .scaleEffect(isSelected ? 1.02 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
-        .accessibilityLabel("\(species.name), \(isSelected ? "selected" : "not selected")")
-        .accessibilityHint("Double tap to select. Long press for details.")
+        .accessibilityLabel("\(species.name)\(isSelected ? ", selected" : "")")
+        .accessibilityHint("Tap to view details")
     }
 }
 
@@ -167,20 +118,20 @@ private struct SpeciesDetailSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    // Hero avatar
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(LinearGradient(
-                                colors: [Color.veilGold.opacity(0.2), Color.spaceCard],
-                                startPoint: .top,
+                    // Hero portrait
+                    Image(species.imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 260)
+                        .clipped()
+                        .overlay(
+                            LinearGradient(
+                                colors: [.clear, Color.spacePrimary],
+                                startPoint: .center,
                                 endPoint: .bottom
-                            ))
-                            .frame(height: 140)
-                        Image(systemName: "figure.stand")
-                            .font(.system(size: 60))
-                            .foregroundStyle(Color.veilGold)
-                    }
-                    .padding(.horizontal, 20)
+                            )
+                        )
 
                     // Description
                     VStack(alignment: .leading, spacing: 8) {
@@ -223,7 +174,7 @@ private struct SpeciesDetailSheet: View {
 
                     // Traits
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Racial Traits")
+                        Text("Species Traits")
                             .font(.headline)
                             .foregroundStyle(Color.veilGold)
                         ForEach(species.traits, id: \.self) { trait in
@@ -241,7 +192,10 @@ private struct SpeciesDetailSheet: View {
                     .padding(.horizontal, 20)
 
                     // Select button
-                    Button(action: onSelect) {
+                    Button(action: {
+                        onSelect()
+                        dismiss()
+                    }) {
                         Text(isSelected ? "✓ Selected" : "Select \(species.name)")
                             .font(.body.weight(.semibold))
                             .foregroundStyle(isSelected ? Color.veilGlow : Color.spacePrimary)
