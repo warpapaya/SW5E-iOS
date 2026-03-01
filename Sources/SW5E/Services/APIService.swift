@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 // MARK: - API Service for SW5E Backend
 
@@ -12,6 +13,17 @@ class APIService: ObservableObject {
         didSet { UserDefaults.standard.set(serverURL, forKey: "serverURL") }
     }
     @Published var isConnected: Bool = false
+
+    /// Stable per-device identifier used to scope characters and campaigns.
+    /// Generated once on first launch and stored in UserDefaults.
+    static var deviceId: String = {
+        let key = "sw5e_device_id"
+        if let saved = UserDefaults.standard.string(forKey: key) { return saved }
+        // Prefer identifierForVendor; fall back to a random UUID
+        let id = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+        UserDefaults.standard.set(id, forKey: key)
+        return id
+    }()
 
     private init() {
         let saved = UserDefaults.standard.string(forKey: "serverURL") ?? ""
@@ -241,7 +253,9 @@ class APIService: ObservableObject {
     }
 
     private func decode<T: Decodable>(_ type: T.Type, from request: URLRequest) async throws -> T {
-        let (data, response) = try await URLSession.shared.data(for: request)
+        var req = request
+        req.setValue(APIService.deviceId, forHTTPHeaderField: "X-Device-Id")
+        let (data, response) = try await URLSession.shared.data(for: req)
         try validateHTTP(response)
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -256,6 +270,7 @@ class APIService: ObservableObject {
         var req = URLRequest(url: try requireURL(path))
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue(APIService.deviceId, forHTTPHeaderField: "X-Device-Id")
         req.httpBody = try JSONSerialization.data(withJSONObject: body)
         return try await self.decode(type, from: req)
     }

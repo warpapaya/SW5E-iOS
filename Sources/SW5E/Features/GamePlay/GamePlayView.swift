@@ -40,7 +40,6 @@ struct GamePlayView: View {
                         topBar
                         Divider().background(Color.borderSubtle)
                         narrativeScrollView
-                            .id(viewModel.campaign?.gameState.history.count)
                         Divider().background(Color.borderSubtle)
                         choicesRow
                             .padding(.horizontal, 16)
@@ -182,11 +181,29 @@ struct GamePlayView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top, 8)
             }
-            .animation(.easeInOut(duration: 0.3), value: narrativeEntries.count)
             .onChange(of: narrativeEntries.count) { _, _ in
-                withAnimation { proxy.scrollTo("bottom") }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
+                }
             }
-            .onAppear { narrativeScrollProxy = proxy }
+            .onChange(of: viewModel.isProcessingAction) { _, isProcessing in
+                if isProcessing {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            proxy.scrollTo("bottom", anchor: .bottom)
+                        }
+                    }
+                }
+            }
+            .onAppear {
+                narrativeScrollProxy = proxy
+                // Scroll to bottom on initial load
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    proxy.scrollTo("bottom", anchor: .bottom)
+                }
+            }
         }
     }
 

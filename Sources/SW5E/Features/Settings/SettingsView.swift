@@ -13,14 +13,15 @@ struct SettingsView: View {
     @State private var editingServerURL = false
     @State private var draftServerURL = ""
     @State private var showingSoundInfo = false
+    @State private var showDevOptions = false
 
     var body: some View {
         NavigationStack {
             Form {
-                serverSection
                 aiBackendSection
                 soundSection
                 aboutSection
+                developerSection
             }
             .scrollContentBackground(.hidden)
             .background(Color.spacePrimary.ignoresSafeArea())
@@ -34,10 +35,42 @@ struct SettingsView: View {
         }
     }
 
+    // MARK: - Developer Options Section (collapsed by default)
+
+    private var developerSection: some View {
+        Section {
+            DisclosureGroup(isExpanded: $showDevOptions) {
+                serverSectionContent
+            } label: {
+                HStack {
+                    Image(systemName: "wrench.and.screwdriver")
+                        .foregroundColor(.mutedText)
+                        .frame(width: 24)
+                    Text("Developer Options")
+                        .font(.subheadline)
+                        .foregroundColor(.mutedText)
+                }
+            }
+        }
+        .listRowBackground(Color.spaceCard)
+    }
+
     // MARK: - Server Configuration Section
 
     private var serverSection: some View {
         Section {
+            serverSectionContent
+        } header: {
+            Label("Server Configuration", systemImage: "server.rack.fill")
+                .foregroundColor(.hologramBlue)
+        } footer: {
+            Text("Set the address of your SW5E backend. Default: https://sw5e-api.petieclark.com")
+                .foregroundColor(.mutedText)
+        }
+        .listRowBackground(Color.spaceCard)
+    }
+
+    @ViewBuilder private var serverSectionContent: some View {
             // URL row
             if editingServerURL {
                 HStack {
@@ -123,14 +156,6 @@ struct SettingsView: View {
                     }
                 }
             }
-        } header: {
-            Label("Server Configuration", systemImage: "server.rack.fill")
-                .foregroundColor(.hologramBlue)
-        } footer: {
-            Text("Set the address of your SW5E backend. Default: https://sw5e-api.petieclark.com")
-                .foregroundColor(.mutedText)
-        }
-        .listRowBackground(Color.spaceCard)
     }
 
     // MARK: - AI Backend Status Section
