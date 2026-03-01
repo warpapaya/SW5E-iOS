@@ -13,21 +13,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SW5E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
-                                <rect key="frame" x="147" y="438" width="120" height="50"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <color key="textColor" systemColor="systemOrangeColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="EchoveilSplash" translatesAutoresizingMaskIntoConstraints="NO" id="splash-img">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.0392156862745098" green="0.0549019607843137" blue="0.101960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0392156862745098" green="0.0392156862745098" blue="0.0745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="moa-c2-u7t"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Q3B-4y-6b5"/>
+                            <constraint firstItem="splash-img" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cst-lead"/>
+                            <constraint firstItem="splash-img" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="cst-trail"/>
+                            <constraint firstItem="splash-img" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cst-top"/>
+                            <constraint firstItem="splash-img" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="cst-bot"/>
                         </constraints>
                     </view>
                 </viewController>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="EchoveilSplash" width="1024" height="1024"/>
+    </resources>
 </document>
