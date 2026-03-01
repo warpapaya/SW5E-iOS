@@ -102,10 +102,10 @@ struct CBClass: Identifiable, Codable, Equatable {
         case "sentinel":  return "eye.fill"
         case "consular":  return "book.closed.fill"
         case "engineer":  return "wrench.and.screwdriver.fill"
-        case "fighter":   return "figure.martial.arts"
-        case "smuggler":  return "creditcard.fill"
-        case "operative": return "theatermasks.fill"
-        case "scholar":   return "graduationcap.fill"
+        case "vanguard":   return "figure.martial.arts"
+        case "drifter":  return "creditcard.fill"
+        case "cipher": return "eye.slash.fill"
+        case "savant":   return "brain.head.profile"
         default:          return "person.fill"
         }
     }
@@ -116,10 +116,10 @@ struct CBClass: Identifiable, Codable, Equatable {
         case "sentinel":  return [Color(red: 0.49, green: 0.23, blue: 0.93), Color(red: 0.30, green: 0.11, blue: 0.58)]
         case "consular":  return [.veilGlow, Color(red: 0.02, green: 0.37, blue: 0.27)]
         case "engineer":  return [.veilPurple, Color(red: 0.49, green: 0.18, blue: 0.07)]
-        case "fighter":   return [Color(red: 0.92, green: 0.35, blue: 0.0), Color(red: 0.26, green: 0.08, blue: 0.03)]
-        case "smuggler":  return [Color(red: 0.79, green: 0.54, blue: 0.02), Color(red: 0.44, green: 0.25, blue: 0.07)]
-        case "operative": return [Color(red: 0.60, green: 0.20, blue: 0.50), Color(red: 0.25, green: 0.05, blue: 0.25)]
-        case "scholar":   return [Color(red: 0.20, green: 0.60, blue: 0.80), Color(red: 0.05, green: 0.25, blue: 0.45)]
+        case "vanguard":   return [Color(red: 0.92, green: 0.35, blue: 0.0), Color(red: 0.26, green: 0.08, blue: 0.03)]
+        case "drifter":  return [Color(red: 0.79, green: 0.54, blue: 0.02), Color(red: 0.44, green: 0.25, blue: 0.07)]
+        case "cipher": return [Color(red: 0.60, green: 0.20, blue: 0.50), Color(red: 0.25, green: 0.05, blue: 0.25)]
+        case "savant":   return [Color(red: 0.20, green: 0.60, blue: 0.80), Color(red: 0.05, green: 0.25, blue: 0.45)]
         default:          return [.veilGold, .veilGoldSubtle]
         }
     }
@@ -137,17 +137,17 @@ struct CBClass: Identifiable, Codable, Equatable {
         CBClass(id: "engineer",   name: "Fabricant",  hitDie: 8,  primaryStat: .intelligence,
                 roleDescription: "Tech specialists who modify weapons, control machines, and wield tech powers.",
                 isForceUser: false, isTechUser: true),
-        CBClass(id: "fighter",   name: "Fighter",   hitDie: 10, primaryStat: .strength,
-                roleDescription: "Master warriors trained in all forms of combat, unmatched in sustained fighting.",
+        CBClass(id: "vanguard",   name: "Vanguard",   hitDie: 10, primaryStat: .strength,
+                roleDescription: "Hardened frontline warriors who excel in prolonged combat and leading the charge.",
                 isForceUser: false, isTechUser: false),
-        CBClass(id: "smuggler",  name: "Smuggler",  hitDie: 8,  primaryStat: .dexterity,
-                roleDescription: "Cunning operators who rely on luck, skill, and knowing when to run.",
+        CBClass(id: "drifter",  name: "Drifter",  hitDie: 8,  primaryStat: .dexterity,
+                roleDescription: "Quick-handed opportunists who navigate danger with luck, instinct, and exits.",
                 isForceUser: false, isTechUser: false),
-        CBClass(id: "operative", name: "Operative", hitDie: 8,  primaryStat: .dexterity,
-                roleDescription: "Trained spies and assassins who excel at stealth and precision strikes.",
+        CBClass(id: "cipher", name: "Cipher", hitDie: 8,  primaryStat: .dexterity,
+                roleDescription: "Ghost operatives trained in silence, precision, and leaving no trace.",
                 isForceUser: false, isTechUser: false),
-        CBClass(id: "scholar",   name: "Scholar",   hitDie: 6,  primaryStat: .intelligence,
-                roleDescription: "Brilliant minds who support allies with expertise, medicine, and tactics.",
+        CBClass(id: "savant",   name: "Savant",   hitDie: 6,  primaryStat: .intelligence,
+                roleDescription: "Brilliant analysts who reshape the battlefield with technology and calculated tactics.",
                 isForceUser: false, isTechUser: true),
     ]
 }
@@ -231,8 +231,8 @@ struct CBPower: Identifiable, Codable, Equatable {
                 duration: "1 minute", description: "Create a small holographic image or sound.", cost: "At-will"),
         CBPower(id: "shock",          name: "Shock",          level: 0, type: "tech",
                 duration: "Instant",  description: "Deliver a jolt of electricity to a target.", cost: "At-will"),
-        CBPower(id: "repair-droid",   name: "Repair Droid",   level: 0, type: "tech",
-                duration: "Instant",  description: "Restore 1d6 hit points to a droid or construct.", cost: "At-will"),
+        CBPower(id: "repair-protocol",   name: "Repair Protocol",   level: 0, type: "tech",
+                duration: "Instant",  description: "Invoke tech protocols to repair a mechanical construct or device.", cost: "At-will"),
         CBPower(id: "overcharge",     name: "Overcharge",     level: 1, type: "tech",
                 duration: "Instant",  description: "Supercharge a weapon for extra damage on next attack.", cost: "2 TP"),
         CBPower(id: "decryption",     name: "Decryption",     level: 1, type: "tech",
@@ -281,23 +281,23 @@ struct CBEquipment: Identifiable, Codable, Equatable {
             CBEquipment(id: "basic-clothes", name: "Basic Clothing",  type: "armor",      weight: 2.0,  isDefault: true,  description: "Standard adventuring outfit."),
             CBEquipment(id: "utility-belt",  name: "Utility Belt",    type: "gear",       weight: 0.5,  isDefault: true,  description: "Holds up to 20 lbs of small items."),
             CBEquipment(id: "medpac",        name: "Medpac",          type: "consumable", weight: 1.0,  isDefault: true,  description: "Restores 2d4+2 hit points."),
-            CBEquipment(id: "comlink",       name: "Comlink",         type: "gear",       weight: 0.25, isDefault: false, description: "Short-range communicator, 1-mile range."),
+            CBEquipment(id: "veil-comm",       name: "Veil-comm",         type: "gear",       weight: 0.25, isDefault: false, description: "Quantum-encrypted short-range communicator, 1-mile standard range."),
         ]
         switch className.lowercased() {
-        case "tidecaller", "fighter", "warden":
+        case "vanguard", "tidecaller", "warden":
             items.append(CBEquipment(id: "veilblade",    name: "Veilblade",           type: "weapon", weight: 1.0,  isDefault: true,  description: "1d8 energy, finesse, versatile (1d10)."))
             items.append(CBEquipment(id: "light-armor",  name: "Light Battle Armor",  type: "armor",  weight: 13.0, isDefault: true,  description: "AC 12 + DEX modifier."))
-        case "smuggler", "operative":
-            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
-            items.append(CBEquipment(id: "holdout-blaster", name: "Holdout Blaster",  type: "weapon", weight: 0.5, isDefault: false, description: "1d4 energy, concealable, 30/120 ft."))
-        case "fabricant", "scholar":
+        case "drifter", "cipher":
+            items.append(CBEquipment(id: "pulse-pistol", name: "Pulse Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
+            items.append(CBEquipment(id: "holdout-pulse", name: "Holdout Pulse",  type: "weapon", weight: 0.5, isDefault: false, description: "1d4 energy, concealable, 30/120 ft."))
+        case "fabricant", "savant":
             items.append(CBEquipment(id: "techblade",    name: "Techblade",           type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 kinetic, finesse."))
             items.append(CBEquipment(id: "tech-kit",     name: "Tech Kit",            type: "gear",   weight: 4.0, isDefault: true,  description: "Required for casting tech powers."))
         case "lorekeeper":
             items.append(CBEquipment(id: "veil-staff",   name: "Veil-imbued Staff",   type: "weapon", weight: 3.0, isDefault: true,  description: "1d6 kinetic, versatile (1d8), focus."))
             items.append(CBEquipment(id: "robes",        name: "Lorekeeper Robes",    type: "armor",  weight: 4.0, isDefault: true,  description: "AC 10 + WIS modifier (Veil Focus)."))
         default:
-            items.append(CBEquipment(id: "blaster-pistol", name: "Blaster Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
+            items.append(CBEquipment(id: "pulse-pistol", name: "Pulse Pistol",    type: "weapon", weight: 2.0, isDefault: true,  description: "1d6 energy, range 40/160 ft."))
         }
         return items
     }

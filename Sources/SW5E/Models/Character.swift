@@ -8,7 +8,7 @@ struct Character: Identifiable, Codable, Equatable, Hashable {
     let id: String
     var name: String
     var species: String
-    var charClass: String  // Tidecaller, Warden, Lorekeeper, Fabricant, Fighter, etc.
+    var charClass: String  // Tidecaller, Warden, Lorekeeper, Fabricant, Vanguard, Drifter, Cipher, Savant, etc.
     var level: Int
     var experiencePoints: Int
     var currentHP: Int
@@ -92,8 +92,10 @@ enum CharacterClassColor: String, CaseIterable {
     case sentinel = "Warden"        // Purple - Scouts, investigators
     case consular = "Lorekeeper"    // Teal - Diplomats, scholars
     case engineer = "Fabricant"     // Green - Tech specialists
-    case fighter = "Fighter"         // Orange - Martial combatants
-    case smuggler = "Smuggler"       // Yellow - Rogues, operators
+    case vanguard = "Vanguard"       // Orange - Martial combatants
+    case drifter = "Drifter"         // Yellow - Rogues, operators
+    case cipher = "Cipher"           // Dark red - Stealth operatives
+    case savant = "Savant"           // Lavender - Brilliant analysts
     
     var displayName: String {
         return rawValue.capitalized
@@ -109,10 +111,14 @@ enum CharacterClassColor: String, CaseIterable {
             return (.veilGlow, .spaceCard)         // Teal gradient
         case .engineer:
             return (.veilPurple, .voidRed)          // Green-orange gradient
-        case .fighter:
+        case .vanguard:
             return (.lightText, .mutedText)          // Orange/gray gradient
-        case .smuggler:
+        case .drifter:
             return (.veilGold, .spaceCard)       // Yellow-blue gradient
+        case .cipher:
+            return (.voidRed, .spaceCard)        // stealth — dark red
+        case .savant:
+            return (.veilGlow, .veilDeep)         // intelligence — lavender/deep
         }
     }
     
@@ -122,8 +128,10 @@ enum CharacterClassColor: String, CaseIterable {
         case .sentinel: return "magnifyingglass"
         case .consular: return "book.closed"
         case .engineer: return "wrench.and.screwdriver"
-        case .fighter: return "sword"
-        case .smuggler: return "exclamationmark.shield.fill"
+        case .vanguard: return "sword"
+        case .drifter: return "exclamationmark.shield.fill"
+        case .cipher: return "eye.slash.fill"
+        case .savant: return "brain.head.profile"
         }
     }
 }
@@ -176,7 +184,7 @@ extension Character {
     /// Initiative bonus for combat (includes force sensitivity bonus)
     var initiativeBonus: Int {
         // Base dexterity-based bonus
-        let baseDexMod = (charClass == "Rogue" || charClass == "Smuggler") ? 4 : 2
+        let baseDexMod = (charClass == "Rogue" || charClass == "Drifter") ? 4 : 2
         
         // Veilborn users get +1 bonus to initiative (enhanced reflexes)
         return isForceUser ? baseDexMod + 1 : baseDexMod

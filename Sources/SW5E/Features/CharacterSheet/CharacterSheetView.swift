@@ -265,7 +265,7 @@ final class CharacterSheetViewModel: ObservableObject {
         equipment = [
             EquipmentItem(name: "Veilblade",   type: "weapon", attackBonus: 5, damageDice: "1d8+3", damageType: "energy", weight: 1.0),
             EquipmentItem(name: "Light Armor",  type: "armor",  armorClass: 13, weight: 10.0),
-            EquipmentItem(name: "Comlink",      type: "gear",   quantity: 1,    weight: 0.5),
+            EquipmentItem(name: "Veil-comm",      type: "gear",   quantity: 1,    weight: 0.5),
             EquipmentItem(name: "Medpac",       type: "gear",   quantity: 3,    weight: 0.5),
         ]
 
