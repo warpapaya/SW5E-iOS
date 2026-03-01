@@ -116,18 +116,16 @@ struct CharacterListView: View {
                             characterToDelete = character
                         }
                     )
-                    // Swipe-to-delete (destructive, requires confirmation via alert)
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            characterToDelete = character
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
                 }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
+        }
+        .onDelete { indexSet in
+            for index in indexSet {
+                let character = filteredCharacters[index]
+                Task { await viewModel.deleteCharacter(character.id) }
+            }
         }
     }
 

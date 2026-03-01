@@ -84,31 +84,31 @@ struct CampaignTemplate: Identifiable {
 
     // MARK: - Built-in Templates
 
-    static let outerRimJob = CampaignTemplate(
-        id: "outer-rim-job",
-        title: "Outer Rim Job",
+    static let driftwayJob = CampaignTemplate(
+        id: "driftway-job",
+        title: "The Driftway Job",
         era: "Sovereignty Era",
-        description: "A shady cargo run turns deadly when you discover what's really in those crates. Smugglers, bounty hunters, and desperate choices await beyond the Core.",
+        description: "A mercenary heist in the criminal underworld of the Merchant Drift — nothing on the Driftway is ever as simple as it sounds.",
         difficulty: .moderate,
         icon: "shippingbox.fill",
         accentColor: .gold
     )
 
-    static let jediAcademy = CampaignTemplate(
-        id: "jedi-academy",
-        title: "Tidecaller Academy",
-        era: "New Republic",
-        description: "Warden Aelith has taken you as an Initiate. But the Void whispers, and not every Tidecaller survives their trials. How will you face your destiny?",
+    static let tidecallerAwakening = CampaignTemplate(
+        id: "tidecaller-awakening",
+        title: "Tidecaller Awakening",
+        era: "Sovereignty Era",
+        description: "Discover the Veil and forge your identity at a hidden Tidecaller academy on Ashenveil. But the Void whispers, and not every Initiate survives their trials.",
         difficulty: .hard,
         icon: "sparkles",
         accentColor: .blue
     )
 
-    static let rebelCell = CampaignTemplate(
-        id: "rebel-cell",
-        title: "Fractured Coalition Cell",
-        era: "Galactic Civil War",
-        description: "Deep in Sovereignty space, your small cell of Fractured fighters fights for survival. Every mission could be your last—and the Sovereignty is always watching.",
+    static let fracturedCell = CampaignTemplate(
+        id: "fractured-cell",
+        title: "Fractured Cell",
+        era: "Sovereignty Era",
+        description: "Espionage and guerrilla warfare deep inside Sovereignty territory — fighting for a galaxy that does not yet know it can be free.",
         difficulty: .hard,
         icon: "shield.lefthalf.filled",
         accentColor: .red
@@ -116,15 +116,15 @@ struct CampaignTemplate: Identifiable {
 
     static let sandbox = CampaignTemplate(
         id: "sandbox",
-        title: "Sandbox",
+        title: "Freeform",
         era: "Your Choice",
-        description: "No rails, no script. The AI Game Master creates a galaxy around your decisions. Define your era, your faction, your story.",
+        description: "No rails, no script. The AI Game Master builds a galaxy around your choices. Define your era, your faction, your story.",
         difficulty: .easy,
         icon: "wand.and.sparkles",
         accentColor: .purple
     )
 
-    static let all: [CampaignTemplate] = [.outerRimJob, .jediAcademy, .rebelCell, .sandbox]
+    static let all: [CampaignTemplate] = [.driftwayJob, .tidecallerAwakening, .fracturedCell, .sandbox]
 }
 
 // MARK: - Demo Data

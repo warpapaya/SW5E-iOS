@@ -342,8 +342,11 @@ struct CharacterSheetView: View {
                 .presentationDetents([.medium])
         }
         .sheet(isPresented: $showingCampaignPick) {
-            CampaignSelectStub(character: vm.character)
-                .presentationDetents([.large])
+            CampaignSelectNavigation(
+                character: vm.character,
+                switchToPlayTab: appState.switchToPlayTabCallback
+            )
+            .presentationDetents([.large])
         }
         // ── Tooltip overlay ──
         .overlay {
@@ -1177,7 +1180,7 @@ private struct LevelUpSheet: View {
 struct CampaignSelectNavigation: View {
     let character: Character
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var appState = AppState.shared
+    @Binding var switchToPlayTab: (() -> Void)?
 
     var body: some View {
         NavigationStack {
@@ -1198,7 +1201,7 @@ struct CampaignSelectNavigation: View {
 
                 Button {
                     dismiss()
-                    appState.switchToPlayTab()
+                    switchToPlayTab?()
                 } label: {
                     Label("Go to Play", systemImage: "play.circle.fill")
                         .font(.headline.weight(.semibold))
@@ -1227,15 +1230,15 @@ struct CampaignSelectNavigation: View {
 class AppState: ObservableObject {
     static let shared = AppState()
     
-    @Published var selectedTab: ContentView.AppTab?
+    @Published var switchToPlayTabCallback: (() -> Void)?
+    
+    func setSwitchToPlayTab(_ callback: @escaping () -> Void) {
+        self.switchToPlayTabCallback = callback
+    }
     
     func switchToPlayTab() {
         DispatchQueue.main.async {
-            if let tab = self.selectedTab, tab == .play {
-                // Already on play tab, do nothing
-                return
-            }
-            self.selectedTab = .play
+            self.switchToPlayTabCallback?()
         }
     }
 }

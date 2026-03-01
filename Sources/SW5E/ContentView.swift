@@ -10,6 +10,10 @@ struct ContentView: View {
         case characters, play, settings
     }
 
+    init() {
+        _appState = EnvironmentObject() // Use existing shared instance
+    }
+
     var body: some View {
         TabView(selection: $selectedTab) {
 
@@ -39,6 +43,13 @@ struct ContentView: View {
         }
         .tint(.veilGold)
         .preferredColorScheme(.dark)
+        .onAppear {
+            appState.setSwitchToPlayTab {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    selectedTab = .play
+                }
+            }
+        }
     }
 }
 

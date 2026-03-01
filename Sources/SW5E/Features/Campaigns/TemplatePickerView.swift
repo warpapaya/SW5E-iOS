@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Template Picker View
 
 /// Bottom-sheet style view for selecting a campaign template.
-/// Shows 4 cards: Outer Rim Job, Tidecaller Academy, Fractured Cell, Sandbox.
+/// Shows 4 cards: Driftway Job, Tidecaller Awakening, Fractured Cell, Freeform.
 struct TemplatePickerView: View {
     let onSelect: (CampaignTemplate) -> Void
     let onDismiss: () -> Void

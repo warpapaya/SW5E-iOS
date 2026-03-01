@@ -304,6 +304,7 @@ final class CharacterBuilderViewModel: ObservableObject {
             var req = URLRequest(url: url)
             req.httpMethod = "POST"
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            req.setValue(APIService.deviceId, forHTTPHeaderField: "X-Device-Id")
             req.httpBody = try JSONSerialization.data(withJSONObject: payload)
             let (data, _) = try await URLSession.shared.data(for: req)
             if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
