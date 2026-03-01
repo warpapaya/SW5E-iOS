@@ -116,15 +116,14 @@ class CampaignStartViewModel: ObservableObject {
         isStarting = true
         errorMessage = nil
 
-        // Best-effort character sync before campaign start
-        if let character = findCharacter(by: characterId) {
-            await ensureCharacterSynced(character)
-        }
+        // Include character inline so server can auto-create if not yet synced
+        let inlineCharacter = findCharacter(by: characterId)
 
         let body = CampaignStartRequest(
             templateId: templateId,
             characterId: characterId,
-            title: nil
+            title: nil,
+            characterData: inlineCharacter
         )
 
         do {

@@ -145,7 +145,7 @@ extension Character {
             ac: 14, forcePoints: 6, lastModified: Date().addingTimeInterval(-86_400)
         ),
         Character(
-            id: "demo-3", name: "Brom Skalos", species: "Zabrak", charClass: "Fabricant",
+            id: "demo-3", name: "Brom Skalos", species: "Keth", charClass: "Fabricant",
             level: 5, experiencePoints: 14_000, currentHP: 38, maxHP: 42,
             ac: 17, forcePoints: 0, lastModified: Date().addingTimeInterval(-7_200)
         ),

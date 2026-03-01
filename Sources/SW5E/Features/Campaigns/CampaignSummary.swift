@@ -149,7 +149,7 @@ struct CampaignStartRequest: Codable {
     let templateId: String?
     let characterId: String
     let title: String?
-    // Backend expects camelCase — no CodingKeys needed
+    let characterData: Character?   // Inline character so server can auto-create if not synced yet
 }
 
 struct CampaignStartResponse: Codable {
