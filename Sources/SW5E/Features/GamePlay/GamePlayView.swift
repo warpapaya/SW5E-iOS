@@ -11,6 +11,8 @@ struct GamePlayView: View {
     @State private var showCombatOverlay = false
     @State private var showCharacterDrawer = false
     @State private var showSettingsSheet = false
+    @State private var showDiscontinueAlert = false
+    @Environment(\.dismiss) private var dismiss
     @State private var narrativeScrollProxy: ScrollViewProxy?
 
     // MARK: - Computed Properties
@@ -102,6 +104,31 @@ struct GamePlayView: View {
         // Campaign settings sheet
         .sheet(isPresented: $showSettingsSheet) {
             CampaignSettingsSheet(viewModel: viewModel)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(role: .destructive) {
+                        showDiscontinueAlert = true
+                    } label: {
+                        Label("Discontinue Campaign", systemImage: "xmark.circle")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(Color.veilGold)
+                }
+            }
+        }
+        .alert("Discontinue Campaign?", isPresented: $showDiscontinueAlert) {
+            Button("Discontinue", role: .destructive) {
+                Task {
+                    await viewModel.deleteCampaign()
+                    dismiss()
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This campaign run will be permanently deleted. Your character will be unaffected.")
         }
     }
 

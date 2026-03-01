@@ -273,6 +273,17 @@ class GamePlayViewModel: ObservableObject {
     func playBlasterSound() { soundManager.playBlasterShot() }
     func playDiceRollSound() { soundManager.playDiceRoll() }
     func playXPChimeSound()  { soundManager.playXPChime() }
+
+    // MARK: - Delete Campaign
+
+    @MainActor
+    func deleteCampaign() async {
+        do {
+            try await api.deleteCampaign(id: campaignId)
+        } catch {
+            print("[Echoveil] deleteCampaign error: \(error)")
+        }
+    }
 }
 
 // MARK: - APIClient (thin shim for existing GamePlayView call-sites)

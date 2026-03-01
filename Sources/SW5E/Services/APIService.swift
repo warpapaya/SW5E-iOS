@@ -234,6 +234,15 @@ class APIService: ObservableObject {
         try validateHTTP(resp)
     }
 
+    func deleteCampaign(id: String) async throws {
+        let url = try requireURL("/api/game/campaign/\(id)")
+        var req = URLRequest(url: url)
+        req.httpMethod = "DELETE"
+        let (_, resp) = try await URLSession.shared.data(for: req)
+        if let http = resp as? HTTPURLResponse, http.statusCode == 404 { return }
+        try validateHTTP(resp)
+    }
+
     // MARK: - Generic Helpers
 
     private func requireURL(_ path: String) throws -> URL {

@@ -285,11 +285,13 @@ final class CharacterSheetViewModel: ObservableObject {
 struct CharacterSheetView: View {
 
     @StateObject private var vm: CharacterSheetViewModel
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var appState: AppState
     @State private var selectedTab: SheetTab = .skills
     @State private var showingHPEditor    = false
     @State private var showingLevelUp     = false
     @State private var showingCampaignPick = false
+    @State private var showDeleteAlert      = false
     @State private var tooltipFormula: StatFormula?
 
     enum SheetTab: String, CaseIterable {
@@ -332,6 +334,31 @@ struct CharacterSheetView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(vm.character.name)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(role: .destructive) {
+                        showDeleteAlert = true
+                    } label: {
+                        Label("Delete Character", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(Color.veilGold)
+                }
+            }
+        }
+        .alert("Delete Character?", isPresented: $showDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                Task {
+                    try? await APIService.shared.deleteCharacter(id: vm.character.id)
+                    dismiss()
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently delete \(vm.character.name). This cannot be undone.")
+        }
         .task { await vm.load() }
         // ── Sheets ──
         .sheet(isPresented: $showingHPEditor) {
