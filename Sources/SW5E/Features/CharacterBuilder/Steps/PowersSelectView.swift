@@ -37,14 +37,14 @@ struct PowersSelectView: View {
                 if vm.isLoading {
                     ProgressView("Loading powers…")
                         .frame(maxWidth: .infinity, minHeight: 200)
-                        .tint(isForce ? Color(red: 0.49, green: 0.23, blue: 0.93) : Color.techOrange)
+                        .tint(isForce ? Color(red: 0.49, green: 0.23, blue: 0.93) : Color.veilPurple)
                 } else {
                     // At-will / Cantrip section
                     PowerSectionView(
                         title: "At-Will Powers",
                         subtitle: "\(selectedCantrips.count)/\(cantripLimit) selected",
                         icon: "infinity.circle.fill",
-                        accentColor: isForce ? Color(red: 0.49, green: 0.23, blue: 0.93) : Color.techOrange,
+                        accentColor: isForce ? Color(red: 0.49, green: 0.23, blue: 0.93) : Color.veilPurple,
                         powers: cantrips,
                         selectedPowers: vm.draft.selectedPowers,
                         isAtLimit: selectedCantrips.count >= cantripLimit,
@@ -61,7 +61,7 @@ struct PowersSelectView: View {
                         title: "1st-Level Powers",
                         subtitle: "\(selectedLevel1Powers.count)/\(level1Limit) selected",
                         icon: "1.circle.fill",
-                        accentColor: isForce ? Color.hologramBlue : Color.saberGreen,
+                        accentColor: isForce ? Color.veilGold : Color.veilGlow,
                         powers: level1Powers,
                         selectedPowers: vm.draft.selectedPowers,
                         isAtLimit: selectedLevel1Powers.count >= level1Limit,
@@ -179,10 +179,10 @@ private struct PowerRow: View {
 
                     Text(power.cost)
                         .font(.caption2.weight(.medium))
-                        .foregroundStyle(Color.techOrange)
+                        .foregroundStyle(Color.veilPurple)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 2)
-                        .background(Color.techOrange.opacity(0.12))
+                        .background(Color.veilPurple.opacity(0.12))
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                 }
 

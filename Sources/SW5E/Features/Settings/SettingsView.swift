@@ -62,7 +62,7 @@ struct SettingsView: View {
             serverSectionContent
         } header: {
             Label("Server Configuration", systemImage: "server.rack.fill")
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
         } footer: {
             Text("Set the address of your Echoveil backend. Default: https://sw5e-api.petieclark.com")
                 .foregroundColor(.mutedText)
@@ -88,7 +88,7 @@ struct SettingsView: View {
                         Task { await connectionChecker.checkConnection() }
                     } label: {
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.saberGreen)
+                            .foregroundColor(.veilGlow)
                             .font(.title3)
                     }
 
@@ -96,14 +96,14 @@ struct SettingsView: View {
                         editingServerURL = false
                     } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.siithRed)
+                            .foregroundColor(.voidRed)
                             .font(.title3)
                     }
                 }
             } else {
                 HStack {
                     Image(systemName: "server.rack")
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                         .frame(width: 24)
 
                     VStack(alignment: .leading, spacing: 2) {
@@ -123,7 +123,7 @@ struct SettingsView: View {
                         editingServerURL = true
                     } label: {
                         Image(systemName: "pencil.circle")
-                            .foregroundColor(.techOrange)
+                            .foregroundColor(.veilPurple)
                             .font(.title3)
                     }
                     .buttonStyle(.plain)
@@ -137,7 +137,7 @@ struct SettingsView: View {
                 } label: {
                     Label("Check Connection", systemImage: "wifi")
                         .font(.subheadline)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
                 .buttonStyle(.plain)
 
@@ -148,11 +148,11 @@ struct SettingsView: View {
                 } else {
                     HStack(spacing: 6) {
                         Circle()
-                            .fill(connectionChecker.isConnected ? Color.saberGreen : Color.siithRed)
+                            .fill(connectionChecker.isConnected ? Color.veilGlow : Color.voidRed)
                             .frame(width: 8, height: 8)
                         Text(connectionChecker.isConnected ? "Connected" : "Offline")
                             .font(.caption)
-                            .foregroundColor(connectionChecker.isConnected ? .saberGreen : .siithRed)
+                            .foregroundColor(connectionChecker.isConnected ? .veilGlow : .voidRed)
                     }
                 }
             }
@@ -164,7 +164,7 @@ struct SettingsView: View {
         Section {
             HStack(spacing: 12) {
                 Image(systemName: "brain.head.profile")
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                     .frame(width: 24)
 
                 VStack(alignment: .leading, spacing: 2) {
@@ -190,7 +190,7 @@ struct SettingsView: View {
                 .foregroundColor(.mutedText)
         } header: {
             Label("AI Backend", systemImage: "cpu.fill")
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
         } footer: {
             Text("The AI GM generates narrative, descriptions, and NPC dialogue in real-time using the configured server.")
                 .foregroundColor(.mutedText)
@@ -203,11 +203,11 @@ struct SettingsView: View {
         if connectionChecker.aiOnline {
             Label("Online", systemImage: "checkmark.circle.fill")
                 .font(.caption.weight(.semibold))
-                .foregroundColor(.saberGreen)
+                .foregroundColor(.veilGlow)
         } else {
             Label("Offline", systemImage: "xmark.circle.fill")
                 .font(.caption.weight(.semibold))
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
         }
     }
 
@@ -220,7 +220,7 @@ struct SettingsView: View {
                 Label("Sound Effects", systemImage: soundManager.isMuted ? "speaker.slash.fill" : "speaker.fill")
                     .foregroundColor(soundManager.isMuted ? .mutedText : .lightText)
             }
-            .tint(.hologramBlue)
+            .tint(.veilGold)
 
             // Volume slider — hidden when muted
             if !soundManager.isMuted {
@@ -230,9 +230,9 @@ struct SettingsView: View {
                             .foregroundColor(.mutedText)
                             .font(.caption)
                         Slider(value: $soundManager.volume, in: 0...1, step: 0.05)
-                            .tint(.hologramBlue)
+                            .tint(.veilGold)
                         Image(systemName: "speaker.wave.3")
-                            .foregroundColor(.hologramBlue)
+                            .foregroundColor(.veilGold)
                             .font(.caption)
                     }
 
@@ -260,7 +260,7 @@ struct SettingsView: View {
                 HStack {
                     Text(showingSoundInfo ? "Hide sound details" : "Show sound details")
                         .font(.subheadline)
-                        .foregroundColor(.techOrange)
+                        .foregroundColor(.veilPurple)
                     Spacer()
                     Image(systemName: showingSoundInfo ? "chevron.up" : "chevron.down")
                         .font(.caption)
@@ -275,32 +275,32 @@ struct SettingsView: View {
                         icon: "waveform.and.sparkles",
                         title: "Veilblade Hum",
                         description: "Dual-oscillator hum with FM modulation. Plays for Veilborn classes.",
-                        color: .saberGreen
+                        color: .veilGlow
                     )
                     SoundEffectRow(
                         icon: "bolt.fill",
                         title: "Blaster Shot",
                         description: "White noise + 800→300 Hz sweep. Plays on combat actions.",
-                        color: .techOrange
+                        color: .veilPurple
                     )
                     SoundEffectRow(
                         icon: "die.face.6.fill",
                         title: "Dice Roll",
                         description: "Randomised frequency bursts simulating rattling dice.",
-                        color: .hologramBlue
+                        color: .veilGold
                     )
                     SoundEffectRow(
                         icon: "sparkles",
                         title: "XP Chime",
                         description: "C-major arpeggio (C5–E5–G5–C6) with harmonic overtones on level-up.",
-                        color: .saberGreen
+                        color: .veilGlow
                     )
                 }
                 .padding(.vertical, 4)
             }
         } header: {
             Label("Sound Effects", systemImage: "speaker.fill")
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
         }
         .listRowBackground(Color.spaceCard)
     }
@@ -311,11 +311,11 @@ struct SettingsView: View {
         } label: {
             Text(label)
                 .font(.caption.weight(.semibold))
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 4)
-                .background(RoundedRectangle(cornerRadius: 6).fill(Color.hologramBlue.opacity(0.15)))
-                .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.hologramBlue.opacity(0.3), lineWidth: 1))
+                .background(RoundedRectangle(cornerRadius: 6).fill(Color.veilGold.opacity(0.15)))
+                .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.veilGold.opacity(0.3), lineWidth: 1))
         }
         .buttonStyle(.plain)
     }
@@ -342,17 +342,17 @@ struct SettingsView: View {
 
             Link(destination: URL(string: "https://github.com/warpapaya/SW5E-iOS")!) {
                 Label("Source on GitHub", systemImage: "link")
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
 
             Link(destination: URL(string: "https://notes.petieclark.com/doc/echoveil-game-design-bible-zGLCyZJWZp")!) {
                 Label("Echoveil Ruleset", systemImage: "book.closed.fill")
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
 
             Link(destination: URL(string: "https://github.com/warpapaya/SW5E-iOS/blob/main/LICENSE")!) {
                 Label("MIT License", systemImage: "doc.text.fill")
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
 
             // Reset
@@ -362,11 +362,11 @@ struct SettingsView: View {
                 APIService.shared.serverURL = "https://sw5e-api.petieclark.com"
             } label: {
                 Label("Reset to Defaults", systemImage: "arrow.counterclockwise")
-                    .foregroundColor(.siithRed)
+                    .foregroundColor(.voidRed)
             }
         } header: {
             Label("About", systemImage: "info.circle.fill")
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
         }
         .listRowBackground(Color.spaceCard)
     }
@@ -449,9 +449,9 @@ private struct SoundEffectRow: View {
 #Preview("Sound Effect Row") {
     VStack(spacing: 8) {
         SoundEffectRow(icon: "waveform.and.sparkles", title: "Veilblade Hum",
-                       description: "Dual-oscillator hum with FM modulation.", color: .saberGreen)
+                       description: "Dual-oscillator hum with FM modulation.", color: .veilGlow)
         SoundEffectRow(icon: "bolt.fill", title: "Blaster Shot",
-                       description: "White noise + frequency sweep.", color: .techOrange)
+                       description: "White noise + frequency sweep.", color: .veilPurple)
     }
     .padding()
     .background(Color.spacePrimary)

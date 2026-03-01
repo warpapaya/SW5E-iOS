@@ -55,12 +55,12 @@ struct CombatOverlayView: View {
         HStack(spacing: 12) {
             Text("⚔️ COMBAT")
                 .font(.holoDisplay)
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
 
             Spacer()
 
             HStack(spacing: 6) {
-                Image(systemName: "timer").foregroundColor(.techOrange)
+                Image(systemName: "timer").foregroundColor(.veilPurple)
                 Text("Turn \(localCombatState.currentTurnIndex + 1)")
                     .font(.dataReadout)
                     .foregroundColor(.lightText)
@@ -91,20 +91,20 @@ struct CombatOverlayView: View {
     @ViewBuilder private func initiativeRow(participant: Combatant, isCurrentTurn: Bool) -> some View {
         HStack(spacing: 12) {
             RoundedRectangle(cornerRadius: 4)
-                .fill(isCurrentTurn ? Color.techOrange : Color.clear)
+                .fill(isCurrentTurn ? Color.veilPurple : Color.clear)
                 .frame(width: 6)
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.techOrange.opacity(0.5), lineWidth: 2))
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.veilPurple.opacity(0.5), lineWidth: 2))
                 .animation(.easeInOut(duration: 0.3), value: isCurrentTurn)
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
                     Text(participant.name)
                         .font(.bodyText)
-                        .foregroundColor(isCurrentTurn ? Color.hologramBlue : .lightText)
+                        .foregroundColor(isCurrentTurn ? Color.veilGold : .lightText)
 
                     if isCurrentTurn {
                         Circle()
-                            .fill(Color.techOrange)
+                            .fill(Color.veilPurple)
                             .frame(width: 6, height: 6)
                             .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isCurrentTurn)
                     }
@@ -127,10 +127,10 @@ struct CombatOverlayView: View {
                         ForEach(participant.conditions, id: \.self) { condition in
                             Text(condition)
                                 .font(.dataReadout)
-                                .foregroundColor(.siithRed)
+                                .foregroundColor(.voidRed)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)
-                                .background(Color.siithRed.opacity(0.1))
+                                .background(Color.voidRed.opacity(0.1))
                                 .clipShape(RoundedRectangle(cornerRadius: 4))
                         }
                     }
@@ -161,11 +161,11 @@ struct CombatOverlayView: View {
                         Image(systemName: "hourglass.bottomhalf.filled").font(.system(size: 20))
                         Text("End Turn").font(.dataReadout)
                     }
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                     .padding(12)
                     .background(Color.spaceCard)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+                    .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.veilGoldSubtle, lineWidth: 1))
                 }
             }
         }
@@ -181,7 +181,7 @@ struct CombatOverlayView: View {
             .padding(.vertical, 8)
             .background(Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.veilGoldSubtle, lineWidth: 1))
         }
     }
 
@@ -191,7 +191,7 @@ struct CombatOverlayView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text("COMBAT LOG")
                 .font(.dataReadout)
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
 
             ScrollViewShowsIndicators(.vertical) {
                 VStack(spacing: 6) {
@@ -254,7 +254,7 @@ struct CombatOverlayView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(participant.name)
                         .font(.bodyText)
-                        .foregroundColor(isSelected ? Color.hologramBlue : .lightText)
+                        .foregroundColor(isSelected ? Color.veilGold : .lightText)
                     HPBar(currentHp: participant.hp, maxHp: participant.maxHp, size: 6)
                 }
                 Spacer()
@@ -270,9 +270,9 @@ struct CombatOverlayView: View {
 
     private func healthColor(for participant: Combatant) -> Color {
         let pct = Double(participant.hp) / Double(max(1, participant.maxHp))
-        if pct > 0.6 { return .saberGreen }
-        if pct > 0.3 { return .techOrange }
-        return .siithRed
+        if pct > 0.6 { return .veilGlow }
+        if pct > 0.3 { return .veilPurple }
+        return .voidRed
     }
 
     // MARK: - Actions

@@ -40,7 +40,7 @@ struct CharacterListView: View {
                     } label: {
                         Image(systemName: "plus")
                             .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.hologramBlue)
+                            .foregroundColor(.veilGold)
                     }
                     .accessibilityLabel("Add character")
                 }
@@ -86,7 +86,7 @@ struct CharacterListView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView()
-                .tint(.hologramBlue)
+                .tint(.veilGold)
                 .scaleEffect(1.4)
             Text("Loading characters…")
                 .font(.subheadline)
@@ -139,7 +139,7 @@ struct CharacterListView: View {
 
             Image(systemName: "person.crop.circle.badge.plus")
                 .font(.system(size: 80))
-                .foregroundColor(.hologramBlue.opacity(0.4))
+                .foregroundColor(.veilGold.opacity(0.4))
 
             VStack(spacing: 10) {
                 Text("No characters yet")
@@ -164,13 +164,13 @@ struct CharacterListView: View {
                     .padding(.vertical, 14)
                     .background(
                         LinearGradient(
-                            colors: [.hologramBlue, .holoBlueSubtle],
+                            colors: [.veilGold, .veilGoldSubtle],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .shadow(color: .hologramBlue.opacity(0.4), radius: 10)
+                    .shadow(color: .veilGold.opacity(0.4), radius: 10)
             }
 
             Spacer()
@@ -224,9 +224,9 @@ struct CharacterCardView: View {
     }
 
     private var hpColor: Color {
-        if character.hpPercentage < 0.25 { return .siithRed }
-        if character.hpPercentage < 0.5  { return .techOrange }
-        return .saberGreen
+        if character.hpPercentage < 0.25 { return .voidRed }
+        if character.hpPercentage < 0.5  { return .veilPurple }
+        return .veilGlow
     }
 
     var body: some View {
@@ -263,7 +263,7 @@ struct CharacterCardView: View {
                         if character.level >= 10 {
                             Image(systemName: "star.fill")
                                 .font(.caption2)
-                                .foregroundColor(.techOrange)
+                                .foregroundColor(.veilPurple)
                         }
 
                         Spacer()
@@ -273,14 +273,14 @@ struct CharacterCardView: View {
                             .foregroundColor(.spacePrimary)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
-                            .background(Capsule().fill(Color.hologramBlue))
+                            .background(Capsule().fill(Color.veilGold))
                     }
 
                     // Species + class
                     HStack(spacing: 5) {
                         Text(character.species)
                             .font(.caption)
-                            .foregroundColor(.hologramBlue)
+                            .foregroundColor(.veilGold)
                         Text("·")
                             .font(.caption)
                             .foregroundColor(.mutedText)

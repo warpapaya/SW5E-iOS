@@ -29,7 +29,7 @@ struct SpeciesSelectView: View {
                 if vm.isLoading {
                     ProgressView("Loading species…")
                         .frame(maxWidth: .infinity, minHeight: 200)
-                        .tint(Color.hologramBlue)
+                        .tint(Color.veilGold)
                 } else {
                     LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(vm.availableSpecies) { species in
@@ -75,7 +75,7 @@ private struct SpeciesCard: View {
                     .fill(
                         LinearGradient(
                             colors: isSelected
-                                ? [Color.hologramBlue.opacity(0.3), Color.holoBlueSubtle]
+                                ? [Color.veilGold.opacity(0.3), Color.veilGoldSubtle]
                                 : [Color.spaceCard, Color.borderSubtle.opacity(0.5)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -85,13 +85,13 @@ private struct SpeciesCard: View {
 
                 Image(systemName: "figure.stand")
                     .font(.system(size: 34))
-                    .foregroundStyle(isSelected ? Color.hologramBlue : Color.mutedText)
+                    .foregroundStyle(isSelected ? Color.veilGold : Color.mutedText)
             }
 
             // Name
             Text(species.name)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(isSelected ? Color.hologramBlue : Color.lightText)
+                .foregroundStyle(isSelected ? Color.veilGold : Color.lightText)
                 .lineLimit(1)
 
             // Ability bonuses chips
@@ -99,10 +99,10 @@ private struct SpeciesCard: View {
                 ForEach(Array(species.abilityBonuses.prefix(2)), id: \.key) { key, val in
                     Text("+\(val) \(key.uppercased())")
                         .font(.caption2.weight(.medium))
-                        .foregroundStyle(Color.saberGreen)
+                        .foregroundStyle(Color.veilGlow)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 2)
-                        .background(Color.saberGreen.opacity(0.15))
+                        .background(Color.veilGlow.opacity(0.15))
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                 }
             }
@@ -113,7 +113,7 @@ private struct SpeciesCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.caption2)
-                            .foregroundStyle(Color.saberGreen.opacity(0.7))
+                            .foregroundStyle(Color.veilGlow.opacity(0.7))
                         Text(trait)
                             .font(.caption2)
                             .foregroundStyle(Color.mutedText)
@@ -129,11 +129,11 @@ private struct SpeciesCard: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 14)
                         .strokeBorder(
-                            isSelected ? Color.hologramBlue : Color.borderSubtle,
+                            isSelected ? Color.veilGold : Color.borderSubtle,
                             lineWidth: isSelected ? 2 : 1
                         )
                 )
-                .shadow(color: isSelected ? Color.hologramBlue.opacity(0.2) : .clear, radius: 8)
+                .shadow(color: isSelected ? Color.veilGold.opacity(0.2) : .clear, radius: 8)
         )
         .scaleEffect(isSelected ? 1.02 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
@@ -158,14 +158,14 @@ private struct SpeciesDetailSheet: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(LinearGradient(
-                                colors: [Color.hologramBlue.opacity(0.2), Color.spaceCard],
+                                colors: [Color.veilGold.opacity(0.2), Color.spaceCard],
                                 startPoint: .top,
                                 endPoint: .bottom
                             ))
                             .frame(height: 140)
                         Image(systemName: "figure.stand")
                             .font(.system(size: 60))
-                            .foregroundStyle(Color.hologramBlue)
+                            .foregroundStyle(Color.veilGold)
                     }
                     .padding(.horizontal, 20)
 
@@ -173,7 +173,7 @@ private struct SpeciesDetailSheet: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("About")
                             .font(.headline)
-                            .foregroundStyle(Color.hologramBlue)
+                            .foregroundStyle(Color.veilGold)
                         Text(species.description)
                             .font(.body)
                             .foregroundStyle(Color.lightText)
@@ -184,13 +184,13 @@ private struct SpeciesDetailSheet: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Ability Bonuses")
                             .font(.headline)
-                            .foregroundStyle(Color.hologramBlue)
+                            .foregroundStyle(Color.veilGold)
                         HStack(spacing: 10) {
                             ForEach(Array(species.abilityBonuses), id: \.key) { key, val in
                                 VStack(spacing: 2) {
                                     Text("+\(val)")
                                         .font(.title3.weight(.bold))
-                                        .foregroundStyle(Color.saberGreen)
+                                        .foregroundStyle(Color.veilGlow)
                                     Text(key.uppercased())
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(Color.mutedText)
@@ -201,7 +201,7 @@ private struct SpeciesDetailSheet: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .strokeBorder(Color.saberGreen.opacity(0.4), lineWidth: 1)
+                                        .strokeBorder(Color.veilGlow.opacity(0.4), lineWidth: 1)
                                 )
                             }
                         }
@@ -212,12 +212,12 @@ private struct SpeciesDetailSheet: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Racial Traits")
                             .font(.headline)
-                            .foregroundStyle(Color.hologramBlue)
+                            .foregroundStyle(Color.veilGold)
                         ForEach(species.traits, id: \.self) { trait in
                             HStack(alignment: .top, spacing: 10) {
                                 Image(systemName: "star.fill")
                                     .font(.caption)
-                                    .foregroundStyle(Color.hologramBlue)
+                                    .foregroundStyle(Color.veilGold)
                                     .padding(.top, 2)
                                 Text(trait)
                                     .font(.body)
@@ -231,21 +231,21 @@ private struct SpeciesDetailSheet: View {
                     Button(action: onSelect) {
                         Text(isSelected ? "✓ Selected" : "Select \(species.name)")
                             .font(.body.weight(.semibold))
-                            .foregroundStyle(isSelected ? Color.saberGreen : Color.spacePrimary)
+                            .foregroundStyle(isSelected ? Color.veilGlow : Color.spacePrimary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background {
                                 if isSelected {
-                                    Color.saberGreen.opacity(0.2)
+                                    Color.veilGlow.opacity(0.2)
                                 } else {
-                                    LinearGradient(colors: [.hologramBlue, .saberGreen.opacity(0.8)],
+                                    LinearGradient(colors: [.veilGold, .veilGlow.opacity(0.8)],
                                                    startPoint: .leading, endPoint: .trailing)
                                 }
                             }
                             .clipShape(RoundedRectangle(cornerRadius: 14))
                             .overlay {
                                 if isSelected {
-                                    RoundedRectangle(cornerRadius: 14).strokeBorder(Color.saberGreen, lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: 14).strokeBorder(Color.veilGlow, lineWidth: 1)
                                 }
                             }
                     }
@@ -261,7 +261,7 @@ private struct SpeciesDetailSheet: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color.hologramBlue)
+                        .foregroundStyle(Color.veilGold)
                 }
             }
         }

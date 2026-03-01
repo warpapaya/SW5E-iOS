@@ -62,7 +62,7 @@ extension View {
         }) {
             Text("Tap me")
                 .padding()
-                .background(Color.hologramBlue)
+                .background(Color.veilGold)
                 .foregroundColor(.spacePrimary)
                 .cornerRadius(8)
         }

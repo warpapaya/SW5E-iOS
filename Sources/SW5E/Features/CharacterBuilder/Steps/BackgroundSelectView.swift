@@ -24,7 +24,7 @@ struct BackgroundSelectView: View {
                 if vm.isLoading {
                     ProgressView("Loading backgrounds…")
                         .frame(maxWidth: .infinity, minHeight: 200)
-                        .tint(Color.hologramBlue)
+                        .tint(Color.veilGold)
                 } else {
                     LazyVStack(spacing: 10) {
                         ForEach(vm.availableBackgrounds) { bg in
@@ -68,27 +68,27 @@ private struct BackgroundCard: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(isSelected ? Color.hologramBlue.opacity(0.2) : Color.borderSubtle.opacity(0.5))
+                        .fill(isSelected ? Color.veilGold.opacity(0.2) : Color.borderSubtle.opacity(0.5))
                         .frame(width: 44, height: 44)
                     Image(systemName: "book.fill")
                         .font(.system(size: 18))
-                        .foregroundStyle(isSelected ? Color.hologramBlue : Color.mutedText)
+                        .foregroundStyle(isSelected ? Color.veilGold : Color.mutedText)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(background.name)
                         .font(.headline.weight(.semibold))
-                        .foregroundStyle(isSelected ? Color.hologramBlue : Color.lightText)
+                        .foregroundStyle(isSelected ? Color.veilGold : Color.lightText)
 
                     // Skill grants
                     HStack(spacing: 6) {
                         ForEach(background.skillGrants, id: \.self) { skill in
                             Text(skill)
                                 .font(.caption2.weight(.medium))
-                                .foregroundStyle(Color.saberGreen)
+                                .foregroundStyle(Color.veilGlow)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)
-                                .background(Color.saberGreen.opacity(0.15))
+                                .background(Color.veilGlow.opacity(0.15))
                                 .clipShape(RoundedRectangle(cornerRadius: 4))
                         }
                     }
@@ -100,7 +100,7 @@ private struct BackgroundCard: View {
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.title3)
-                        .foregroundStyle(Color.saberGreen)
+                        .foregroundStyle(Color.veilGlow)
                 } else {
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .font(.caption.weight(.semibold))
@@ -119,7 +119,7 @@ private struct BackgroundCard: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Label("Background Feature", systemImage: "sparkles")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Color.techOrange)
+                            .foregroundStyle(Color.veilPurple)
 
                         Text(background.featureDescription)
                             .font(.subheadline)
@@ -131,14 +131,14 @@ private struct BackgroundCard: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Label("Skill Proficiencies", systemImage: "checkmark.seal.fill")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Color.hologramBlue)
+                            .foregroundStyle(Color.veilGold)
 
                         HStack(spacing: 8) {
                             ForEach(background.skillGrants, id: \.self) { skill in
                                 HStack(spacing: 4) {
                                     Image(systemName: "circle.fill")
                                         .font(.system(size: 6))
-                                        .foregroundStyle(Color.hologramBlue)
+                                        .foregroundStyle(Color.veilGold)
                                     Text(skill)
                                         .font(.subheadline)
                                         .foregroundStyle(Color.lightText)
@@ -153,15 +153,15 @@ private struct BackgroundCard: View {
                     } label: {
                         Text(isSelected ? "✓ Selected" : "Select \(background.name)")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(isSelected ? Color.saberGreen : Color.spacePrimary)
+                            .foregroundStyle(isSelected ? Color.veilGlow : Color.spacePrimary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
                             .background {
                                 if isSelected {
-                                    Color.saberGreen.opacity(0.2)
+                                    Color.veilGlow.opacity(0.2)
                                 } else {
                                     LinearGradient(
-                                        colors: [.hologramBlue, .saberGreen.opacity(0.7)],
+                                        colors: [.veilGold, .veilGlow.opacity(0.7)],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -183,11 +183,11 @@ private struct BackgroundCard: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 14)
                         .strokeBorder(
-                            isSelected ? Color.saberGreen : (isExpanded ? Color.hologramBlue.opacity(0.5) : Color.borderSubtle),
+                            isSelected ? Color.veilGlow : (isExpanded ? Color.veilGold.opacity(0.5) : Color.borderSubtle),
                             lineWidth: isSelected ? 2 : 1
                         )
                 )
-                .shadow(color: isSelected ? Color.saberGreen.opacity(0.15) : .clear, radius: 8)
+                .shadow(color: isSelected ? Color.veilGlow.opacity(0.15) : .clear, radius: 8)
         )
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isSelected)
     }

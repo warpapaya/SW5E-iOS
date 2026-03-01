@@ -32,7 +32,7 @@ struct TemplatePickerView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", action: onDismiss)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
             }
         }
@@ -49,19 +49,19 @@ private struct TemplateCard: View {
 
     var accentGradient: LinearGradient {
         switch template.accentColor {
-        case .blue:   return LinearGradient(colors: [.hologramBlue, .holoBlueSubtle], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .blue:   return LinearGradient(colors: [.veilGold, .veilGoldSubtle], startPoint: .topLeading, endPoint: .bottomTrailing)
         case .purple: return LinearGradient(colors: [Color(red: 0.6, green: 0.2, blue: 0.9), Color(red: 0.3, green: 0.1, blue: 0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
-        case .red:    return LinearGradient(colors: [.siithRed, Color(red: 0.5, green: 0.1, blue: 0.1)], startPoint: .topLeading, endPoint: .bottomTrailing)
-        case .gold:   return LinearGradient(colors: [.techOrange, Color(red: 0.6, green: 0.4, blue: 0.0)], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .red:    return LinearGradient(colors: [.voidRed, Color(red: 0.5, green: 0.1, blue: 0.1)], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .gold:   return LinearGradient(colors: [.veilPurple, Color(red: 0.6, green: 0.4, blue: 0.0)], startPoint: .topLeading, endPoint: .bottomTrailing)
         }
     }
 
     var accentForeground: Color {
         switch template.accentColor {
-        case .blue:   return .hologramBlue
+        case .blue:   return .veilGold
         case .purple: return Color(red: 0.7, green: 0.5, blue: 1.0)
-        case .red:    return .siithRed
-        case .gold:   return .techOrange
+        case .red:    return .voidRed
+        case .gold:   return .veilPurple
         }
     }
 

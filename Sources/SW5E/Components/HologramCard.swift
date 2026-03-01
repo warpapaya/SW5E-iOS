@@ -11,7 +11,7 @@ struct HologramCard: View {
             if let title = title {
                 Text(title)
                     .font(.holoDisplay)
-                    .foregroundStyle(Color.hologramBlue)
+                    .foregroundStyle(Color.veilGold)
             }
             Text(content)
                 .font(.bodyText)
@@ -23,12 +23,12 @@ struct HologramCard: View {
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(
-                    isHovered ? Color.hologramBlue : Color.borderSubtle,
+                    isHovered ? Color.veilGold : Color.borderSubtle,
                     lineWidth: isHovered ? 2 : 1
                 )
         )
         .shadow(
-            color: isHovered ? Color.hologramBlue.opacity(0.3) : Color.black.opacity(0.5),
+            color: isHovered ? Color.veilGold.opacity(0.3) : Color.black.opacity(0.5),
             radius: isHovered ? 8 : 4, x: 0, y: 4
         )
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovered)

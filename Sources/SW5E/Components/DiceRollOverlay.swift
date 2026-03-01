@@ -14,10 +14,10 @@ struct DiceRollOverlay: View {
     var isFail: Bool { sides == 20 && rolls.contains(1) }
 
     var resultColor: Color {
-        if isCrit { return .techOrange }
-        if isFail { return .siithRed }
-        if total >= 15 { return .hologramBlue }
-        return .techOrange
+        if isCrit { return .veilPurple }
+        if isFail { return .voidRed }
+        if total >= 15 { return .veilGold }
+        return .veilPurple
     }
 
     var body: some View {
@@ -52,10 +52,10 @@ struct DiceRollOverlay: View {
                                 if modifier != 0 {
                                     Text(modifier > 0 ? "+\(modifier)" : "\(modifier)")
                                         .font(.system(size: 36, weight: .semibold, design: .monospaced))
-                                        .foregroundStyle(Color.hologramBlue)
+                                        .foregroundStyle(Color.veilGold)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 4)
-                                        .background(Color.holoBlueSubtle)
+                                        .background(Color.veilGoldSubtle)
                                         .clipShape(RoundedRectangle(cornerRadius: 6))
                                 }
                             }

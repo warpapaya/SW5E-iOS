@@ -120,15 +120,15 @@ struct CBClass: Identifiable, Codable, Equatable {
 
     var gradientColors: [Color] {
         switch name.lowercased() {
-        case "guardian":  return [.hologramBlue, .holoBlueSubtle]
+        case "guardian":  return [.veilGold, .veilGoldSubtle]
         case "sentinel":  return [Color(red: 0.49, green: 0.23, blue: 0.93), Color(red: 0.30, green: 0.11, blue: 0.58)]
-        case "consular":  return [.saberGreen, Color(red: 0.02, green: 0.37, blue: 0.27)]
-        case "engineer":  return [.techOrange, Color(red: 0.49, green: 0.18, blue: 0.07)]
+        case "consular":  return [.veilGlow, Color(red: 0.02, green: 0.37, blue: 0.27)]
+        case "engineer":  return [.veilPurple, Color(red: 0.49, green: 0.18, blue: 0.07)]
         case "fighter":   return [Color(red: 0.92, green: 0.35, blue: 0.0), Color(red: 0.26, green: 0.08, blue: 0.03)]
         case "smuggler":  return [Color(red: 0.79, green: 0.54, blue: 0.02), Color(red: 0.44, green: 0.25, blue: 0.07)]
         case "operative": return [Color(red: 0.60, green: 0.20, blue: 0.50), Color(red: 0.25, green: 0.05, blue: 0.25)]
         case "scholar":   return [Color(red: 0.20, green: 0.60, blue: 0.80), Color(red: 0.05, green: 0.25, blue: 0.45)]
-        default:          return [.hologramBlue, .holoBlueSubtle]
+        default:          return [.veilGold, .veilGoldSubtle]
         }
     }
 

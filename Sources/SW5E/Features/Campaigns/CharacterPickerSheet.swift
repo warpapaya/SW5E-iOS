@@ -28,7 +28,7 @@ struct CharacterPickerSheet: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", action: onDismiss)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
             }
         }
@@ -60,7 +60,7 @@ struct CharacterPickerSheet: View {
             Spacer()
             Image(systemName: "person.slash")
                 .font(.system(size: 52))
-                .foregroundColor(.hologramBlue.opacity(0.4))
+                .foregroundColor(.veilGold.opacity(0.4))
             Text("No characters yet")
                 .font(.title3)
                 .fontWeight(.semibold)
@@ -90,7 +90,7 @@ struct CharacterPickerSheet: View {
             .padding(.vertical, 14)
             .background(
                 LinearGradient(
-                    colors: [.hologramBlue, .holoBlueSubtle],
+                    colors: [.veilGold, .veilGoldSubtle],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -145,7 +145,7 @@ private struct CharacterPickerRow: View {
                     HStack(spacing: 8) {
                         Text(character.species)
                             .font(.caption)
-                            .foregroundColor(.hologramBlue)
+                            .foregroundColor(.veilGold)
 
                         Text("·")
                             .foregroundColor(.mutedText)
@@ -165,7 +165,7 @@ private struct CharacterPickerRow: View {
                         .foregroundColor(.mutedText)
                     Text("\(character.level)")
                         .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.techOrange)
+                        .foregroundColor(.veilPurple)
                         .monospacedDigit()
                 }
                 .frame(minWidth: 36)

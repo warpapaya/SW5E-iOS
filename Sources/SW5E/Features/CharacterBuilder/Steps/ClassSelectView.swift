@@ -23,7 +23,7 @@ struct ClassSelectView: View {
                 if vm.isLoading {
                     ProgressView("Loading classes…")
                         .frame(maxWidth: .infinity, minHeight: 200)
-                        .tint(Color.hologramBlue)
+                        .tint(Color.veilGold)
                 } else {
                     LazyVStack(spacing: 12) {
                         ForEach(vm.availableClasses) { charClass in
@@ -80,7 +80,7 @@ private struct ClassCard: View {
 
                     Image(systemName: charClass.classIcon)
                         .font(.system(size: 24))
-                        .foregroundStyle(charClass.gradientColors.first ?? .hologramBlue)
+                        .foregroundStyle(charClass.gradientColors.first ?? .veilGold)
                 }
 
                 // Info
@@ -95,10 +95,10 @@ private struct ClassCard: View {
                         // Hit die badge
                         Text("d\(charClass.hitDie)")
                             .font(.caption.weight(.bold))
-                            .foregroundStyle(Color.techOrange)
+                            .foregroundStyle(Color.veilPurple)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
-                            .background(Color.techOrange.opacity(0.15))
+                            .background(Color.veilPurple.opacity(0.15))
                             .clipShape(RoundedRectangle(cornerRadius: 6))
                     }
 
@@ -107,7 +107,7 @@ private struct ClassCard: View {
                         // Primary stat
                         ClassTagView(
                             label: charClass.primaryStat.rawValue,
-                            color: .hologramBlue,
+                            color: .veilGold,
                             icon: "chart.bar.fill"
                         )
 
@@ -115,7 +115,7 @@ private struct ClassCard: View {
                         if charClass.isForceUser {
                             ClassTagView(label: "Force", color: Color(red: 0.49, green: 0.23, blue: 0.93), icon: "sparkles")
                         } else if charClass.isTechUser {
-                            ClassTagView(label: "Tech", color: .techOrange, icon: "cpu.fill")
+                            ClassTagView(label: "Tech", color: .veilPurple, icon: "cpu.fill")
                         }
                     }
 
@@ -137,13 +137,13 @@ private struct ClassCard: View {
                     RoundedRectangle(cornerRadius: 14)
                         .strokeBorder(
                             isSelected
-                            ? (charClass.gradientColors.first ?? Color.hologramBlue)
+                            ? (charClass.gradientColors.first ?? Color.veilGold)
                             : Color.borderSubtle,
                             lineWidth: isSelected ? 2 : 1
                         )
                 )
                 .shadow(
-                    color: isSelected ? (charClass.gradientColors.first ?? Color.hologramBlue).opacity(0.25) : .clear,
+                    color: isSelected ? (charClass.gradientColors.first ?? Color.veilGold).opacity(0.25) : .clear,
                     radius: 10
                 )
         )

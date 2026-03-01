@@ -36,7 +36,7 @@ struct ContentView: View {
                 }
                 .tag(AppTab.settings)
         }
-        .tint(.hologramBlue)
+        .tint(.veilGold)
         .preferredColorScheme(.dark)
     }
 }

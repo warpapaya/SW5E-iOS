@@ -28,14 +28,14 @@ struct ActionButton: View {
                     Text(title).font(.holoDisplay)
                 }
             }
-            .foregroundColor(isPressed ? .hologramBlue : .lightText)
+            .foregroundColor(isPressed ? .veilGold : .lightText)
             .padding(.horizontal, icon == nil ? 20 : 16)
             .padding(.vertical, 14)
             .background(RoundedRectangle(cornerRadius: 8).fill(Color.spaceCard))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .strokeBorder(
-                        isPressed ? Color.hologramBlue : Color.borderSubtle,
+                        isPressed ? Color.veilGold : Color.borderSubtle,
                         lineWidth: isPressed ? 2 : 1
                     )
                     .animation(.spring(response: 0.2), value: isPressed)

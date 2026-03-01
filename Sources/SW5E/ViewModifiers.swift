@@ -18,7 +18,7 @@ extension View {
     // MARK: - Glow Effect Modifier
     
     /// Adds a colored glow shadow effect.
-    func glowEffect(color: Color = .hologramBlue, radius: CGFloat = 8, xOffset: CGFloat = 0, yOffset: CGFloat = 4) -> some View {
+    func glowEffect(color: Color = .veilGold, radius: CGFloat = 8, xOffset: CGFloat = 0, yOffset: CGFloat = 4) -> some View {
         self
             .shadow(color: color.opacity(0.3), radius: radius, x: xOffset, y: yOffset)
     }
@@ -31,7 +31,7 @@ extension View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(
-                        active ? Color.hologramBlue : Color.borderSubtle,
+                        active ? Color.veilGold : Color.borderSubtle,
                         lineWidth: width
                     )
             )
@@ -60,7 +60,7 @@ extension View {
         self
             .background(
                 LinearGradient(
-                    colors: [Color.spaceCard, Color.holoBlueSubtle.opacity(0.3)],
+                    colors: [Color.spaceCard, Color.veilGoldSubtle.opacity(0.3)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -145,9 +145,9 @@ extension View {
         // Hologram Card Modifier
         Text("Card with Glow Effect")
             .font(.holoDisplay)
-            .foregroundStyle(Color.hologramBlue)
+            .foregroundStyle(Color.veilGold)
             .holoCard()
-            .glowEffect(color: .hologramBlue, radius: 12)
+            .glowEffect(color: .veilGold, radius: 12)
         
         // Hologram Border
         VStack {

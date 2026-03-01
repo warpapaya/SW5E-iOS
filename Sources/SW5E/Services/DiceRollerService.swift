@@ -70,7 +70,7 @@ actor DiceRollerService {
     VStack(spacing: 12) {
         Text("Dice Roller")
             .font(.holoDisplay)
-            .foregroundColor(Color.hologramBlue)
+            .foregroundColor(Color.veilGold)
         Text("Actor-based dice rolling service")
             .font(.dataReadout)
             .foregroundColor(Color.mutedText)

@@ -15,12 +15,12 @@ struct StatBadge: View {
 
     var color: Color {
         switch label.uppercased() {
-        case "STR": return .saberGreen
-        case "DEX": return .hologramBlue
-        case "CON": return .techOrange
-        case "INT": return .siithRed
-        case "WIS": return .hologramBlue
-        case "CHA": return .techOrange
+        case "STR": return .veilGlow
+        case "DEX": return .veilGold
+        case "CON": return .veilPurple
+        case "INT": return .voidRed
+        case "WIS": return .veilGold
+        case "CHA": return .veilPurple
         default:    return .lightText
         }
     }

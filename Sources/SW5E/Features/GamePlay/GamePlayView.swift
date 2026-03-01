@@ -112,7 +112,7 @@ struct GamePlayView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(viewModel.campaign?.title ?? "Loading...")
                     .font(.holoDisplay)
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
 
                 HStack(spacing: 6) {
                     Text(currentLocation)
@@ -120,7 +120,7 @@ struct GamePlayView: View {
                         .foregroundColor(.lightText)
 
                     Circle()
-                        .fill(isAIOnline ? Color.saberGreen : Color.siithRed)
+                        .fill(isAIOnline ? Color.veilGlow : Color.voidRed)
                         .frame(width: 8, height: 8)
                         .animation(.easeInOut(duration: 0.3), value: isAIOnline)
                 }
@@ -134,11 +134,11 @@ struct GamePlayView: View {
             } label: {
                 Image(systemName: viewModel.isUndoing ? "clock.arrow.circlepath" : "arrow.uturn.backward")
                     .font(.system(size: 18))
-                    .foregroundColor(viewModel.isUndoing ? .mutedText : .hologramBlue)
+                    .foregroundColor(viewModel.isUndoing ? .mutedText : .veilGold)
                     .padding(8)
                     .background(Color.spaceCard)
                     .clipShape(Circle())
-                    .overlay(Circle().strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+                    .overlay(Circle().strokeBorder(Color.veilGoldSubtle, lineWidth: 1))
             }
             .disabled(viewModel.isUndoing)
 
@@ -146,11 +146,11 @@ struct GamePlayView: View {
             Button(action: { showSettingsSheet = true }) {
                 Image(systemName: "gearshape.fill")
                     .font(.system(size: 18))
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                     .padding(8)
                     .background(Color.spaceCard)
                     .clipShape(Circle())
-                    .overlay(Circle().strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+                    .overlay(Circle().strokeBorder(Color.veilGoldSubtle, lineWidth: 1))
             }
         }
         .padding(.horizontal, 16)
@@ -236,7 +236,7 @@ struct GamePlayView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.hologramBlue, lineWidth: 3)
+                .strokeBorder(Color.veilGold, lineWidth: 3)
                 .padding(-3)
         )
         .padding(.horizontal, 16)
@@ -254,7 +254,7 @@ struct GamePlayView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .strokeBorder(Color.techOrange, lineWidth: 2)
+                        .strokeBorder(Color.veilPurple, lineWidth: 2)
                 )
         }
         .padding(.horizontal, 16)
@@ -264,7 +264,7 @@ struct GamePlayView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("⚔️ COMBAT UPDATE")
                 .font(.dataReadout)
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
             Text(content)
                 .font(.bodyText)
                 .foregroundColor(.lightText)
@@ -275,7 +275,7 @@ struct GamePlayView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.siithRed, lineWidth: 3)
+                .strokeBorder(Color.voidRed, lineWidth: 3)
                 .padding(-3)
         )
         .padding(.horizontal, 16)
@@ -285,10 +285,10 @@ struct GamePlayView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Image(systemName: "book.closed.fill")
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                 Text("SESSION RECAP")
                     .font(.dataReadout)
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
             Text(content)
                 .font(.bodyText)
@@ -299,7 +299,7 @@ struct GamePlayView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.hologramBlue.opacity(0.5), lineWidth: 1)
+                .strokeBorder(Color.veilGold.opacity(0.5), lineWidth: 1)
         )
         .padding(.horizontal, 16)
     }
@@ -310,7 +310,7 @@ struct GamePlayView: View {
         HStack(spacing: 6) {
             Image(systemName: "ellipsis")
                 .font(.title3)
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
                 .symbolEffect(.variableColor.iterative, options: .repeating)
             Text("AI Game Master is thinking…")
                 .font(.caption)
@@ -327,19 +327,19 @@ struct GamePlayView: View {
     @ViewBuilder private var xpToast: some View {
         HStack(spacing: 8) {
             Image(systemName: "sparkles")
-                .foregroundColor(.saberGreen)
+                .foregroundColor(.veilGlow)
             Text("+\(viewModel.xpToastAmount) XP")
                 .font(.headline.weight(.bold))
-                .foregroundColor(.saberGreen)
+                .foregroundColor(.veilGlow)
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 12)
         .background(
             Capsule()
                 .fill(Color.spaceCard)
-                .shadow(color: Color.saberGreen.opacity(0.4), radius: 12)
+                .shadow(color: Color.veilGlow.opacity(0.4), radius: 12)
         )
-        .overlay(Capsule().strokeBorder(Color.saberGreen.opacity(0.5), lineWidth: 1))
+        .overlay(Capsule().strokeBorder(Color.veilGlow.opacity(0.5), lineWidth: 1))
     }
 
     // MARK: - Choices Row
@@ -397,7 +397,7 @@ struct GamePlayView: View {
                 Button(action: sendAction) {
                     Image(systemName: "arrow.up.circle.fill")
                         .font(.system(size: 28))
-                        .foregroundColor(canSendAction && !actionText.isEmpty ? Color.hologramBlue : Color.mutedText)
+                        .foregroundColor(canSendAction && !actionText.isEmpty ? Color.veilGold : Color.mutedText)
                         .padding(4)
                 }
                 .disabled(!canSendAction || actionText.isEmpty)
@@ -421,7 +421,7 @@ struct GamePlayView: View {
             .padding(.vertical, 6)
             .background(Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.holoBlueSubtle, lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.veilGoldSubtle, lineWidth: 1))
         }
     }
 
@@ -429,7 +429,7 @@ struct GamePlayView: View {
 
     @ViewBuilder private var sessionSummaryBanner: some View {
         HStack(spacing: 12) {
-            Image(systemName: "book.closed").foregroundColor(.hologramBlue)
+            Image(systemName: "book.closed").foregroundColor(.veilGold)
             Text(viewModel.sessionSummaryText)
                 .font(.caption)
                 .foregroundColor(.lightText)
@@ -441,7 +441,7 @@ struct GamePlayView: View {
             } label: {
                 Text("Load")
                     .font(.caption.weight(.semibold))
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
             Button(action: viewModel.dismissSessionSummary) {
                 Image(systemName: "xmark.circle.fill").foregroundColor(.mutedText)
@@ -496,7 +496,7 @@ struct CampaignSettingsSheet: View {
                     .listRowBackground(Color.spaceCard)
                 } header: {
                     Label("Difficulty", systemImage: "shield.fill")
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
 
                 Section {
@@ -509,7 +509,7 @@ struct CampaignSettingsSheet: View {
                     .listRowBackground(Color.spaceCard)
                 } header: {
                     Label("Narrative Style", systemImage: "film.fill")
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 } footer: {
                     Text("Cinematic = epic drama · Gritty = dark & realistic · Comedic = lighthearted")
                         .foregroundColor(.mutedText)
@@ -522,7 +522,7 @@ struct CampaignSettingsSheet: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Apply") {
@@ -531,7 +531,7 @@ struct CampaignSettingsSheet: View {
                             dismiss()
                         }
                     }
-                    .foregroundColor(.saberGreen)
+                    .foregroundColor(.veilGlow)
                     .fontWeight(.semibold)
                 }
             }
@@ -562,11 +562,11 @@ private struct ChoiceChip: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(isSelected ? Color.hologramBlue : Color.spaceCard)
+            .background(isSelected ? Color.veilGold : Color.spaceCard)
             .clipShape(Capsule())
             .overlay(
                 Capsule().strokeBorder(
-                    isSelected ? Color.hologramBlue : Color.holoBlueSubtle,
+                    isSelected ? Color.veilGold : Color.veilGoldSubtle,
                     lineWidth: 1
                 )
             )

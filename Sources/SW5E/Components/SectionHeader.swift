@@ -10,7 +10,7 @@ struct SectionHeader: View {
             HStack(spacing: 12) {
                 // Left accent bar
                 RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.hologramBlue)
+                    .fill(Color.veilGold)
                     .frame(width: 4, height: 20)
                 
                 Text(title.uppercased())

@@ -66,13 +66,13 @@ struct CharacterBuilderView: View {
                     let isActive    = index == vm.currentVisibleIndex
                     let isCompleted = index < vm.currentVisibleIndex
                     Circle()
-                        .fill(isActive    ? Color.hologramBlue :
-                              isCompleted ? Color.saberGreen   : Color.borderSubtle)
+                        .fill(isActive    ? Color.veilGold :
+                              isCompleted ? Color.veilGlow   : Color.borderSubtle)
                         .frame(width: isActive ? 10 : 7, height: isActive ? 10 : 7)
                         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: vm.currentStep)
                         .overlay(
                             isCompleted
-                            ? Circle().strokeBorder(Color.saberGreen.opacity(0.5), lineWidth: 1)
+                            ? Circle().strokeBorder(Color.veilGlow.opacity(0.5), lineWidth: 1)
                             : nil
                         )
                 }
@@ -87,7 +87,7 @@ struct CharacterBuilderView: View {
                     RoundedRectangle(cornerRadius: 2)
                         .fill(
                             LinearGradient(
-                                colors: [.hologramBlue, .saberGreen],
+                                colors: [.veilGold, .veilGlow],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -172,7 +172,7 @@ struct CharacterBuilderView: View {
                     .padding(.vertical, 14)
                     .background(
                         vm.canProceed
-                        ? LinearGradient(colors: [.hologramBlue, .saberGreen.opacity(0.8)],
+                        ? LinearGradient(colors: [.veilGold, .veilGlow.opacity(0.8)],
                                          startPoint: .leading, endPoint: .trailing)
                         : LinearGradient(colors: [Color.borderSubtle, Color.borderSubtle],
                                          startPoint: .leading, endPoint: .trailing)

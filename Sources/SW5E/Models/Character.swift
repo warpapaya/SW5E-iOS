@@ -102,17 +102,17 @@ enum CharacterClassColor: String, CaseIterable {
     var gradientColors: (Color, Color) {
         switch self {
         case .guardian:
-            return (.hologramBlue, .holoBlueSubtle)  // Blue gradient
+            return (.veilGold, .veilGoldSubtle)  // Blue gradient
         case .sentinel:
-            return (.lightText, .hologramBlue)       // Purple gradient
+            return (.lightText, .veilGold)       // Purple gradient
         case .consular:
-            return (.saberGreen, .spaceCard)         // Teal gradient
+            return (.veilGlow, .spaceCard)         // Teal gradient
         case .engineer:
-            return (.techOrange, .siithRed)          // Green-orange gradient
+            return (.veilPurple, .voidRed)          // Green-orange gradient
         case .fighter:
             return (.lightText, .mutedText)          // Orange/gray gradient
         case .smuggler:
-            return (.hologramBlue, .spaceCard)       // Yellow-blue gradient
+            return (.veilGold, .spaceCard)       // Yellow-blue gradient
         }
     }
     

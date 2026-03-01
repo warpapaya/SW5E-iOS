@@ -10,7 +10,7 @@ struct AIStatusIndicator: View {
 
     @State private var isPulsing = false
 
-    private var dotColor: Color { isAvailable ? .saberGreen : .siithRed }
+    private var dotColor: Color { isAvailable ? .veilGlow : .voidRed }
     private var label: String    { isAvailable ? "AI Online" : "AI Offline" }
 
     var body: some View {

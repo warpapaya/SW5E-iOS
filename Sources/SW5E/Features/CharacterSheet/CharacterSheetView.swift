@@ -390,9 +390,9 @@ struct CharacterSheetView: View {
             .padding(.vertical, 14)
             .background(
                 Capsule()
-                    .fill(Color.hologramBlue)
+                    .fill(Color.veilGold)
             )
-            .shadow(color: .hologramBlue.opacity(0.6), radius: 14, x: 0, y: 6)
+            .shadow(color: .veilGold.opacity(0.6), radius: 14, x: 0, y: 6)
         }
     }
 }
@@ -441,7 +441,7 @@ private struct CharacterHeaderSection: View {
                             .foregroundColor(.spacePrimary)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
-                            .background(Capsule().fill(Color.hologramBlue))
+                            .background(Capsule().fill(Color.veilGold))
                     }
 
                     Text("\(vm.character.species) · \(vm.character.charClass)")
@@ -462,8 +462,8 @@ private struct CharacterHeaderSection: View {
                                 .foregroundColor(.spacePrimary)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 5)
-                                .background(Capsule().fill(Color.saberGreen))
-                                .shadow(color: .saberGreen.opacity(0.5), radius: 6)
+                                .background(Capsule().fill(Color.veilGlow))
+                                .shadow(color: .veilGlow.opacity(0.5), radius: 6)
                         }
                     }
                 }
@@ -491,7 +491,7 @@ private struct CharacterHeaderSection: View {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 3).fill(Color.borderSubtle)
                         RoundedRectangle(cornerRadius: 3)
-                            .fill(Color.hologramBlue)
+                            .fill(Color.veilGold)
                             .frame(width: geo.size.width * min(1, Double(vm.character.experiencePoints) / Double(threshold)))
                     }
                 }
@@ -516,12 +516,12 @@ private struct VitalsBarSection: View {
                 }
                 .buttonStyle(.plain)
 
-                VitalBadge(label: "AC", value: "\(vm.character.ac)", color: .hologramBlue, icon: "shield.fill")
-                VitalBadge(label: "Init", value: (vm.initiative >= 0 ? "+\(vm.initiative)" : "\(vm.initiative)"), color: .techOrange, icon: "bolt.fill")
-                VitalBadge(label: "Speed", value: "\(vm.speed) ft", color: .saberGreen, icon: "figure.walk")
-                VitalBadge(label: "Prof", value: "+\(vm.profBonus)", color: .hologramBlue, icon: "star.fill")
+                VitalBadge(label: "AC", value: "\(vm.character.ac)", color: .veilGold, icon: "shield.fill")
+                VitalBadge(label: "Init", value: (vm.initiative >= 0 ? "+\(vm.initiative)" : "\(vm.initiative)"), color: .veilPurple, icon: "bolt.fill")
+                VitalBadge(label: "Speed", value: "\(vm.speed) ft", color: .veilGlow, icon: "figure.walk")
+                VitalBadge(label: "Prof", value: "+\(vm.profBonus)", color: .veilGold, icon: "star.fill")
                 if vm.character.forcePoints > 0 {
-                    VitalBadge(label: "VP", value: "\(vm.character.forcePoints)", color: .siithRed, icon: "moon.stars.fill")
+                    VitalBadge(label: "VP", value: "\(vm.character.forcePoints)", color: .voidRed, icon: "moon.stars.fill")
                 }
             }
             .padding(.horizontal, 16)
@@ -530,9 +530,9 @@ private struct VitalsBarSection: View {
 
     private var hpColor: Color {
         let pct = vm.character.hpPercentage
-        if pct < 0.25 { return .siithRed }
-        if pct < 0.5  { return .techOrange }
-        return .saberGreen
+        if pct < 0.25 { return .voidRed }
+        if pct < 0.5  { return .veilPurple }
+        return .veilGlow
     }
 }
 
@@ -607,12 +607,12 @@ private struct AbilityScoreBadge: View {
 
     private var color: Color {
         switch key {
-        case "STR": return .saberGreen
-        case "DEX": return .hologramBlue
-        case "CON": return .techOrange
-        case "INT": return .siithRed
-        case "WIS": return .hologramBlue
-        case "CHA": return .techOrange
+        case "STR": return .veilGlow
+        case "DEX": return .veilGold
+        case "CON": return .veilPurple
+        case "INT": return .voidRed
+        case "WIS": return .veilGold
+        case "CHA": return .veilPurple
         default:    return .lightText
         }
     }
@@ -662,7 +662,7 @@ private struct TabPickerBar: View {
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)
                             .background(
-                                Capsule().fill(selected == tab ? Color.hologramBlue : Color.spaceCard)
+                                Capsule().fill(selected == tab ? Color.veilGold : Color.spaceCard)
                             )
                     }
                     .buttonStyle(.plain)
@@ -703,11 +703,11 @@ private struct SkillRow: View {
         HStack(spacing: 12) {
             // Proficiency dot
             Circle()
-                .fill(skill.isProficient ? Color.hologramBlue : Color.borderSubtle)
+                .fill(skill.isProficient ? Color.veilGold : Color.borderSubtle)
                 .frame(width: 8, height: 8)
                 .overlay(
                     Circle()
-                        .stroke(Color.hologramBlue, lineWidth: skill.hasExpertise ? 2 : 0)
+                        .stroke(Color.veilGold, lineWidth: skill.hasExpertise ? 2 : 0)
                         .frame(width: 12, height: 12)
                 )
 
@@ -725,7 +725,7 @@ private struct SkillRow: View {
             // Highlight proficient skills
             Text(skill.total >= 0 ? "+\(skill.total)" : "\(skill.total)")
                 .font(.system(.subheadline, design: .monospaced).weight(.bold))
-                .foregroundColor(skill.isProficient ? .hologramBlue : .lightText)
+                .foregroundColor(skill.isProficient ? .veilGold : .lightText)
                 .frame(width: 32, alignment: .trailing)
         }
         .padding(.horizontal, 16)
@@ -878,8 +878,8 @@ private struct EquipmentRow: View {
             Image(systemName: item.type == "weapon" ? "sword.fill" :
                              item.type == "armor"  ? "shield.fill" : "bag.fill")
                 .font(.caption)
-                .foregroundColor(item.type == "weapon" ? .siithRed :
-                                 item.type == "armor"  ? .hologramBlue : .mutedText)
+                .foregroundColor(item.type == "weapon" ? .voidRed :
+                                 item.type == "armor"  ? .veilGold : .mutedText)
                 .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 2) {
@@ -890,11 +890,11 @@ private struct EquipmentRow: View {
                 if item.type == "weapon", let atk = item.attackBonus, let dmg = item.damageDice {
                     Text("+\(atk) to hit · \(dmg) \(item.damageType ?? "dmg")")
                         .font(.caption2)
-                        .foregroundColor(.techOrange)
+                        .foregroundColor(.veilPurple)
                 } else if item.type == "armor", let ac = item.armorClass {
                     Text("AC \(ac)")
                         .font(.caption2)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 } else if item.quantity > 1 {
                     Text("×\(item.quantity)")
                         .font(.caption2)
@@ -1016,7 +1016,7 @@ private struct NotesTabView: View {
                     } else {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.caption)
-                            .foregroundColor(.saberGreen.opacity(0.7))
+                            .foregroundColor(.veilGlow.opacity(0.7))
                     }
                 }
                 TextEditor(text: $vm.notes)
@@ -1062,7 +1062,7 @@ private struct HPEditorSheet: View {
                     } label: {
                         Image(systemName: "minus.circle.fill")
                             .font(.system(size: 44))
-                            .foregroundColor(.siithRed)
+                            .foregroundColor(.voidRed)
                     }
 
                     TextField("HP", text: $inputText)
@@ -1082,14 +1082,14 @@ private struct HPEditorSheet: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 44))
-                            .foregroundColor(.saberGreen)
+                            .foregroundColor(.veilGlow)
                     }
                 }
 
                 HStack(spacing: 12) {
-                    HPQuickButton(label: "Heal +5", delta: 5, color: .saberGreen) { vm.setCurrentHP(vm.character.currentHP + 5) }
-                    HPQuickButton(label: "Full", delta: 0, color: .hologramBlue) { vm.setCurrentHP(vm.character.maxHP) }
-                    HPQuickButton(label: "Damage -5", delta: -5, color: .siithRed) { vm.setCurrentHP(vm.character.currentHP - 5) }
+                    HPQuickButton(label: "Heal +5", delta: 5, color: .veilGlow) { vm.setCurrentHP(vm.character.currentHP + 5) }
+                    HPQuickButton(label: "Full", delta: 0, color: .veilGold) { vm.setCurrentHP(vm.character.maxHP) }
+                    HPQuickButton(label: "Damage -5", delta: -5, color: .voidRed) { vm.setCurrentHP(vm.character.currentHP - 5) }
                 }
             }
             .padding(24)
@@ -1098,7 +1098,7 @@ private struct HPEditorSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }.foregroundColor(.hologramBlue)
+                    Button("Done") { dismiss() }.foregroundColor(.veilGold)
                 }
             }
             .onAppear {
@@ -1141,8 +1141,8 @@ private struct LevelUpSheet: View {
             VStack(spacing: 24) {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 72))
-                    .foregroundColor(.saberGreen)
-                    .shadow(color: .saberGreen.opacity(0.6), radius: 16)
+                    .foregroundColor(.veilGlow)
+                    .shadow(color: .veilGlow.opacity(0.6), radius: 16)
 
                 Text("Level Up!")
                     .font(.largeTitle.weight(.bold))
@@ -1164,7 +1164,7 @@ private struct LevelUpSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") { dismiss() }.foregroundColor(.hologramBlue)
+                    Button("Close") { dismiss() }.foregroundColor(.veilGold)
                 }
             }
         }
@@ -1183,8 +1183,8 @@ private struct CampaignSelectStub: View {
             VStack(spacing: 24) {
                 Image(systemName: "gamecontroller.fill")
                     .font(.system(size: 60))
-                    .foregroundColor(.hologramBlue)
-                    .shadow(color: .hologramBlue.opacity(0.5), radius: 12)
+                    .foregroundColor(.veilGold)
+                    .shadow(color: .veilGold.opacity(0.5), radius: 12)
 
                 Text("Play as \(character.name)")
                     .font(.title2.weight(.bold))
@@ -1202,7 +1202,7 @@ private struct CampaignSelectStub: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }.foregroundColor(.hologramBlue)
+                    Button("Cancel") { dismiss() }.foregroundColor(.veilGold)
                 }
             }
         }
@@ -1223,7 +1223,7 @@ private struct StatTooltipOverlay: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Image(systemName: "function")
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                     Text("Derived Formula")
                         .font(.headline)
                         .foregroundColor(.lightText)
@@ -1235,14 +1235,14 @@ private struct StatTooltipOverlay: View {
                 }
                 Text(formula.description)
                     .font(.system(.subheadline, design: .monospaced))
-                    .foregroundColor(.saberGreen)
+                    .foregroundColor(.veilGlow)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .padding(20)
             .background(Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.hologramBlue.opacity(0.4), lineWidth: 1))
-            .shadow(color: .hologramBlue.opacity(0.2), radius: 20)
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.veilGold.opacity(0.4), lineWidth: 1))
+            .shadow(color: .veilGold.opacity(0.2), radius: 20)
             .padding(.horizontal, 24)
         }
         .transition(.opacity.combined(with: .scale(scale: 0.95)))

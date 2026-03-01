@@ -104,10 +104,10 @@ struct DiceResultCard: View {
             HStack(spacing: 4) {
                 Text("+")
                     .font(.system(size: 24, weight: .bold, design: .monospaced))
-                    .foregroundStyle(Color.hologramBlue)
+                    .foregroundStyle(Color.veilGold)
                 Text("\(result.modifier)")
                     .font(.system(size: 32, weight: .bold, design: .monospaced))
-                    .foregroundStyle(result.modifier >= 0 ? Color.saberGreen : Color.siithRed)
+                    .foregroundStyle(result.modifier >= 0 ? Color.veilGlow : Color.voidRed)
             }
 
             Text("= \(result.total)")
@@ -129,18 +129,18 @@ struct DiceResultCard: View {
     }
 
     private func colorForRoll(_ roll: Int) -> Color {
-        if result.isCrit { return .techOrange }
-        if result.isFail && roll == 1 { return .siithRed }
-        if result.total >= 15 { return .hologramBlue }
-        if result.total <= 8 { return .techOrange }
+        if result.isCrit { return .veilPurple }
+        if result.isFail && roll == 1 { return .voidRed }
+        if result.total >= 15 { return .veilGold }
+        if result.total <= 8 { return .veilPurple }
         return .lightText
     }
 
     private func colorForTotal() -> Color {
-        if result.isCrit { return .techOrange }
-        if result.isFail { return .siithRed }
-        if result.total >= 15 { return .hologramBlue }
-        if result.total <= 8 { return .techOrange }
+        if result.isCrit { return .veilPurple }
+        if result.isFail { return .voidRed }
+        if result.total >= 15 { return .veilGold }
+        if result.total <= 8 { return .veilPurple }
         return .lightText
     }
 }
@@ -225,7 +225,7 @@ struct DiceRollControls: View {
                 .foregroundStyle(Color.spacePrimary)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.hologramBlue)
+                .background(Color.veilGold)
                 .cornerRadius(12)
             }
         }

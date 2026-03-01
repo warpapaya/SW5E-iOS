@@ -23,7 +23,7 @@ struct CampaignListView: View {
                         Color.spacePrimary
                             .ignoresSafeArea()
                             .overlay {
-                                ProgressView().tint(.hologramBlue)
+                                ProgressView().tint(.veilGold)
                             }
                     }
                 }
@@ -126,7 +126,7 @@ struct CampaignListView: View {
         HStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.subheadline)
-                .foregroundStyle(Color.hologramBlue)
+                .foregroundStyle(Color.veilGold)
             Text(title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
@@ -146,7 +146,7 @@ struct CampaignListView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(
                             LinearGradient(
-                                colors: [.hologramBlue, .holoBlueSubtle],
+                                colors: [.veilGold, .veilGoldSubtle],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -171,14 +171,14 @@ struct CampaignListView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.subheadline)
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
             }
             .padding(14)
             .background(Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .overlay(
                 RoundedRectangle(cornerRadius: 14)
-                    .strokeBorder(Color.hologramBlue.opacity(0.35), lineWidth: 1)
+                    .strokeBorder(Color.veilGold.opacity(0.35), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)
@@ -195,7 +195,7 @@ struct CampaignListView: View {
 
                 Text("Generating opening scene...")
                     .font(.headline)
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
 
                 Text("The AI Game Master is building your world")
                     .font(.caption)
@@ -206,7 +206,7 @@ struct CampaignListView: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .strokeBorder(Color.hologramBlue.opacity(0.5), lineWidth: 1)
+                    .strokeBorder(Color.veilGold.opacity(0.5), lineWidth: 1)
             )
         }
     }
@@ -216,7 +216,7 @@ struct CampaignListView: View {
     private func errorBanner(_ message: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundColor(.techOrange)
+                .foregroundColor(.veilPurple)
             Text(message)
                 .font(.caption)
                 .foregroundColor(.lightText)
@@ -225,12 +225,12 @@ struct CampaignListView: View {
                 viewModel.errorMessage = nil
             }
             .font(.caption)
-            .foregroundColor(.hologramBlue)
+            .foregroundColor(.veilGold)
         }
         .padding(12)
         .background(Color.spaceCard)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.siithRed.opacity(0.4), lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.voidRed.opacity(0.4), lineWidth: 1))
         .padding(.horizontal)
         .padding(.bottom, 8)
     }
@@ -255,7 +255,7 @@ struct SavedCampaignCard: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(
                         LinearGradient(
-                            colors: [.hologramBlue.opacity(0.6), .holoBlueSubtle],
+                            colors: [.veilGold.opacity(0.6), .veilGoldSubtle],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -276,10 +276,10 @@ struct SavedCampaignCard: View {
                 HStack(spacing: 6) {
                     Image(systemName: "person.fill")
                         .font(.caption2)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                     Text(summary.characterName)
                         .font(.caption)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                 }
 
                 HStack(spacing: 10) {
@@ -308,7 +308,7 @@ struct SavedCampaignCard: View {
                     .foregroundColor(.spacePrimary)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 8)
-                    .background(Color.hologramBlue)
+                    .background(Color.veilGold)
                     .clipShape(Capsule())
             }
             .buttonStyle(.plain)
@@ -332,14 +332,14 @@ private struct HoloSpinner: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.hologramBlue.opacity(0.2), lineWidth: 4)
+                .stroke(Color.veilGold.opacity(0.2), lineWidth: 4)
                 .frame(width: 56, height: 56)
 
             Circle()
                 .trim(from: 0, to: 0.72)
                 .stroke(
                     LinearGradient(
-                        colors: [.hologramBlue, .hologramBlue.opacity(0)],
+                        colors: [.veilGold, .veilGold.opacity(0)],
                         startPoint: .leading,
                         endPoint: .trailing
                     ),
@@ -350,7 +350,7 @@ private struct HoloSpinner: View {
 
             Image(systemName: "sparkles")
                 .font(.system(size: 18))
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
         }
         .onAppear {
             withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: false)) {

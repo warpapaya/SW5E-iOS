@@ -50,7 +50,7 @@ struct CharacterSidebarDrawer: View {
         HStack(spacing: 12) {
             Text("Character")
                 .font(.holoDisplay)
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
             Spacer()
             Button(action: { withAnimation(.easeOut(duration: 0.2)) { isPresented = false } }) {
                 Image(systemName: "xmark.circle.fill")
@@ -67,7 +67,7 @@ struct CharacterSidebarDrawer: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("STATUS")
                 .font(.dataReadout)
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
                 .padding(.horizontal, 16)
 
             HStack(spacing: 8) {
@@ -75,8 +75,8 @@ struct CharacterSidebarDrawer: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(characterName).font(.bodyText).foregroundColor(.lightText)
                     HStack(spacing: 4) {
-                        Text(characterClass).font(.dataReadout).foregroundColor(.hologramBlue)
-                        Circle().fill(Color.holoBlueSubtle).frame(width: 4, height: 4)
+                        Text(characterClass).font(.dataReadout).foregroundColor(.veilGold)
+                        Circle().fill(Color.veilGoldSubtle).frame(width: 4, height: 4)
                         Text("Level \(level)").font(.dataReadout).foregroundColor(.lightText)
                     }
                 }
@@ -87,7 +87,7 @@ struct CharacterSidebarDrawer: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Hit Points").font(.dataReadout).foregroundColor(.lightText)
                     HStack(spacing: 8) {
-                        Image(systemName: "heart.fill").foregroundColor(.siithRed)
+                        Image(systemName: "heart.fill").foregroundColor(.voidRed)
                         Text("\(characterHP)/\(characterMaxHP)")
                             .font(.system(size: 24, weight: .bold, design: .monospaced))
                             .foregroundColor(.lightText)
@@ -113,7 +113,7 @@ struct CharacterSidebarDrawer: View {
         VStack(alignment: .leading, spacing: 0) {
             Text("POWERS")
                 .font(.dataReadout)
-                .foregroundColor(.hologramBlue)
+                .foregroundColor(.veilGold)
                 .padding(.horizontal, 16)
 
             ScrollViewShowsIndicators {
@@ -201,7 +201,7 @@ struct CharacterSidebarDrawer: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(power.name)
                         .font(.bodyText)
-                        .foregroundColor(isSelected ? Color.hologramBlue : .lightText)
+                        .foregroundColor(isSelected ? Color.veilGold : .lightText)
                     Text(power.description)
                         .font(.dataReadout)
                         .foregroundColor(.mutedText)
@@ -209,7 +209,7 @@ struct CharacterSidebarDrawer: View {
 
                 Spacer()
                 Circle()
-                    .fill(isSelected ? Color.hologramBlue : Color.borderSubtle)
+                    .fill(isSelected ? Color.veilGold : Color.borderSubtle)
                     .frame(width: 12, height: 12)
             }
             .padding(12)
@@ -224,7 +224,7 @@ struct CharacterSidebarDrawer: View {
             Text(item).font(.bodyText).foregroundColor(.lightText)
             Spacer()
             Button(action: { useItem(item) }) {
-                Image(systemName: "checkmark.circle").foregroundColor(.saberGreen)
+                Image(systemName: "checkmark.circle").foregroundColor(.veilGlow)
             }
         }
         .padding(12)
@@ -244,9 +244,9 @@ struct CharacterSidebarDrawer: View {
 
     private func powerColor(for type: PowerType) -> Color {
         switch type {
-        case .force:     return .hologramBlue
-        case .weapon:    return .techOrange
-        case .defensive: return .saberGreen
+        case .force:     return .veilGold
+        case .weapon:    return .veilPurple
+        case .defensive: return .veilGlow
         }
     }
 

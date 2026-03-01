@@ -82,7 +82,7 @@ struct ReviewSaveView: View {
                     .background(
                         vm.draft.isReadyToSave
                         ? LinearGradient(
-                            colors: [.hologramBlue, .saberGreen.opacity(0.9)],
+                            colors: [.veilGold, .veilGlow.opacity(0.9)],
                             startPoint: .leading,
                             endPoint: .trailing
                           )
@@ -93,7 +93,7 @@ struct ReviewSaveView: View {
                           )
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .shadow(color: vm.draft.isReadyToSave ? Color.hologramBlue.opacity(0.35) : .clear, radius: 12, y: 4)
+                    .shadow(color: vm.draft.isReadyToSave ? Color.veilGold.opacity(0.35) : .clear, radius: 12, y: 4)
                 }
                 .disabled(!vm.draft.isReadyToSave || vm.isSaving)
                 .padding(.horizontal, 16)
@@ -112,7 +112,7 @@ private struct CharacterSummaryCard: View {
     let draft: CharacterDraft
 
     var gradient: [Color] {
-        draft.charClass?.gradientColors ?? [.hologramBlue, .holoBlueSubtle]
+        draft.charClass?.gradientColors ?? [.veilGold, .veilGoldSubtle]
     }
 
     var body: some View {
@@ -148,7 +148,7 @@ private struct CharacterSummaryCard: View {
                             if let species = draft.species {
                                 Text(species.name)
                                     .font(.subheadline)
-                                    .foregroundStyle(Color.hologramBlue)
+                                    .foregroundStyle(Color.veilGold)
                             }
                             if draft.species != nil && draft.charClass != nil {
                                 Text("·").foregroundStyle(Color.mutedText)
@@ -185,11 +185,11 @@ private struct CharacterSummaryCard: View {
 
             // Details row
             HStack(spacing: 0) {
-                ReviewInfoCell(label: "Hit Die", value: draft.charClass.map { "d\(String($0.hitDie))" } ?? "—", color: .techOrange)
+                ReviewInfoCell(label: "Hit Die", value: draft.charClass.map { "d\(String($0.hitDie))" } ?? "—", color: .veilPurple)
                 Divider().frame(height: 40).background(Color.borderSubtle)
-                ReviewInfoCell(label: "Primary", value: draft.charClass?.primaryStat.rawValue ?? "—", color: .hologramBlue)
+                ReviewInfoCell(label: "Primary", value: draft.charClass?.primaryStat.rawValue ?? "—", color: .veilGold)
                 Divider().frame(height: 40).background(Color.borderSubtle)
-                ReviewInfoCell(label: "Skills", value: draft.background.map { "\($0.skillGrants.count)" } ?? "0", color: .saberGreen)
+                ReviewInfoCell(label: "Skills", value: draft.background.map { "\($0.skillGrants.count)" } ?? "0", color: .veilGlow)
                 Divider().frame(height: 40).background(Color.borderSubtle)
                 ReviewInfoCell(label: "Powers", value: "\(draft.selectedPowers.count)", color: Color(red: 0.49, green: 0.23, blue: 0.93))
             }
@@ -201,7 +201,7 @@ private struct CharacterSummaryCard: View {
             RoundedRectangle(cornerRadius: 14)
                 .strokeBorder(Color.borderSubtle, lineWidth: 1)
         )
-        .shadow(color: (gradient.first ?? Color.hologramBlue).opacity(0.2), radius: 12, y: 4)
+        .shadow(color: (gradient.first ?? Color.veilGold).opacity(0.2), radius: 12, y: 4)
     }
 }
 
@@ -229,7 +229,7 @@ private struct AbilityScoresSummarySection: View {
     let scores: AbilityScores
 
     var body: some View {
-        ReviewSection(title: "Ability Scores", icon: "chart.bar.fill", color: .hologramBlue) {
+        ReviewSection(title: "Ability Scores", icon: "chart.bar.fill", color: .veilGold) {
             HStack(spacing: 0) {
                 ForEach(AbilityStat.allCases, id: \.self) { stat in
                     let val = scores.value(for: stat)
@@ -243,7 +243,7 @@ private struct AbilityScoresSummarySection: View {
                             .foregroundStyle(Color.lightText)
                         Text(mod >= 0 ? "+\(mod)" : "\(mod)")
                             .font(.caption2.weight(.semibold))
-                            .foregroundStyle(mod >= 0 ? Color.saberGreen : Color.siithRed)
+                            .foregroundStyle(mod >= 0 ? Color.veilGlow : Color.voidRed)
                     }
                     .frame(maxWidth: .infinity)
                     if stat != .charisma {
@@ -278,12 +278,12 @@ private struct PowersSummarySection: View {
                         .font(.caption2.weight(.medium))
                         .foregroundStyle(power.type == "force"
                             ? Color(red: 0.49, green: 0.23, blue: 0.93)
-                            : Color.techOrange)
+                            : Color.veilPurple)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
                         .background((power.type == "force"
                             ? Color(red: 0.49, green: 0.23, blue: 0.93)
-                            : Color.techOrange).opacity(0.15))
+                            : Color.veilPurple).opacity(0.15))
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                 }
                 if power.id != powers.last?.id {
@@ -300,11 +300,11 @@ private struct EquipmentSummarySection: View {
     let equipment: [CBEquipment]
 
     var body: some View {
-        ReviewSection(title: "Starting Equipment", icon: "backpack.fill", color: .techOrange) {
+        ReviewSection(title: "Starting Equipment", icon: "backpack.fill", color: .veilPurple) {
             ForEach(equipment) { item in
                 HStack {
                     Image(systemName: item.typeIcon)
-                        .foregroundStyle(Color.techOrange)
+                        .foregroundStyle(Color.veilPurple)
                         .frame(width: 20)
                     Text(item.name)
                         .font(.subheadline)
@@ -344,22 +344,22 @@ private struct ReviewWarningBanner: View {
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(Color.techOrange)
+                .foregroundStyle(Color.veilPurple)
             VStack(alignment: .leading, spacing: 2) {
                 Text("Missing required fields")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.techOrange)
+                    .foregroundStyle(Color.veilPurple)
                 Text("Make sure you have a name, species, class, and background.")
                     .font(.caption)
                     .foregroundStyle(Color.mutedText)
             }
         }
         .padding(12)
-        .background(Color.techOrange.opacity(0.08))
+        .background(Color.veilPurple.opacity(0.08))
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.techOrange.opacity(0.3), lineWidth: 1)
+                .strokeBorder(Color.veilPurple.opacity(0.3), lineWidth: 1)
         )
     }
 }

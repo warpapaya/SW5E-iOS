@@ -6,7 +6,7 @@ extension Font {
     // MARK: - Title Typography
 
     /// Main title font — inspired by Echoveil opening crawl
-    static var starWarsTitle: Font {
+    static var echoveilTitle: Font {
         .largeTitle.weight(.bold)
     }
 
@@ -41,7 +41,7 @@ extension Font {
 #Preview("Typography") {
     VStack(alignment: .leading, spacing: 24) {
         Text("Echoveil Title")
-            .font(.starWarsTitle)
+            .font(.echoveilTitle)
             .tracking(2)
 
         Text("Hologram Display")

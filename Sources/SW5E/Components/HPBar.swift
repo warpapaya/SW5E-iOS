@@ -28,11 +28,11 @@ struct HPBar: View {
     var barColor: Color {
         switch hpPercentage {
         case 0..<0.25:
-            return .siithRed // Critical - red
+            return .voidRed // Critical - red
         case 0.25..<0.5:
-            return .techOrange // Warning - orange
+            return .veilPurple // Warning - orange
         default:
-            return .saberGreen // Safe - green
+            return .veilGlow // Safe - green
         }
     }
     

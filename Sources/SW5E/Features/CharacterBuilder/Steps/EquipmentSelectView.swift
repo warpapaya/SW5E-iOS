@@ -17,9 +17,9 @@ struct EquipmentSelectView: View {
     }
 
     private var encumbranceColor: Color {
-        if encumbranceRatio < 0.5 { return .saberGreen }
-        if encumbranceRatio < 0.75 { return .techOrange }
-        return .siithRed
+        if encumbranceRatio < 0.5 { return .veilGlow }
+        if encumbranceRatio < 0.75 { return .veilPurple }
+        return .voidRed
     }
 
     // Group equipment by type
@@ -161,10 +161,10 @@ private struct EquipmentSection: View {
 
     var sectionColor: Color {
         switch type {
-        case "weapon":     return .siithRed
-        case "armor":      return .hologramBlue
-        case "gear":       return .techOrange
-        case "consumable": return .saberGreen
+        case "weapon":     return .voidRed
+        case "armor":      return .veilGold
+        case "gear":       return .veilPurple
+        case "consumable": return .veilGlow
         default:           return .mutedText
         }
     }
@@ -240,7 +240,7 @@ private struct EquipmentRow: View {
                 if item.isDefault {
                     Text("Default gear")
                         .font(.system(size: 9, weight: .medium))
-                        .foregroundStyle(Color.saberGreen.opacity(0.7))
+                        .foregroundStyle(Color.veilGlow.opacity(0.7))
                 }
             }
         }

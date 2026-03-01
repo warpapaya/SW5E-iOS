@@ -87,25 +87,25 @@ extension View {
 
         Button("Button Tap (Light)") { HapticsManager.shared.buttonTap() }
             .padding()
-            .background(Color.hologramBlue)
+            .background(Color.veilGold)
             .foregroundColor(Color.spacePrimary)
             .cornerRadius(8)
 
         Button("Character Selection (Medium)") { HapticsManager.shared.characterSelection() }
             .padding()
-            .background(Color.techOrange)
+            .background(Color.veilPurple)
             .foregroundColor(Color.spacePrimary)
             .cornerRadius(8)
 
         Button("Critical Hit") { HapticsManager.shared.criticalHitSuccess() }
             .padding()
-            .background(Color.saberGreen)
+            .background(Color.veilGlow)
             .foregroundColor(Color.spacePrimary)
             .cornerRadius(8)
 
         Button("Critical Fail") { HapticsManager.shared.criticalFailError() }
             .padding()
-            .background(Color.siithRed)
+            .background(Color.voidRed)
             .foregroundColor(Color.lightText)
             .cornerRadius(8)
     }

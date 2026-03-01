@@ -63,9 +63,9 @@ private struct PointsRemainingBanner: View {
     let remaining: Int
 
     var bannerColor: Color {
-        if remaining < 0  { return .siithRed }
-        if remaining <= 5 { return .techOrange }
-        return .hologramBlue
+        if remaining < 0  { return .voidRed }
+        if remaining <= 5 { return .veilPurple }
+        return .veilGold
     }
 
     var body: some View {
@@ -125,27 +125,27 @@ private struct AbilityStatControl: View {
             HStack(spacing: 3) {
                 Text(stat.rawValue)
                     .font(.caption.weight(.bold))
-                    .foregroundStyle(isPrimary ? Color.techOrange : Color.mutedText)
+                    .foregroundStyle(isPrimary ? Color.veilPurple : Color.mutedText)
                 if isPrimary {
                     Image(systemName: "star.fill")
                         .font(.system(size: 7))
-                        .foregroundStyle(Color.techOrange)
+                        .foregroundStyle(Color.veilPurple)
                 }
             }
 
             // Score display
             Text("\(score)")
                 .font(.system(size: 28, weight: .bold, design: .monospaced))
-                .foregroundStyle(isPrimary ? Color.techOrange : Color.lightText)
+                .foregroundStyle(isPrimary ? Color.veilPurple : Color.lightText)
                 .animation(.spring(response: 0.2), value: score)
 
             // Modifier
             Text(modString)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(modifier >= 0 ? Color.saberGreen : Color.siithRed)
+                .foregroundStyle(modifier >= 0 ? Color.veilGlow : Color.voidRed)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
-                .background((modifier >= 0 ? Color.saberGreen : Color.siithRed).opacity(0.15))
+                .background((modifier >= 0 ? Color.veilGlow : Color.voidRed).opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 5))
 
             // +/- buttons
@@ -191,11 +191,11 @@ private struct AbilityStatControl: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 14)
                         .strokeBorder(
-                            isPrimary ? Color.techOrange.opacity(0.5) : Color.borderSubtle,
+                            isPrimary ? Color.veilPurple.opacity(0.5) : Color.borderSubtle,
                             lineWidth: isPrimary ? 1.5 : 1
                         )
                 )
-                .shadow(color: isPrimary ? Color.techOrange.opacity(0.1) : .clear, radius: 6)
+                .shadow(color: isPrimary ? Color.veilPurple.opacity(0.1) : .clear, radius: 6)
         )
         .animation(.spring(response: 0.2, dampingFraction: 0.7), value: score)
     }
@@ -230,7 +230,7 @@ private struct StatBlockSummaryView: View {
                             .foregroundStyle(Color.lightText)
                         Text(mod >= 0 ? "+\(mod)" : "\(mod)")
                             .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(mod >= 0 ? Color.saberGreen : Color.siithRed)
+                            .foregroundStyle(mod >= 0 ? Color.veilGlow : Color.voidRed)
                     }
                     .frame(maxWidth: .infinity)
                     if stat != .charisma {
@@ -257,33 +257,33 @@ private struct RacialBonusNoteView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: "info.circle.fill")
-                .foregroundStyle(Color.hologramBlue)
+                .foregroundStyle(Color.veilGold)
                 .padding(.top, 1)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(species.name) Racial Bonuses (applied at save)")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.hologramBlue)
+                    .foregroundStyle(Color.veilGold)
 
                 HStack(spacing: 8) {
                     ForEach(Array(species.abilityBonuses), id: \.key) { key, val in
                         Text("+\(val) \(key.uppercased())")
                             .font(.caption.weight(.medium))
-                            .foregroundStyle(Color.saberGreen)
+                            .foregroundStyle(Color.veilGlow)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(Color.saberGreen.opacity(0.15))
+                            .background(Color.veilGlow.opacity(0.15))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
                 }
             }
         }
         .padding(12)
-        .background(Color.hologramBlue.opacity(0.08))
+        .background(Color.veilGold.opacity(0.08))
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.hologramBlue.opacity(0.3), lineWidth: 1)
+                .strokeBorder(Color.veilGold.opacity(0.3), lineWidth: 1)
         )
     }
 }

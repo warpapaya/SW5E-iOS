@@ -35,7 +35,7 @@ struct DetailsFormView: View {
                         label: "Character Name",
                         systemImage: "person.fill",
                         isRequired: true,
-                        accentColor: .hologramBlue
+                        accentColor: .veilGold
                     ) {
                         TextField("Enter character name…", text: $vm.draft.name)
                             .focused($focusedField, equals: .name)
@@ -48,7 +48,7 @@ struct DetailsFormView: View {
                     if !vm.draft.name.isEmpty && nameIsEmpty {
                         Label("Name cannot be blank", systemImage: "exclamationmark.triangle.fill")
                             .font(.caption)
-                            .foregroundStyle(Color.siithRed)
+                            .foregroundStyle(Color.voidRed)
                             .padding(.horizontal, 20)
                             .padding(.top, -10)
                     }
@@ -107,7 +107,7 @@ struct DetailsFormView: View {
                                     if vm.isGeneratingBackstory {
                                         ProgressView()
                                             .scaleEffect(0.7)
-                                            .tint(Color.hologramBlue)
+                                            .tint(Color.veilGold)
                                     } else {
                                         Image(systemName: "sparkles")
                                             .font(.caption.weight(.semibold))
@@ -115,14 +115,14 @@ struct DetailsFormView: View {
                                     Text(vm.isGeneratingBackstory ? "Generating…" : "Generate")
                                         .font(.caption.weight(.semibold))
                                 }
-                                .foregroundStyle(Color.hologramBlue)
+                                .foregroundStyle(Color.veilGold)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
-                                .background(Color.hologramBlue.opacity(0.12))
+                                .background(Color.veilGold.opacity(0.12))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 8)
-                                        .strokeBorder(Color.hologramBlue.opacity(0.3), lineWidth: 1)
+                                        .strokeBorder(Color.veilGold.opacity(0.3), lineWidth: 1)
                                 )
                             }
                             .disabled(vm.isGeneratingBackstory || nameIsEmpty)
@@ -152,7 +152,7 @@ struct DetailsFormView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(
-                                    focusedField == .backstory ? Color.hologramBlue.opacity(0.5) : Color.borderSubtle,
+                                    focusedField == .backstory ? Color.veilGold.opacity(0.5) : Color.borderSubtle,
                                     lineWidth: 1
                                 )
                         )
@@ -203,7 +203,7 @@ private struct DetailsField<Content: View>: View {
                 if isRequired {
                     Text("*")
                         .font(.caption.weight(.bold))
-                        .foregroundStyle(Color.siithRed)
+                        .foregroundStyle(Color.voidRed)
                 }
             }
 

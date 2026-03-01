@@ -368,10 +368,10 @@ struct CombatView: View {
     private var combatHeader: some View {
         HStack(spacing: 12) {
             Image(systemName: "bolt.shield.fill")
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
             Text("COMBAT")
                 .font(.holoDisplay)
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
                 .tracking(3)
 
             Spacer()
@@ -379,10 +379,10 @@ struct CombatView: View {
             HStack(spacing: 6) {
                 Image(systemName: "timer")
                     .font(.system(size: 12))
-                    .foregroundColor(.techOrange)
+                    .foregroundColor(.veilPurple)
                 Text("Round \(vm.currentTurnIndex / max(vm.participants.count, 1) + 1)")
                     .font(.dataReadout)
-                    .foregroundColor(.techOrange)
+                    .foregroundColor(.veilPurple)
             }
 
             Button(action: onDismiss) {
@@ -402,9 +402,9 @@ struct CombatView: View {
         HStack(spacing: 0) {
             // Animated orange left border for current turn
             RoundedRectangle(cornerRadius: 3)
-                .fill(isCurrent ? Color.techOrange : Color.clear)
+                .fill(isCurrent ? Color.veilPurple : Color.clear)
                 .frame(width: 4)
-                .shadow(color: isCurrent ? Color.techOrange.opacity(pulseActive ? 0.9 : 0.3) : .clear,
+                .shadow(color: isCurrent ? Color.veilPurple.opacity(pulseActive ? 0.9 : 0.3) : .clear,
                         radius: isCurrent ? 6 : 0)
                 .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: pulseActive)
                 .padding(.trailing, 10)
@@ -414,15 +414,15 @@ struct CombatView: View {
                     Text(p.name)
                         .font(.bodyText)
                         .fontWeight(isCurrent ? .semibold : .regular)
-                        .foregroundColor(isCurrent ? .hologramBlue : .lightText)
+                        .foregroundColor(isCurrent ? .veilGold : .lightText)
 
                     if p.isPlayer {
                         Text("YOU")
                             .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(.hologramBlue)
+                            .foregroundColor(.veilGold)
                             .padding(.horizontal, 5)
                             .padding(.vertical, 2)
-                            .background(Color.hologramBlue.opacity(0.15))
+                            .background(Color.veilGold.opacity(0.15))
                             .clipShape(RoundedRectangle(cornerRadius: 3))
                     }
 
@@ -448,10 +448,10 @@ struct CombatView: View {
                             ForEach(p.conditions, id: \.self) { cond in
                                 Text(cond)
                                     .font(.system(size: 10, weight: .medium))
-                                    .foregroundColor(.siithRed)
+                                    .foregroundColor(.voidRed)
                                     .padding(.horizontal, 5)
                                     .padding(.vertical, 2)
-                                    .background(Color.siithRed.opacity(0.12))
+                                    .background(Color.voidRed.opacity(0.12))
                                     .clipShape(RoundedRectangle(cornerRadius: 4))
                             }
                         }
@@ -465,7 +465,7 @@ struct CombatView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(
-                    isCurrent ? Color.techOrange.opacity(0.6) : Color.borderSubtle,
+                    isCurrent ? Color.veilPurple.opacity(0.6) : Color.borderSubtle,
                     lineWidth: isCurrent ? 1.5 : 0.5
                 )
         )
@@ -500,20 +500,20 @@ struct CombatView: View {
             VStack(spacing: 5) {
                 Image(systemName: action.icon)
                     .font(.system(size: 18))
-                    .foregroundColor(isEndTurn ? .hologramBlue : .lightText)
+                    .foregroundColor(isEndTurn ? .veilGold : .lightText)
                 Text(action.label)
                     .font(.dataReadout)
-                    .foregroundColor(isEndTurn ? .hologramBlue : .lightText)
+                    .foregroundColor(isEndTurn ? .veilGold : .lightText)
                     .lineLimit(1)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 9)
-            .background(isEndTurn ? Color.holoBlueSubtle : Color.spaceCard)
+            .background(isEndTurn ? Color.veilGoldSubtle : Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .strokeBorder(
-                        isEndTurn ? Color.hologramBlue : Color.holoBlueSubtle,
+                        isEndTurn ? Color.veilGold : Color.veilGoldSubtle,
                         lineWidth: 1
                     )
             )
@@ -565,7 +565,7 @@ struct CombatView: View {
     @ViewBuilder
     private func targetRow(_ p: CombatViewModel.CombatParticipant) -> some View {
         let hpPct = Double(p.hp) / Double(max(p.maxHp, 1))
-        let hpColor: Color = hpPct > 0.6 ? .saberGreen : (hpPct > 0.3 ? .techOrange : .siithRed)
+        let hpColor: Color = hpPct > 0.6 ? .veilGlow : (hpPct > 0.3 ? .veilPurple : .voidRed)
 
         Button { vm.selectedTarget(p) } label: {
             HStack(spacing: 12) {
@@ -587,14 +587,14 @@ struct CombatView: View {
                         .foregroundColor(.mutedText)
                 }
                 Image(systemName: "chevron.right.circle.fill")
-                    .foregroundColor(.siithRed.opacity(0.7))
+                    .foregroundColor(.voidRed.opacity(0.7))
             }
             .padding(12)
             .background(Color.spaceCard)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.siithRed.opacity(0.4), lineWidth: 1)
+                    .strokeBorder(Color.voidRed.opacity(0.4), lineWidth: 1)
             )
         }
     }
@@ -621,8 +621,8 @@ struct CombatView: View {
                     // Hit / Miss banner
                     Text(result.hit ? "HIT" : "MISS")
                         .font(.system(size: 52, weight: .black, design: .monospaced))
-                        .foregroundColor(result.hit ? .hologramBlue : .siithRed)
-                        .shadow(color: result.hit ? .hologramBlue.opacity(0.6) : .siithRed.opacity(0.6), radius: 16)
+                        .foregroundColor(result.hit ? .veilGold : .voidRed)
+                        .shadow(color: result.hit ? .veilGold.opacity(0.6) : .voidRed.opacity(0.6), radius: 16)
 
                     // Damage roll (if hit)
                     if result.hit, let dmg = result.damage {
@@ -633,8 +633,8 @@ struct CombatView: View {
                                 .tracking(2)
                             Text("\(dmg)")
                                 .font(.system(size: 44, weight: .bold, design: .monospaced))
-                                .foregroundColor(.techOrange)
-                                .shadow(color: Color.techOrange.opacity(0.5), radius: 10)
+                                .foregroundColor(.veilPurple)
+                                .shadow(color: Color.veilPurple.opacity(0.5), radius: 10)
                             if let dtype = result.damageType {
                                 Text(dtype.uppercased())
                                     .font(.dataReadout)
@@ -651,10 +651,10 @@ struct CombatView: View {
                     Button("Continue") { vm.showDiceOverlay = false }
                         .font(.bodyText)
                         .fontWeight(.semibold)
-                        .foregroundColor(.hologramBlue)
+                        .foregroundColor(.veilGold)
                         .padding(.horizontal, 32)
                         .padding(.vertical, 12)
-                        .background(Color.holoBlueSubtle)
+                        .background(Color.veilGoldSubtle)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.bottom, 32)
                 }
@@ -669,7 +669,7 @@ struct CombatView: View {
     private func enemyNarrationBar(text: String) -> some View {
         HStack(spacing: 10) {
             Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
-                .foregroundColor(.siithRed)
+                .foregroundColor(.voidRed)
             Text(text)
                 .font(.dataReadout)
                 .foregroundColor(.lightText)
@@ -680,13 +680,13 @@ struct CombatView: View {
         .padding(.vertical, 10)
         .background(
             Color.spaceCard
-                .overlay(Color.siithRed.opacity(0.08))
+                .overlay(Color.voidRed.opacity(0.08))
         )
         .clipShape(RoundedRectangle(cornerRadius: 0))
         .overlay(
             Rectangle()
                 .frame(height: 2)
-                .foregroundColor(.siithRed.opacity(0.6)),
+                .foregroundColor(.voidRed.opacity(0.6)),
             alignment: .bottom
         )
     }
@@ -698,7 +698,7 @@ struct CombatView: View {
             HStack {
                 Text("COMBAT LOG")
                     .font(.dataReadout)
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                     .tracking(2)
                 Spacer()
             }
@@ -732,17 +732,17 @@ struct CombatView: View {
                 // Icon
                 Image(systemName: vm.victory ? "star.circle.fill" : "xmark.octagon.fill")
                     .font(.system(size: 72))
-                    .foregroundColor(vm.victory ? .techOrange : .siithRed)
-                    .shadow(color: vm.victory ? .techOrange.opacity(0.7) : .siithRed.opacity(0.6), radius: 20)
+                    .foregroundColor(vm.victory ? .veilPurple : .voidRed)
+                    .shadow(color: vm.victory ? .veilPurple.opacity(0.7) : .voidRed.opacity(0.6), radius: 20)
                     .scaleEffect(pulseActive ? 1.08 : 1.0)
                     .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: pulseActive)
 
                 // Headline
                 Text(vm.victory ? "VICTORY" : "DEFEATED")
                     .font(.system(size: 44, weight: .black, design: .monospaced))
-                    .foregroundColor(vm.victory ? .techOrange : .siithRed)
+                    .foregroundColor(vm.victory ? .veilPurple : .voidRed)
                     .tracking(6)
-                    .shadow(color: vm.victory ? .techOrange.opacity(0.5) : .siithRed.opacity(0.4), radius: 12)
+                    .shadow(color: vm.victory ? .veilPurple.opacity(0.5) : .voidRed.opacity(0.4), radius: 12)
 
                 // XP award (victory only)
                 if vm.victory && vm.xpAwarded > 0 {
@@ -753,14 +753,14 @@ struct CombatView: View {
                             .tracking(2)
                         Text("+\(vm.xpAwarded) XP")
                             .font(.system(size: 32, weight: .bold, design: .monospaced))
-                            .foregroundColor(.saberGreen)
+                            .foregroundColor(.veilGlow)
                     }
                     .padding(16)
                     .background(Color.spaceCard)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(Color.saberGreen.opacity(0.4), lineWidth: 1)
+                            .strokeBorder(Color.veilGlow.opacity(0.4), lineWidth: 1)
                     )
                 }
 
@@ -774,14 +774,14 @@ struct CombatView: View {
                             .fontWeight(.semibold)
                         Image(systemName: "chevron.right")
                     }
-                    .foregroundColor(.hologramBlue)
+                    .foregroundColor(.veilGold)
                     .padding(.horizontal, 36)
                     .padding(.vertical, 14)
-                    .background(Color.holoBlueSubtle)
+                    .background(Color.veilGoldSubtle)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(Color.hologramBlue, lineWidth: 1)
+                            .strokeBorder(Color.veilGold, lineWidth: 1)
                     )
                 }
             }
