@@ -10,10 +10,6 @@ struct ContentView: View {
         case characters, play, settings
     }
 
-    init() {
-        _appState = EnvironmentObject() // Use existing shared instance
-    }
-
     var body: some View {
         TabView(selection: $selectedTab) {
 

@@ -285,6 +285,7 @@ final class CharacterSheetViewModel: ObservableObject {
 struct CharacterSheetView: View {
 
     @StateObject private var vm: CharacterSheetViewModel
+    @EnvironmentObject private var appState: AppState
     @State private var selectedTab: SheetTab = .skills
     @State private var showingHPEditor    = false
     @State private var showingLevelUp     = false
@@ -344,7 +345,7 @@ struct CharacterSheetView: View {
         .sheet(isPresented: $showingCampaignPick) {
             CampaignSelectNavigation(
                 character: vm.character,
-                switchToPlayTab: appState.switchToPlayTabCallback
+                onSwitchToPlayTab: appState.switchToPlayTabCallback
             )
             .presentationDetents([.large])
         }
@@ -1179,8 +1180,8 @@ private struct LevelUpSheet: View {
 /// When clicking "Play" on CharacterSheetView, show a confirmation sheet that navigates to Play tab.
 struct CampaignSelectNavigation: View {
     let character: Character
+    var onSwitchToPlayTab: (() -> Void)?
     @Environment(\.dismiss) private var dismiss
-    @Binding var switchToPlayTab: (() -> Void)?
 
     var body: some View {
         NavigationStack {
@@ -1201,7 +1202,7 @@ struct CampaignSelectNavigation: View {
 
                 Button {
                     dismiss()
-                    switchToPlayTab?()
+                    onSwitchToPlayTab?()
                 } label: {
                     Label("Go to Play", systemImage: "play.circle.fill")
                         .font(.headline.weight(.semibold))
@@ -1322,6 +1323,7 @@ private struct EmptyTabPlaceholder: View {
     NavigationStack {
         CharacterSheetView(character: .default)
     }
+    .environmentObject(AppState.shared)
     .preferredColorScheme(.dark)
 }
 

@@ -116,16 +116,19 @@ struct CharacterListView: View {
                             characterToDelete = character
                         }
                     )
+                    // Swipe-to-delete — shows native red trash button on trailing edge.
+                    // Full-swipe triggers delete immediately; half-swipe shows button then confirms via alert.
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            characterToDelete = character
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-        }
-        .onDelete { indexSet in
-            for index in indexSet {
-                let character = filteredCharacters[index]
-                Task { await viewModel.deleteCharacter(character.id) }
-            }
         }
     }
 
