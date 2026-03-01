@@ -26,7 +26,7 @@ struct CBSpecies: Identifiable, Codable, Equatable {
         CBSpecies(id: "vrask", name: "Vrask",
                   traits: ["Powerful Build", "Natural Claws", "Fury"],
                   abilityBonuses: ["str": 2, "con": 1],
-                  description: "Powerful beings from the world of Vakhar, Vrask are fierce and intensely loyal."),
+                  description: "Vrask are large, powerful beings covered in banded grey-silver scales. Deep honor culture, fierce warriors, fiercely loyal to those who earn their respect."),
         CBSpecies(id: "mirialan", name: "Mirialan",
                   traits: ["Veilborn", "Focused", "Acrobatic"],
                   abilityBonuses: ["wis": 2, "dex": 1],
@@ -38,15 +38,15 @@ struct CBSpecies: Identifiable, Codable, Equatable {
         CBSpecies(id: "rodian", name: "Rodian",
                   traits: ["Natural Hunter", "Tracker", "Multi-Directional Eyes"],
                   abilityBonuses: ["dex": 2],
-                  description: "Rodians are instinctive hunters from Rodia, prized as bounty hunters across the galaxy."),
+                  description: "Drifborn are those raised on stations and deep-space vessels — culturally stateless, hyper-adaptable, and trusted nowhere and everywhere."),
         CBSpecies(id: "bothan", name: "Bothan",
                   traits: ["Natural Spy", "Intuitive", "Cunning"],
                   abilityBonuses: ["int": 1, "cha": 1],
-                  description: "Bothans are short-furred beings infamous for their spy networks and political maneuvering."),
+                  description: "Keth are four-armed, coral-skinned beings known for their methodical thinking and engineering mastery."),
         CBSpecies(id: "togruta", name: "Togruta",
                   traits: ["Pack Tactics", "Spatial Awareness", "Montrals"],
                   abilityBonuses: ["wis": 1, "cha": 1],
-                  description: "Togrutas are communal hunters with hollow montrals that sense space ultrasonically."),
+                  description: "Sylari are slender beings with bioluminescent skin patterns and heightened Veil perception — rare Tidecallers, often outsiders."),
     ]
 }
 

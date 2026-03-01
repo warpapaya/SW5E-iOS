@@ -77,13 +77,49 @@ class CampaignStartViewModel: ObservableObject {
         aiBackend   = status.message
     }
 
+    // MARK: - Character Sync
+
+    /// Ensures a character exists on the server by posting it (upsert).
+    /// Returns success for 200/201/409; only throws network errors.
+    private func ensureCharacterSynced(_ character: Character) async {
+        let url = URL(string: "\(baseURL)/api/characters")!
+        var req = URLRequest(url: url)
+        req.httpMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.timeoutInterval = 10
+        req.httpBody = try? JSONEncoder().encode(character)
+
+        do {
+            let (_, response) = try await URLSession.shared.data(for: req)
+            // 200 (already exists), 201 (created), or 409 (conflict) are all acceptable — don't throw
+            guard let http = response as? HTTPURLResponse else { return }
+            if !(200...201).contains(http.statusCode) && http.statusCode != 409 {
+                // Network error already thrown by data() call; ignore other HTTP errors
+            }
+        } catch {
+            // Best-effort sync — don't block campaign start
+            print("Character sync failed: \(error.localizedDescription)")
+        }
+    }
+
+    /// Finds a character in the local array by ID.
+    private func findCharacter(by id: String) -> Character? {
+        characters.first { $0.id == id }
+    }
+
     // MARK: - Start New Campaign
 
     /// POST /api/game/start — shows animated loading, navigates on success.
+    /// Before starting, attempts to sync the character to the server (upsert).
     func startCampaign(templateId: String?, characterId: String) async {
         guard !isStarting else { return }
         isStarting = true
         errorMessage = nil
+
+        // Best-effort character sync before campaign start
+        if let character = findCharacter(by: characterId) {
+            await ensureCharacterSynced(character)
+        }
 
         let body = CampaignStartRequest(
             templateId: templateId,

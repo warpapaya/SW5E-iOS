@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Root Tab View
 
 struct ContentView: View {
+    @EnvironmentObject var appState: AppState
     @State private var selectedTab: AppTab = .play
 
     enum AppTab: Hashable {
@@ -43,4 +44,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AppState.shared)
 }

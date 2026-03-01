@@ -1171,12 +1171,13 @@ private struct LevelUpSheet: View {
     }
 }
 
-// MARK: - Campaign Select Stub
+// MARK: - Campaign Select Navigation
 
-/// Stub shown until CampaignSelectView is implemented; navigates with pre-loaded character
-private struct CampaignSelectStub: View {
+/// When clicking "Play" on CharacterSheetView, show a confirmation sheet that navigates to Play tab.
+struct CampaignSelectNavigation: View {
     let character: Character
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var appState = AppState.shared
 
     var body: some View {
         NavigationStack {
@@ -1190,15 +1191,27 @@ private struct CampaignSelectStub: View {
                     .font(.title2.weight(.bold))
                     .foregroundColor(.lightText)
 
-                Text("Select or start a campaign\n(Campaign select view coming soon)")
+                Text("Navigate to the Play tab to select a campaign template")
                     .font(.subheadline)
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
+
+                Button {
+                    dismiss()
+                    appState.switchToPlayTab()
+                } label: {
+                    Label("Go to Play", systemImage: "play.circle.fill")
+                        .font(.headline.weight(.semibold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 14)
+                        .background(Capsule().fill(Color.veilGold))
+                }
             }
             .padding(32)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.spacePrimary)
-            .navigationTitle("Choose Campaign")
+            .navigationTitle("Play as \(character.name)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -1207,6 +1220,28 @@ private struct CampaignSelectStub: View {
             }
         }
     }
+}
+
+// MARK: - App State (shared navigation state)
+
+class AppState: ObservableObject {
+    static let shared = AppState()
+    
+    @Published var selectedTab: ContentView.AppTab?
+    
+    func switchToPlayTab() {
+        DispatchQueue.main.async {
+            if let tab = self.selectedTab, tab == .play {
+                // Already on play tab, do nothing
+                return
+            }
+            self.selectedTab = .play
+        }
+    }
+}
+
+extension AppState: Identifiable {
+    var id: String { "app-state" }
 }
 
 // MARK: - Stat Tooltip Overlay

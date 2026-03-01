@@ -175,7 +175,7 @@ struct CharacterSidebarDrawer: View {
         ]
     }
 
-    private var quickInventoryItems: [String] { ["Medpac (2)", "Grenade", "Comlink", "Rations"] }
+    private var quickInventoryItems: [String] { ["Medpac (2)", "Grenade", "Veil-comm", "Rations"] }
 
     // MARK: - Helper Views
 
