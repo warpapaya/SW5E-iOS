@@ -17,7 +17,7 @@ class APIService: ObservableObject {
     /// Stable per-device identifier used to scope characters and campaigns.
     /// Generated once on first launch and stored in UserDefaults.
     static var deviceId: String = {
-        let key = "sw5e_device_id"
+        let key = "echoveil_device_id"
         if let saved = UserDefaults.standard.string(forKey: key) { return saved }
         // Prefer identifierForVendor; fall back to a random UUID
         let id = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString

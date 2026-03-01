@@ -69,7 +69,7 @@ final class CharacterBuilderViewModel: ObservableObject {
 
     // MARK: - Step Navigation
 
-    /// Steps that require Force/Tech classes are only shown when relevant
+    /// Steps that require Veil/Tech classes are only shown when relevant
     var visibleSteps: [BuilderStep] {
         if draft.charClass?.isForceUser == true || draft.charClass?.isTechUser == true {
             return BuilderStep.allCases

@@ -14,13 +14,13 @@ class SoundManager: NSObject, ObservableObject {
 
     @Published var isMuted: Bool = false {
         didSet {
-            UserDefaults.standard.set(isMuted, forKey: "sw5e_sound_muted")
+            UserDefaults.standard.set(isMuted, forKey: "echoveil_sound_muted")
         }
     }
 
     @Published var volume: Float = 0.75 {
         didSet {
-            UserDefaults.standard.set(volume, forKey: "sw5e_sound_volume")
+            UserDefaults.standard.set(volume, forKey: "echoveil_sound_volume")
         }
     }
 
@@ -28,8 +28,8 @@ class SoundManager: NSObject, ObservableObject {
 
     override init() {
         super.init()
-        isMuted = UserDefaults.standard.bool(forKey: "sw5e_sound_muted")
-        let stored = UserDefaults.standard.double(forKey: "sw5e_sound_volume")
+        isMuted = UserDefaults.standard.bool(forKey: "echoveil_sound_muted")
+        let stored = UserDefaults.standard.double(forKey: "echoveil_sound_volume")
         volume = stored > 0 ? Float(stored) : 0.75
     }
 

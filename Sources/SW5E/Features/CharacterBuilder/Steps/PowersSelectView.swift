@@ -219,7 +219,7 @@ private struct PowerRow: View {
 
 // MARK: - Preview
 
-#Preview("Powers Select — Force") {
+#Preview("Powers Select — Veil") {
     let vm = CharacterBuilderViewModel()
     vm.draft.charClass = CBClass.samples.first(where: { $0.isForceUser })
     vm.availablePowers = CBPower.forceSamples

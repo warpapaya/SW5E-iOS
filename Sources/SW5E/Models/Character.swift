@@ -128,7 +128,7 @@ enum CharacterClassColor: String, CaseIterable {
     }
 }
 
-// MARK: - Force User Detection
+// MARK: - Veilborn Detection
 
 // MARK: - Demo Data (offline / first-run fallback)
 
@@ -178,7 +178,7 @@ extension Character {
         // Base dexterity-based bonus
         let baseDexMod = (charClass == "Rogue" || charClass == "Smuggler") ? 4 : 2
         
-        // Force users get +1 bonus to initiative (enhanced reflexes)
+        // Veilborn users get +1 bonus to initiative (enhanced reflexes)
         return isForceUser ? baseDexMod + 1 : baseDexMod
     }
 }

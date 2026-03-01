@@ -111,7 +111,7 @@ private struct ClassCard: View {
                             icon: "chart.bar.fill"
                         )
 
-                        // Force/Tech badge
+                        // Veil/Tech badge
                         if charClass.isForceUser {
                             ClassTagView(label: "Force", color: Color(red: 0.49, green: 0.23, blue: 0.93), icon: "sparkles")
                         } else if charClass.isTechUser {

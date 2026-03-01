@@ -257,9 +257,9 @@ final class CharacterSheetViewModel: ObservableObject {
         buildSkills()
 
         powers = [
-            CharacterPower(name: "Force Push",    level: 1, castingTime: "1 action", duration: "Instantaneous", powerType: "force", description: "Push a target 10 ft away."),
-            CharacterPower(name: "Sense Force",   level: 0, castingTime: "1 action", duration: "Concentration, up to 10 min", powerType: "force", description: "Sense presences strong in the Force."),
-            CharacterPower(name: "Force Barrier",  level: 2, castingTime: "1 reaction", duration: "1 round", powerType: "force", description: "Add +5 to AC against one attack."),
+            CharacterPower(name: "Force Push",    level: 1, castingTime: "1 action", duration: "Instantaneous", powerType: "veil", description: "Push a target 10 ft away."),
+            CharacterPower(name: "Sense Veil",   level: 0, castingTime: "1 action", duration: "Concentration, up to 10 min", powerType: "veil", description: "Sense presences strong in the Veil."),
+            CharacterPower(name: "Force Barrier",  level: 2, castingTime: "1 reaction", duration: "1 round", powerType: "veil", description: "Add +5 to AC against one attack."),
         ]
 
         equipment = [
@@ -270,7 +270,7 @@ final class CharacterSheetViewModel: ObservableObject {
         ]
 
         features = [
-            CharacterFeature(name: "Forcecasting",          source: "class",      description: "Use the Force to cast powers. Force Points equal to your level × WIS modifier."),
+            CharacterFeature(name: "Veilcasting",          source: "class",      description: "Channel the Veil to cast powers. Veil Points equal to your level × WIS modifier."),
             CharacterFeature(name: "Combat Superiority",    source: "class",      description: "Gain 4 superiority dice (d8) for maneuvers per short rest."),
             CharacterFeature(name: "Scholarly Background",  source: "background", description: "Proficiency in History and Lore. Speak two extra languages."),
             CharacterFeature(name: "Human Versatility",     source: "species",    description: "+1 to any two ability scores. Gain proficiency in one additional skill."),

@@ -340,17 +340,17 @@ struct SettingsView: View {
                 Text("⚔️")
             }
 
-            Link(destination: URL(string: "https://github.com/petieclark/sw5e-ios")!) {
+            Link(destination: URL(string: "https://github.com/warpapaya/SW5E-iOS")!) {
                 Label("Source on GitHub", systemImage: "link")
                     .foregroundColor(.hologramBlue)
             }
 
-            Link(destination: URL(string: "https://www.sw5e.com")!) {
+            Link(destination: URL(string: "https://notes.petieclark.com/doc/echoveil-game-design-bible-zGLCyZJWZp")!) {
                 Label("Echoveil Ruleset", systemImage: "book.closed.fill")
                     .foregroundColor(.hologramBlue)
             }
 
-            Link(destination: URL(string: "https://github.com/petieclark/sw5e-ios/blob/main/LICENSE")!) {
+            Link(destination: URL(string: "https://github.com/warpapaya/SW5E-iOS/blob/main/LICENSE")!) {
                 Label("MIT License", systemImage: "doc.text.fill")
                     .foregroundColor(.hologramBlue)
             }

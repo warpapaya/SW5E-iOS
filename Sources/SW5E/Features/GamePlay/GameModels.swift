@@ -318,7 +318,7 @@ extension Campaign {
                 ],
                 suggestedChoices: [
                     SuggestedChoice(text: "Draw my Veilblade and stand ready", emoji: "⚔️"),
-                    SuggestedChoice(text: "Use Force Sense to read their intent",  emoji: "✨"),
+                    SuggestedChoice(text: "Use Veil Sense to read their intent",  emoji: "✨"),
                     SuggestedChoice(text: "Try to negotiate or stall for time",    emoji: "💬"),
                     SuggestedChoice(text: "Draw my blaster and take cover",        emoji: "🔫"),
                 ],

@@ -260,7 +260,7 @@ class GamePlayViewModel: ObservableObject {
         campaign?.gameState.combatState.active.toggle()
     }
 
-    // MARK: - Force User / Sound
+    // MARK: - Veilborn / Sound
 
     func checkForceUserStatus(character: Character?) {
         let wasActive = isActiveForceUser
